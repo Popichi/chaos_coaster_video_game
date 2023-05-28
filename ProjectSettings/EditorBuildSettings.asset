@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/Scenes/TestScene.unity
+    guid: 296d3f7b8fbb74040a1059f9d1868a87
+  - enabled: 0
+    path: Assets/Scenes/MovementTest.unity
+    guid: 94b70f0ae7131414886cb3a6b89b1db0
+  - enabled: 0
+    path: Assets/ML-Agents/Test.unity
+    guid: 3e45ca6d9fa3ca34184652f609ad988e
+  - enabled: 1
+    path: Assets/Scenes/TrainLevelForTraining 1.unity
+    guid: 0dcbc118ec3ff634f9bb1d7b79383e2a
+  m_configObjects: {}

@@ -1,0 +1,5 @@
+mlagents-learn C:\Users\steam\Documents\1ChaosCoster\rollercoaster\ChaosCoaster\Spider.yaml --env=C:\Users\steam\Documents\1ChaosCoster\rollercoaster\ChaosCoaster\Build --no-graphics  --num-envs=32 --torch-device cuda
+
+cd C:\Users\steam\Documents\1ChaosCoster\rollercoaster\ChaosCoaster
+
+mlagents-learn Spider.yaml --env=C:\Users\steam\Documents\1ChaosCoster\rollercoaster\ChaosCoaster\Build --no-graphics  --num-envs=32 --torch-device cuda
