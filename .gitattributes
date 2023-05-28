@@ -1,0 +1,7 @@
+Assets/ML-Agents/mapDinningRoom.blend1 filter=lfs diff=lfs merge=lfs -text
+Assets/EnemyMaterials/MetalCastIron002/MetalCastIron002_NRM16_4K_SPECULAR.tif filter=lfs diff=lfs merge=lfs -text
+Assets/EnemyMaterials/MetalDesignerAluminumBondedBraided001/MetalDesignerAluminumBondedBraided001_NRM16_4K_METALNESS.tif filter=lfs diff=lfs merge=lfs -text
+Assets/EnemyMaterials/MetalStainlessSteelCast001/MetalStainlessSteelCast001_NRM16_4K_SPECULAR.tif filter=lfs diff=lfs merge=lfs -text
+Assets/EnemyMaterials/MetalGraphiteSatin001/MetalGraphiteSatin001_NRM16_4K_SPECULAR.tif filter=lfs diff=lfs merge=lfs -text
+Assets/EnemyMaterials/MetalPaintedBlackWorn001/MetalPaintedBlackWorn001_NRM16_4K_METALNESS.tif filter=lfs diff=lfs merge=lfs -text
+Assets/EnemyMaterials/MetalRustRepolished002/MetalRustRepolished002_NRM16_4K_METALNESS.tif filter=lfs diff=lfs merge=lfs -text
