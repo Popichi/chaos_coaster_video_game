@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public float airMultiplier;
     bool readyToJump;
     public Transform parent;
+    public Transform playerTempSpawnPoint;
 
     [Header("Shooting")]
     public Transform rangedSpawnPoint;
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
 
     float currentTimeBetweenShots;
-    GameObject follower;
+    public GameObject follower;
 
 
 
@@ -91,9 +92,10 @@ public class PlayerController : MonoBehaviour
         //Camera Movement and Rotation
         //ignore rotation of the follower
         if (this.gameObject.transform.parent != null)
-            this.gameObject.transform.parent.parent.rotation = Quaternion.Euler(0, 0, -90);
-        cameraPos.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        transform.rotation = Quaternion.Euler(0, yRotation, 0);
+            //this.gameObject.transform.parent.parent.rotation = Quaternion.Euler(0, 0, -90);
+
+            cameraPos.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
+        transform.localRotation = Quaternion.Euler(0, yRotation, 0);
 
         //Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.05f, groundLayer);
@@ -101,7 +103,8 @@ public class PlayerController : MonoBehaviour
         if (grounded)
         {
             rb.drag = groundDrag;
-        } else
+        }
+        else
         {
             rb.drag = 0;
         }
@@ -120,12 +123,13 @@ public class PlayerController : MonoBehaviour
             {
                 testCharge2 = true;
                 Debug.Log("lvl 2 Charged");
-            } else if (!testCharge1 && chargeTimer >= chargeLvl1)
+            }
+            else if (!testCharge1 && chargeTimer >= chargeLvl1)
             {
                 testCharge1 = true;
                 Debug.Log("lvl 1 Charged");
             }
-        } 
+        }
         if (false)
         {
             if (currentTimeBetweenShots >= timeBetweenShots)
@@ -168,7 +172,8 @@ public class PlayerController : MonoBehaviour
         if (grounded)
         {
             rb.AddForce(direction * moveSpeed * 10f, ForceMode.Force);
-        } else
+        }
+        else
         {
             rb.AddForce(direction * moveSpeed * airMultiplier * 10f, ForceMode.Force);
         }
@@ -190,7 +195,8 @@ public class PlayerController : MonoBehaviour
         if (!primaryCharging)
         {
             primaryCharging = true;
-        } else
+        }
+        else
         //if (currentCooldown <= 0)
         {
             int lvlCharge = 0;
@@ -219,6 +225,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnSpawn()
+    {
+        transform.position = playerTempSpawnPoint.position;
+    }
+
     void OnShootSecondary()
     {
         if (!secondaryPressed)
@@ -226,7 +237,8 @@ public class PlayerController : MonoBehaviour
             //Do something while the button is being held
             weapons[currentWeapon].ShootHeld();
             secondaryPressed = true;
-        } else
+        }
+        else
         {
             weapons[currentWeapon].ShootReleased();
             //Do something when the button is released

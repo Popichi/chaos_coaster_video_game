@@ -7,7 +7,7 @@ public class PulseShotProjectile : MonoBehaviour
     public float timeDetonation;
     Rigidbody rb;
     GameObject other;
-   
+
     bool collided;
     Vector3 collisionDirection;
     // Start is called before the first frame update
@@ -20,7 +20,7 @@ public class PulseShotProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
@@ -28,7 +28,7 @@ public class PulseShotProjectile : MonoBehaviour
         other = collision.gameObject;
         if (!other.CompareTag("Player")) //look into using layers for efficiency, also for other projectiles
         {
-            
+
             collided = true;
             Vector3 otherPos = other.transform.position;
             collisionDirection = otherPos - this.transform.position;
@@ -39,7 +39,7 @@ public class PulseShotProjectile : MonoBehaviour
             rb.isKinematic = true;
             Invoke(nameof(Detonate), timeDetonation);
         }
-        
+
 
     }
 
