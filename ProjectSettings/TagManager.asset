@@ -8,6 +8,9 @@ TagManager:
   - ground
   - agent
   - wall
+  - speedbump
+  - follower
+  - spawnpoint
   layers:
   - Default
   - TransparentFX
@@ -32,7 +35,7 @@ TagManager:
   - Spider1
   - Spider1-C2
   - SpiderTraining
-  - 
+  - ARD
   - 
   - 
   - 

@@ -7,17 +7,11 @@ using Unity.MLAgents.Sensors;
 
 public class AgentDefendBots: Agent
 {
-    bool testForOutside(float y)
-    {
-        float f = manager.playFieldSize / 2f;
-        return y < -f || y > f;
-    }
+
     public GameObject visual;
     Rigidbody rb;
-    HingeJoint hJoint;
-    public Quaternion targetRotation;
-
     public Transform[] jets;
+    public Quaternion targetRotation;
     public override void OnActionReceived(ActionBuffers actions)
     {
         Transform v;
@@ -40,8 +34,7 @@ public class AgentDefendBots: Agent
                 posSum += jets[i].position;
                 n++;
             }
-           
-            Debug.Log(forceSum);
+          
             
             
         }
@@ -179,7 +172,7 @@ public class AgentDefendBots: Agent
     float nowVelocityDot;
     private void FixedUpdate()
     {
-        Debug.DrawRay(transform.position, targetLookDirection*2, Color.red);
+       
         //AddReward(0.2f);
         targetPosition = Target.localPosition;
         Debug.DrawRay(transform.position, targetLookDirection, Color.red);
@@ -193,13 +186,7 @@ public class AgentDefendBots: Agent
             rb.velocity = (rb.velocity / h) * manager.maxVelocity; 
         }
         
-        if(testForOutside(transform.localPosition.x) || testForOutside(transform.localPosition.y) || testForOutside(transform.localPosition.z) )
-        {
-            AddReward(-10f);
-            setInit();
-            EndEpisode();
-            return;
-        }
+        
         if (up)
         {
             nowDot = (Vector3.Dot(transform.up, targetLookDirection) + 1) / 2f;
@@ -487,12 +474,12 @@ public class AgentDefendBots: Agent
         }
         //--------------------
         //jets = t.ToArray();
-        hJoint = GetComponent<HingeJoint>();
+   
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0, -0.15f, 0);
+        //rb.centerOfMass = new Vector3(0, -0.15f, 0);
         rb.maxAngularVelocity = 75;
         
-        maxPlayFieldSize = Mathf.Sqrt(3 * Mathf.Pow(manager.playFieldSize, 2));
+        //maxPlayFieldSize = Mathf.Sqrt(3 * Mathf.Pow(manager.playFieldSize, 2));
     }
     private void OnCollisionEnter(Collision collision)
     {
