@@ -379,6 +379,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 48370764}
+    - target: {fileID: 5406089787168915506, guid: 4f1064039badd794da454b902e7aabba, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5527086443612589311, guid: 4f1064039badd794da454b902e7aabba, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -887,8 +891,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fac24946e187da647a17b5b02c1d4664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  focalPoint: {x: 0, y: 0, z: 0}
   rayDistance: 5
-  numberOfRays: 1000
+  mesh: {fileID: 0}
 --- !u!43 &248989849
 Mesh:
   m_ObjectHideFlags: 0
