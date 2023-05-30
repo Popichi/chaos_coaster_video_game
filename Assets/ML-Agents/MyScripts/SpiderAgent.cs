@@ -79,7 +79,7 @@ public class SpiderAgent : Agent
     Transform rootRoot;
     public override void OnEpisodeBegin()
     {
-        
+        //test
         target.GetComponent<TargetController>().MoveTargetToRandomPosition();
         //Reset all of the body parts
         foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
