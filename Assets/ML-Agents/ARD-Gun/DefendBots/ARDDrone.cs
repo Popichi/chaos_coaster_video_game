@@ -138,8 +138,10 @@ public class ARDDrone : Agent
     {
         if (manager.isTraining)
         {
+            transform.position = manager.GetSpawnPoint();
             rb.velocity = manager.RandomVectorWithLimitedAngle() * manager.GetStartVelocity();
             rb.angularVelocity = Random.rotation * Vector3.up * manager.startAngularVel;
+
         }
 
 
