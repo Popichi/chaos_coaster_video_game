@@ -35,6 +35,12 @@ public class Voxel : MonoBehaviour
 
             Gizmos.DrawSphere(transform.position, transform.localScale.x / 2);
         }
+        else
+        {
+            Gizmos.color = Color.green;
+
+            Gizmos.DrawSphere(transform.position, transform.localScale.x / 2);
+        }
 
            
     }

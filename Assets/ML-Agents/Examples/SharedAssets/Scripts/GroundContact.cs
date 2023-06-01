@@ -8,11 +8,16 @@ namespace Unity.MLAgentsExamples
     /// By attaching this as a component to those joints, their contact with the ground can be used as either
     /// an observation for that agent, and/or a means of punishing the agent for making undesirable contact.
     /// </summary>
+    /// 
+    public interface IReward
+    {
+        public void reward();
+    }
     [DisallowMultipleComponent]
     public class GroundContact : MonoBehaviour
     {
         public Agent agent;
-        public SpiderAgent sa;
+        public IReward sa;
         [Header("Ground Check")] public bool agentDoneOnGroundContact; // Whether to reset agent on ground contact.
         public bool penalizeGroundContact; // Whether to penalize on contact.
         public float groundContactPenalty; // Penalty amount (ex: -1).
@@ -34,7 +39,7 @@ namespace Unity.MLAgentsExamples
 
                 if (agentDoneOnGroundContact)
                 {
-                    sa = (SpiderAgent)agent;
+                    sa = (IReward) agent;
                     sa.reward();
                     agent.EndEpisode();
                 }

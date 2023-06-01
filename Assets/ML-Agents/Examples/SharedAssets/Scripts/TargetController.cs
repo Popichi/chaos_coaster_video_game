@@ -10,9 +10,18 @@ namespace Unity.MLAgentsExamples
     /// Add this script to the target you want the agent to touch.
     /// Callbacks will be triggered any time the target is touched with a collider tagged as 'tagToDetect'
     /// </summary>
+    /// 
+    public enum RespawnMode
+    {
+        Box2D,
+        Radius,
+
+    }
     public class TargetController : MonoBehaviour
     {
-
+        //Target has to be under the map to work properly and on the same level as the Mlagents Agent
+        public Transform rootMap;
+        public RespawnMode respawnMode;
         public SpiderAgent a; 
         [Header("Collider Tag To Detect")]
         public string tagToDetect = "agent"; //collider tag to detect 
@@ -76,11 +85,28 @@ namespace Unity.MLAgentsExamples
         /// </summary>
         public void MoveTargetToRandomPosition()
         {
-            var newTargetPos = m_startingPos + (Random.insideUnitSphere * spawnRadius);
-            newTargetPos.y = m_startingPos.y;
-            transform.localPosition = newTargetPos;
-        }
+            Vector3 newTargetPos;
+            switch (respawnMode)
+            {
+                
+                case (RespawnMode.Radius):
 
+                    newTargetPos = m_startingPos + (Random.insideUnitSphere * spawnRadius);
+                    newTargetPos.y = m_startingPos.y;
+                    transform.localPosition = newTargetPos;
+                    break;
+                case (RespawnMode.Box2D):
+                    Vector2 r = new Vector2(spawnRadius * (Random.value - 0.5f) * 2, spawnRadius * (Random.value - 0.5f) * 2);
+                    newTargetPos = m_startingPos + new Vector3(r.x,0,r.y);
+                    
+                    transform.localPosition = newTargetPos;
+                    break;
+
+
+
+
+            }
+        }
         private void OnCollisionEnter(Collision col)
         {
             if (col.transform.CompareTag(tagToDetect))
