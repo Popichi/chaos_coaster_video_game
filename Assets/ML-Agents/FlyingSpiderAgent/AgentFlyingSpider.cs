@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using System.Linq;
 
-public class AgentFlyingSpider : Agent,IReward
+public class AgentFlyingSpider : Agent,IReward,Iid
 {
     public bool isTraining = true;
     public GameObject mainBody;
@@ -41,7 +41,7 @@ public class AgentFlyingSpider : Agent,IReward
     [Header("Target To Walk Towards")] public Transform target; //Target the agent will walk towards during training.
 
     public List<IsBodyPart> bodyparts;
-    public Transform rootPrefab;
+    public Transform rootOfAgentPrefab;
     //This will be used as a stabilized model space reference point for observations
     //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning
     OrientationCubeController m_OrientationCube;
@@ -54,11 +54,14 @@ public class AgentFlyingSpider : Agent,IReward
     public int myID;
     public override void Initialize()
     {
-        voxelMap = GetComponentInChildren<CreateVoxelMap>();
+        targetController = target.GetComponent<TargetController>();
+        targetController.a = this;
+        if(voxelMap==null)
+        voxelMap = FindAnyObjectByType<CreateVoxelMap>();
         myID = id++;
-        m_OrientationCube = rootPrefab.GetComponentInChildren<OrientationCubeController>();
-        m_DirectionIndicator = rootPrefab.GetComponentInChildren<DirectionIndicator>();
-        bodyparts = rootPrefab.GetComponentsInChildren<IsBodyPart>().ToList();
+        m_OrientationCube = rootOfAgentPrefab.GetComponentInChildren<OrientationCubeController>();
+        m_DirectionIndicator = rootOfAgentPrefab.GetComponentInChildren<DirectionIndicator>();
+        bodyparts = rootOfAgentPrefab.GetComponentsInChildren<IsBodyPart>().ToList();
         //Setup each body part
         m_JdController = GetComponent<JointDriveController>();
         foreach (var a in bodyparts)
@@ -78,35 +81,40 @@ public class AgentFlyingSpider : Agent,IReward
     /// </summary>
     /// 
     Transform rootRoot;
+    TargetController targetController;
+    void rotate2()
+    {
+        Quaternion rot = Quaternion.Euler(0, Random.value * 360, 0);//Random.rotation;
+        rootRoot = rootOfAgentPrefab.transform.parent;
+        rootRoot.rotation *= rot;
+        rootOfAgentPrefab.transform.parent = null;
+        rootRoot.rotation = Quaternion.identity;
+        rootOfAgentPrefab.parent = rootRoot;
+    }
+    public float respawnRadius=1;
+    void rotate()
+    {
+        Quaternion rot = Quaternion.Euler(0, Random.value * 360, 0);//Random.rotation;
+
+        mainBody.transform.rotation *= rot;
+        Vector2 r = new Vector2(respawnRadius * (Random.value - 0.5f) * 2, respawnRadius * (Random.value - 0.5f) * 2);
+        var newTargetPos =(new Vector3(r.x, 0, r.y));
+        mainBody.transform.localPosition += newTargetPos;
+
+    }
     public override void OnEpisodeBegin()
     {
         currentFuel = maxFuel;
         //test
-        target.GetComponent<TargetController>().MoveTargetToRandomPosition();
+       targetController.MoveTargetToRandomPosition();
+       
         //Reset all of the body parts
         foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
         {
             bodyPart.Reset(bodyPart);
         }
 
-        void rotate2()
-        {
-            Quaternion rot = Quaternion.Euler(0, Random.value * 360, 0);//Random.rotation;
-            rootRoot = rootPrefab.transform.parent;
-            rootRoot.rotation *= rot;
-            rootPrefab.transform.parent = null;
-            rootRoot.rotation = Quaternion.identity;
-            rootPrefab.parent = rootRoot;
-        }
-        void rotate()
-        {
-            Quaternion rot = Quaternion.Euler(0, Random.value * 360, 0);//Random.rotation;
 
-            mainBody.transform.rotation *= rot;
-            float off = 14;
-            mainBody.transform.position += new Vector3(Random.value * off - off / 2, 0, Random.value * off - off / 2);
-
-        }
         //Random start rotation to help generalize
         if (isTraining)
         {
@@ -397,7 +405,7 @@ public class AgentFlyingSpider : Agent,IReward
         {
             if (startDistance - nearestDistance != 0)
             {
-                //AddReward(startDistance - nearestDistance);
+                AddReward(startDistance - nearestDistance);
             }
             if (Mathf.Abs(startY - nearestY) * 3 != 0)
             {
@@ -442,7 +450,7 @@ public class AgentFlyingSpider : Agent,IReward
             float f = Vector3.Distance(mainBody.transform.position, target.transform.position);
             if (f < nearestDistance)
             {
-                AddReward(nearestDistance - f);
+                //AddReward(nearestDistance - f);
                 nearestDistance = f;
             }
             f = Mathf.Abs(target.transform.position.y - mainBody.transform.position.y);
@@ -565,5 +573,10 @@ public class AgentFlyingSpider : Agent,IReward
     public void SetResetParameters()
     {
         SetTorsoMass();
+    }
+
+    public int GetID()
+    {
+        return myID;
     }
 }

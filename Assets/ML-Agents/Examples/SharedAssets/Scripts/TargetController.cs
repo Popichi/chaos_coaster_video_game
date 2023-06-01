@@ -11,6 +11,10 @@ namespace Unity.MLAgentsExamples
     /// Callbacks will be triggered any time the target is touched with a collider tagged as 'tagToDetect'
     /// </summary>
     /// 
+    public interface Iid
+    {
+        public int GetID();
+    }
     public enum RespawnMode
     {
         Box2D,
@@ -22,7 +26,7 @@ namespace Unity.MLAgentsExamples
         //Target has to be under the map to work properly and on the same level as the Mlagents Agent
         public Transform rootMap;
         public RespawnMode respawnMode;
-        public SpiderAgent a; 
+        public Iid a; 
         [Header("Collider Tag To Detect")]
         public string tagToDetect = "agent"; //collider tag to detect 
 
@@ -111,7 +115,8 @@ namespace Unity.MLAgentsExamples
         {
             if (col.transform.CompareTag(tagToDetect))
             {
-                if(col.gameObject.GetComponent<IsBodyPart>().id == a.myID)
+                if(col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
+
                 {
                     onCollisionEnterEvent.Invoke(col);
                     if (respawnIfTouched)
@@ -127,7 +132,7 @@ namespace Unity.MLAgentsExamples
         {
             if (col.transform.CompareTag(tagToDetect))
             {
-                if (col.gameObject.GetComponent<IsBodyPart>().id == a.myID)
+                if (col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
                 {
                     onCollisionStayEvent.Invoke(col);
                 }
@@ -138,7 +143,7 @@ namespace Unity.MLAgentsExamples
         {
             if (col.transform.CompareTag(tagToDetect))
             {
-                if (col.gameObject.GetComponent<IsBodyPart>().id == a.myID)
+                if (col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
                 {
                     onCollisionExitEvent.Invoke(col);
                 }
@@ -149,7 +154,7 @@ namespace Unity.MLAgentsExamples
         {
             if (col.CompareTag(tagToDetect))
             {
-                if (col.gameObject.GetComponent<IsBodyPart>().id == a.myID)
+                if (col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
                 {
                     onTriggerEnterEvent.Invoke(col);
                 }
@@ -160,7 +165,7 @@ namespace Unity.MLAgentsExamples
         {
             if (col.CompareTag(tagToDetect))
             {
-                if (col.gameObject.GetComponent<IsBodyPart>().id == a.myID)
+                if (col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
                 {
                     onTriggerStayEvent.Invoke(col);
                 }
@@ -171,7 +176,7 @@ namespace Unity.MLAgentsExamples
         {
             if (col.CompareTag(tagToDetect))
             {
-                if (col.gameObject.GetComponent<IsBodyPart>().id == a.myID)
+                if (col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
                 {
                     onTriggerExitEvent.Invoke(col);
                 }

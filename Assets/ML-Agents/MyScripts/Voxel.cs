@@ -7,7 +7,7 @@ public class Voxel : MonoBehaviour
     // Start is called before the first frame update
     public int id;
     public bool touch;
-    public string tag = "ground";
+    public string tag = "Ground";
     public CreateVoxelMap map;
     private void OnTriggerStay(Collider other)
     {
