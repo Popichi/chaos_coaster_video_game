@@ -34,27 +34,30 @@ public class CreateVoxelMap : MonoBehaviour
         offset.z -= size.z / 2.0f;
         int n = 0;
         cube.transform.localScale = new Vector3(voxelSize, voxelSize, voxelSize);
-        for(int x = 0; x < Mathf.RoundToInt(size.x / voxelSize); ++x)
+        occupancyMap = new bool[Mathf.RoundToInt(size.x / voxelSize)* Mathf.RoundToInt(size.y / voxelSize)* Mathf.RoundToInt(size.z / voxelSize)];
+        for (int x = 0; x < Mathf.RoundToInt(size.x / voxelSize); ++x)
         {
             for (int y = 0; y < Mathf.RoundToInt(size.y / voxelSize); ++y)
             {
                 for (int z = 0; z < Mathf.RoundToInt(size.z / voxelSize); ++z)
                 {
-                    n++;
+                   
                     Vector3 pos = new Vector3(x,y,z)*voxelSize;
                     GameObject g = Instantiate(cube, pos, Quaternion.identity);
                     g.transform.position += offset;
                     voxels.Add(g);
                     var v = g.GetComponent<Voxel>();
-                    v.id = x + (y * size.x) + (z * size.x * size.y);
+                    v.id = n++;
+                    //v.id = x + (y * size.x) + (z * size.x * size.y);
                     v.gameObject.name = "Voxel" + v.id;
                     voxelsV.Add(v);
                     g.transform.parent = root;
                     v.map = this;
+                    
                 }
             }
         }
-        occupancyMap = new bool[n];
+        
 
     }
 

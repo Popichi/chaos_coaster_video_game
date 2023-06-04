@@ -1,0 +1,89 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+#pragma kernel CSMap
+#pragma kernel CSRed
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+
+
+struct MyParticle
+{
+    float3 pos;
+    float3 vel;
+    float mass;
+};
+struct MyNewParticle
+{
+    float3 pNew;
+    float3 vNew;
+};
+RWTexture2D<float4> Result;
+RWStructuredBuffer<MyParticle> particleBuffer;
+RWStructuredBuffer<MyNewParticle> particleNewBuffer;
+uniform  float time;
+float bounds = 5;
+float maxVel;
+[numthreads(1024,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    // TODO: insert actual code here!
+    if (id.x >= particleBuffer.Length) {
+        return;
+    }
+    MyParticle p = particleBuffer[id.x];
+    for (uint i = 0; i < particleBuffer.Length; i++) {
+        //calc force
+        MyParticle other = particleBuffer[i];
+        MyNewParticle n = particleNewBuffer[i];
+        float3 dif = p.pos - other.pos;
+        float3 mag = length(dif);
+        float3 force = -((6.7 *p.mass *other.mass) / (mag*mag))*normalize(dif);
+        n.vNew = time * (force / p.mass);
+        n.vNew = clamp(n.vNew, -maxVel, maxVel);
+        n.pNew = clamp(p.pos + time * n.vNew, -bounds, bounds);
+
+
+            //calc acc
+
+            //calc new velocity
+
+            // calc new pos
+    }
+}
+float PI = 3.141592;
+[numthreads(1024, 1, 1)]
+void CSMap(uint3 id : SV_DispatchThreadID)
+{
+    // TODO: insert actual code here!
+    if (id.x >= particleBuffer.Length) {
+        return;
+    }
+    MyParticle p = particleBuffer[id.x];
+    MyNewParticle pN = particleNewBuffer[id.x];
+
+    p.pos = pN.pNew;
+    p.vel = pN.vNew;
+    particleBuffer[id.x] = p;
+    //map it to the renderTarget
+
+    float3 direction = normalize(p.pos/bounds);
+
+    
+    float longitude = atan2(direction.z, direction.x);
+    float latitude = asin(direction.y);
+
+    float2 uv = float2((longitude + PI) / (2 * PI),(latitude + PI/2) / PI);
+
+    uint2 pixelPos = uint2(uv * Result.GetDimensions().xy);
+    float4 color = float4(((length(p.vel)/ maxVel +1)/2)*0.1, 0.0, 1, 0.1 * p.mass); // Red color for example
+    
+    Result[pixelPos] += color;
+}
+
+[numthreads(8, 8, 1)]
+void CSRed(uint3 id : SV_DispatchThreadID)
+{
+    Result[id.xy] *= 0.98 / (time+0.0001);
+}
+
+

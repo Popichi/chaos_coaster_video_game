@@ -27,20 +27,24 @@ public class Voxel : MonoBehaviour
             map.occupancyMap[id] = false;
         }
     }
+    public bool debug;
     void OnDrawGizmos()
     {
-        if (touch)
-        {
-            Gizmos.color = Color.red;
+        if (debug) {
+            if (touch)
+            {
+                Gizmos.color = Color.red;
 
-            Gizmos.DrawSphere(transform.position, transform.localScale.x / 2);
-        }
-        else
-        {
-            Gizmos.color = Color.green;
+                Gizmos.DrawSphere(transform.position, transform.localScale.x / 2);
+            }
+            else
+            {
+                Gizmos.color = Color.green;
 
-            Gizmos.DrawSphere(transform.position, transform.localScale.x / 2);
+                Gizmos.DrawSphere(transform.position, transform.localScale.x / 2);
+            }
         }
+        
 
            
     }

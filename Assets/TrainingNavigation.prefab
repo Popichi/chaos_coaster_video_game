@@ -5068,6 +5068,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6362333581376124109}
+  - {fileID: 6945751186656508873}
   - {fileID: 8615434153095375547}
   - {fileID: 278518011756280347}
   m_Father: {fileID: 0}
@@ -6619,7 +6620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5149715090816903211}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: -0.073, z: -0.032}
+  m_LocalPosition: {x: 0, y: -0.033, z: -0.055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10382,8 +10383,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6945751186656508873}
   - component: {fileID: 2968656946532228443}
-  - component: {fileID: 5571539788428064413}
-  - component: {fileID: 6212846477325366598}
   m_Layer: 20
   m_Name: VoxelSensor
   m_TagString: Untagged
@@ -10398,12 +10397,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8147196816211548240}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.6700001}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -2.09, y: -0.45100015, z: -0.78700006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6140735501448640281}
+  m_Father: {fileID: 2138302032938316645}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2968656946532228443
@@ -10420,54 +10419,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   root: {fileID: 6945751186656508873}
   cube: {fileID: 1214926287839191806, guid: 53d64670da783ea49aa1c087fa2871c4, type: 3}
-  voxelSize: 0.5
+  voxelSize: 2
   size:
-    x: 5
-    y: 5
-    z: 7
+    x: 10
+    y: 10
+    z: 10
   voxels: []
   voxelsV: []
   occupancyMap: 
---- !u!1818360608 &5571539788428064413
-PositionConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8147196816211548240}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0, z: -0.6700001}
-  m_TranslationOffset: {x: 0, y: 0, z: -0.6700001}
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
-  m_Active: 0
-  m_IsLocked: 0
-  m_Sources:
-  - sourceTransform: {fileID: 2046813260021141707}
-    weight: 1
---- !u!1818360609 &6212846477325366598
-RotationConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8147196816211548240}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Weight: 1
-  m_RotationAtRest: {x: -90, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_Active: 0
-  m_IsLocked: 0
-  m_Sources:
-  - sourceTransform: {fileID: 2046813260021141707}
-    weight: 1
 --- !u!1 &8166553075997064862
 GameObject:
   m_ObjectHideFlags: 0
@@ -10696,6 +10655,7 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -0.5
   touchingGround: 0
+  quadraticFallOf: 0
 --- !u!1 &8268667191272805963
 GameObject:
   m_ObjectHideFlags: 0
@@ -12086,11 +12046,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.09
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.84
+      value: -0.38
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12208,6 +12168,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 48e3cdb748ea86f45b686f9182b33cbb, type: 2}
+    - target: {fileID: -3542852092398272455, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -3542852092398272455, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
@@ -12407,9 +12371,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 6945751186656508873}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7594775903100407387}
@@ -13284,7 +13245,7 @@ MonoBehaviour:
   bodyparts: []
   rootOfAgentPrefab: {fileID: 6140735501448640281}
   myID: 0
-  respawnRadius: 17
+  respawnRadius: 0
   debugTraining: 0
   trainingGround: {fileID: 4043338828726424501}
   voxelMap: {fileID: 2968656946532228443}
@@ -13298,12 +13259,12 @@ MonoBehaviour:
   - {fileID: 3547961572766297109}
   - {fileID: 7312341949528487507}
   - {fileID: 2602214160843243998}
-  turbineStrength: 200
-  maxFuel: 100
+  turbineStrength: 700
+  maxFuel: 120
   currentFuel: 100
-  fuelConsumptionPerSecond: 10
+  fuelConsumptionPerSecond: 50
   fuelRegeneration: 3
-  RewardFunction: 2
+  RewardFunction: 4
   nearestDistance: 0
 --- !u!54 &5464989627235837397
 Rigidbody:
@@ -13345,7 +13306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1581
+    VectorObservationSize: 306
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 20
@@ -13354,10 +13315,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 7682223a09b115440a93456819bfc275, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: Spider2
+  m_BehaviorName: Spider2Nav
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -13433,8 +13394,9 @@ MonoBehaviour:
   agent: {fileID: 4110664307909766570}
   agentDoneOnGroundContact: 0
   penalizeGroundContact: 0
-  groundContactPenalty: -0.01
+  groundContactPenalty: -12000
   touchingGround: 0
+  quadraticFallOf: 1
 --- !u!114 &866838651143061402
 MonoBehaviour:
   m_ObjectHideFlags: 0

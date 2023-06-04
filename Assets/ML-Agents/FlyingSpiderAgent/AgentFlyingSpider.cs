@@ -94,7 +94,7 @@ public class AgentFlyingSpider : Agent,IReward,Iid
     public float respawnRadius=1;
     void rotate()
     {
-        Quaternion rot = Quaternion.Euler(0, Random.value * 360, 0);//Random.rotation;
+        Quaternion rot = Quaternion.Euler(Random.value * 360 * UP(transform));//Random.rotation;
 
         mainBody.transform.rotation *= rot;
         Vector2 r = new Vector2(respawnRadius * (Random.value - 0.5f) * 2, respawnRadius * (Random.value - 0.5f) * 2);
@@ -286,6 +286,13 @@ public class AgentFlyingSpider : Agent,IReward,Iid
     }
     public GetMovement getSpeed;
     public bool showOutput = false;
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var a = actionsOut.ContinuousActions;
+        a[16] = 1;
+        a[17] = 1;
+        
+    }
     public override void OnActionReceived(ActionBuffers actionBuffers)
 
     {
@@ -330,10 +337,14 @@ public class AgentFlyingSpider : Agent,IReward,Iid
         int p = 1;
         foreach(var r in turbines)
         {
-            float action = (continuousActions[++i]+1)/2;
             
-            r.AddForce(r.transform.right * turbineStrength * computeFuel(action)*p);
-            p *= -1;
+            float action = (continuousActions[++i]);
+            if(action > 0)
+            {
+                r.AddForce(-r.transform.up * turbineStrength * computeFuel(action) * p);
+            }
+            
+            //p *= -1;
         }
 
     }
@@ -419,20 +430,21 @@ public class AgentFlyingSpider : Agent,IReward,Iid
     {
 
         regenerateFuel(Time.fixedDeltaTime);
-        Debug.Log(MaxStep + " " + StepCount);
+        //Debug.Log(MaxStep + " " + StepCount);
 
         if (StepCount == MaxStep - 2)
         {
 
-            //reward();
+            reward();
             EndEpisode();
 
         }
+       
         if (isTraining)
         {
             if (Vector3.Dot(UP(mainBody.transform), -Vector3.up) > 0.9f)
             {
-                //AddReward(-0.3f);
+                AddReward(-5f);
                 //EndEpisode();
             }
         }
@@ -443,6 +455,7 @@ public class AgentFlyingSpider : Agent,IReward,Iid
             EndEpisode();
         }
         UpdateOrientationObjects();
+      
         if (RewardFunction == RewardMode.Nearest || RewardFunction == RewardMode.JustGetit)
             AddReward(-1);
         if (RewardFunction == RewardMode.Ndistance)
@@ -467,7 +480,7 @@ public class AgentFlyingSpider : Agent,IReward,Iid
         var cubeForward = m_OrientationCube.transform.forward;
         if (RewardFunction == RewardMode.Velocity)
         {
-            AddReward(Vector3.Dot((mainBody.GetComponent<Rigidbody>().velocity), cubeForward));
+            AddReward(Vector3.Dot((mainBody.GetComponent<Rigidbody>().velocity), cubeForward) - 0.05f);
         }
         // Set reward for this step according to mixture of the following elements.
         // a. Match target speed

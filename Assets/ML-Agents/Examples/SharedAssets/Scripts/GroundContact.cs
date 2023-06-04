@@ -23,7 +23,7 @@ namespace Unity.MLAgentsExamples
         public float groundContactPenalty; // Penalty amount (ex: -1).
         public bool touchingGround;
         public const string k_Ground = "ground"; // Tag of ground object.
-
+        public bool quadraticFallOf;
         /// <summary>
         /// Check for collision with ground, and optionally penalize agent.
         /// </summary>
@@ -34,7 +34,15 @@ namespace Unity.MLAgentsExamples
                 touchingGround = true;
                 if (penalizeGroundContact)
                 {
-                    agent.SetReward(groundContactPenalty);
+                    if (quadraticFallOf)
+                    {
+                        agent.SetReward( (1 - (Mathf.Pow((agent.StepCount/(1.0f*agent.MaxStep)),2))) * groundContactPenalty);
+                    }
+                    else
+                    {
+                        agent.SetReward(groundContactPenalty);
+                    }
+                    
                 }
 
                 if (agentDoneOnGroundContact)
