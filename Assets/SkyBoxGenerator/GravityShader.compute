@@ -18,11 +18,27 @@ struct MyNewParticle
     float3 vNew;
 };
 RWTexture2D<float4> Result;
+
 RWStructuredBuffer<MyParticle> particleBuffer;
 RWStructuredBuffer<MyNewParticle> particleNewBuffer;
 uniform  float time;
-float bounds = 5;
-float maxVel;
+float bounds = 10;
+float maxVel = 5;
+float3 myClamp(float3 f, float m) {
+    return float3(clamp(f.x, -m, m), clamp(f.y, -m, m), clamp(f.z, -m, m));
+};
+float3 myClamp2(float3 f, float m) {
+    
+    float mag = length(f);
+    if (mag > m) {
+        f = normalize(f) * maxVel;
+    }
+    return f;
+};
+uniform float strength;
+uniform float radiusD;
+uniform float radiusDMax;
+
 [numthreads(1024,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
@@ -31,17 +47,19 @@ void CSMain (uint3 id : SV_DispatchThreadID)
         return;
     }
     MyParticle p = particleBuffer[id.x];
+    MyNewParticle n = particleNewBuffer[id.x];
+    double3 sum = 0;
     for (uint i = 0; i < particleBuffer.Length; i++) {
         //calc force
         MyParticle other = particleBuffer[i];
-        MyNewParticle n = particleNewBuffer[i];
+        
         float3 dif = p.pos - other.pos;
-        float3 mag = length(dif);
-        float3 force = -((6.7 *p.mass *other.mass) / (mag*mag))*normalize(dif);
-        n.vNew = time * (force / p.mass);
-        n.vNew = clamp(n.vNew, -maxVel, maxVel);
-        n.pNew = clamp(p.pos + time * n.vNew, -bounds, bounds);
-
+        float mag = length(dif);
+        if (mag > 0.1) {
+            float3 force = -((6.7 * strength * p.mass * other.mass) / (mag * mag)) * (normalize(dif));
+            sum += force;
+        }
+        
 
             //calc acc
 
@@ -49,8 +67,40 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 
             // calc new pos
     }
+    sum /= p.mass;
+    n.vNew = p.vel + time * (sum);
+
+    //n.vNew = myClamp2(n.vNew, maxVel);
+    // 
+    // 
+    // 
+    //n.pNew = p.pos;
+    //n.pNew = clamp(p.pos + time * n.vNew, float3(-bounds,-bounds,-bounds), float3(bounds, bounds, bounds));
+    n.pNew = p.pos + time * n.vNew;
+    
+    float l = length(n.pNew);
+    float3 norm;
+    if ( l < radiusD) {
+        norm = normalize(n.pNew);
+        n.pNew = norm * radiusD;
+        n.vNew = reflect(n.vNew, norm);
+    }
+    else {
+        if (l>radiusDMax) {
+            norm = normalize(n.pNew);
+            n.pNew = norm * radiusDMax;
+            n.vNew = reflect(n.vNew, -norm);
+        }
+    }
+   
+    particleNewBuffer[id.x] = n;
 }
 float PI = 3.141592;
+float maxMass = 2;
+RWTexture2D<int> ColorSumTexture;
+RWTexture2D<int> ColorSumTexture2;
+RWTexture2D<int> CountTexture;
+
 [numthreads(1024, 1, 1)]
 void CSMap(uint3 id : SV_DispatchThreadID)
 {
@@ -66,24 +116,63 @@ void CSMap(uint3 id : SV_DispatchThreadID)
     particleBuffer[id.x] = p;
     //map it to the renderTarget
 
-    float3 direction = normalize(p.pos/bounds);
+    /*
+    float3 direction = normalize(p.pos);
 
     
-    float longitude = atan2(direction.z, direction.x);
-    float latitude = asin(direction.y);
+    float theta = atan2(direction.z, direction.x);
+    float phi = acos(direction.y);
 
-    float2 uv = float2((longitude + PI) / (2 * PI),(latitude + PI/2) / PI);
+    float u = 0.5f + (atan2(direction.z, direction.x) / (2 * PI));
+    float v = 0.5f - (asin(direction.y) / PI);
+    uint x;
+    uint y;
+    Result.GetDimensions(x, y);
 
-    uint2 pixelPos = uint2(uv * Result.GetDimensions().xy);
-    float4 color = float4(((length(p.vel)/ maxVel +1)/2)*0.1, 0.0, 1, 0.1 * p.mass); // Red color for example
-    
-    Result[pixelPos] += color;
+    //float2 uv = float2((theta + PI) / (2 * PI), phi/PI);
+    float2 uv = float2(u,v);
+    uint2 pixelPos = uint2(uv.x * x, uv.y * y);
+
+    //uv = clamp(p.pos,0,1);
+    //pixelPos = uint2(uv.x * x, uv.y * y);
+
+    //ARGB
+    float4 color = float4(p.mass / maxMass, 0, ((length(p.vel) / maxVel + 1) / 2), 1);
+
+    InterlockedAdd(CountTexture[pixelPos], 1);
+    InterlockedAdd(ColorSumTexture[pixelPos], int4(color*255).x);
+    InterlockedAdd(ColorSumTexture2[pixelPos], int4(color * 255).z);
+    */
 }
+
+
+
 
 [numthreads(8, 8, 1)]
 void CSRed(uint3 id : SV_DispatchThreadID)
 {
-    Result[id.xy] *= 0.98 / (time+0.0001);
+
+    //Result[id.xy] *= 0.98 / (time+0.0001);
+
+
+    // Calculate average color for this pixel
+    double4 color = double4(ColorSumTexture2[id.xy],255,255, ColorSumTexture[id.xy]);
+    uint count = CountTexture[id.xy];
+
+    // Reset SumTexture and CountTexture for next frame
+    ColorSumTexture[id.xy] = 0;
+    ColorSumTexture2[id.xy] = 0;
+    CountTexture[id.xy] = 0;
+
+    // Avoid divide by zero
+    if (count > 0)
+    {
+        //Result[id.xy] += color / (count*255);
+        // 
+        // 
+        //Result[id.xy] = float4(0,1,1,1);
+    }
+    
 }
 
 

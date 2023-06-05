@@ -289,59 +289,59 @@ public class SkinSensorVector : MonoBehaviour
         top,
         button, error
     }
-    public side closestBoxDistance(Vector3 point) // local world
+    public side closestBoxDistance(Vector3 point1) // local world
     {
         float minD = float.MaxValue;
         side tmp = side.error;
-        if (point.x > 0 && minD > bounds.x - point.x)
+        if (point1.x > 0 && minD > bounds.x - point1.x)
         {
             tmp = side.right;
-            minD = bounds.x - point.x;
+            minD = bounds.x - point1.x;
             if (minD < 0)
             {
                 //Debug.LogError("distance negative: " + minD);
             }
         }
-        if (point.x <= 0 && minD > bounds.x - Mathf.Abs(point.x))
+        if (point1.x <= 0 && minD > bounds.x - Mathf.Abs(point1.x))
         {
             tmp = side.left;
-            minD = bounds.x - Mathf.Abs(point.x);
+            minD = bounds.x - Mathf.Abs(point1.x);
             if (minD < 0)
             {
                 //Debug.LogError("distance negative: " + minD);
             }
         }
-        if (point.y > 0 && minD > bounds.y - point.y)
+        if (point1.y > 0 && minD > bounds.y - point1.y)
         {
             tmp = side.top;
-            minD = bounds.y - point.y;
+            minD = bounds.y - point1.y;
             if (minD < 0)
             {
                 //Debug.LogError("distance negative: " + minD);
             }
         }
-        if (point.y <= 0 && minD > bounds.y - Mathf.Abs(point.y))
+        if (point1.y <= 0 && minD > bounds.y - Mathf.Abs(point1.y))
         {
             tmp = side.button;
-            minD = bounds.y - Mathf.Abs(point.y);
+            minD = bounds.y - Mathf.Abs(point1.y);
             if (minD < 0)
             {
                 //Debug.LogError("distance negative: " + minD);
             }
         }
-        if (point.z > 0 && minD > bounds.z - point.z)
+        if (point1.z > 0 && minD > bounds.z - point1.z)
         {
             tmp = side.back;
-            minD = bounds.z - point.z;
+            minD = bounds.z - point1.z;
             if (minD < 0)
             {
                 //Debug.LogError("distance negative: " + minD);
             }
         }
-        if (point.z <= 0 && minD > bounds.z - Mathf.Abs(point.z))
+        if (point1.z <= 0 && minD > bounds.z - Mathf.Abs(point1.z))
         {
             tmp = side.front;
-            minD = bounds.z - Mathf.Abs(point.z);
+            minD = bounds.z - Mathf.Abs(point1.z);
             if (minD < 0)
             {
                 //Debug.LogError("distance negative: " + minD);
