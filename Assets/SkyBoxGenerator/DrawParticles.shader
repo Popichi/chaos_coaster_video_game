@@ -6,11 +6,12 @@ Shader "Custom/DrawParticle"
     }
         SubShader
     {
-        Tags { "RenderType" = "Opaque" }
+        Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
         LOD 100
 
         Pass
         {
+            Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             #pragma vertex vert
             #pragma geometry geom
@@ -130,9 +131,18 @@ Shader "Custom/DrawParticle"
             
             fixed4 frag(g2f i) : SV_Target
             {
+
                 // Sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-            col *= i.f;
+            if (length(col.rgb) < 0.5) // threshold can be adjusted according to needs
+            {
+                col.a = 0;
+                return float4(0, 0, 0, 0);
+            }
+            
+            col.xyz *= i.f;
+            
+           
             // Set the color of the particle
             return col;
         }
