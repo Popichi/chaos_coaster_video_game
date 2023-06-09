@@ -47,6 +47,11 @@ namespace PathCreation.Examples
             return this.speed * this.gameObject.transform.localScale.x;
         }
 
+        public float getDistanceTravelled()
+        {
+            return this.distanceTravelled;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             Debug.Log("Collision detected " + other.gameObject.name);
