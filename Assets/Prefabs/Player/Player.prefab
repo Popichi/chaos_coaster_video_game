@@ -16,6 +16,9 @@ GameObject:
   - component: {fileID: 1581414588238113376}
   - component: {fileID: 4225017865571262620}
   - component: {fileID: 7756609681364642906}
+  - component: {fileID: 9188578126152391058}
+  - component: {fileID: 3614577494691735614}
+  - component: {fileID: 1066602899473959288}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -36,7 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1303313040190595886
 MeshFilter:
@@ -53,7 +56,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3822568247093357152}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -125,7 +128,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 3b988337293fd054fa8274e727c7d6a6, type: 3}
   m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -166,18 +168,23 @@ MonoBehaviour:
   jumpCooldown: 1
   airMultiplier: 0.4
   parent: {fileID: 0}
+  playerTempSpawnPoint: {fileID: 0}
   rangedSpawnPoint: {fileID: 0}
-  primaryProjectile: {fileID: 7396368185016720279, guid: fb0aff63bc3d9e14e83d2e8df7729825, type: 3}
+  primaryProjectile: {fileID: 7396368185016720279, guid: 229e42bfed9524a3caa63d9ea8f712fb, type: 3}
   baseProjectileSpeed: 50
   weaponCooldown: 1
   weaponPush: 10
   weapons:
   - {fileID: 7756609681364642906}
-  currentWeapon: 0
+  - {fileID: 9188578126152391058}
+  - {fileID: 1066602899473959288}
+  - {fileID: 3614577494691735614}
+  currentWeapon: 1
   timeBetweenShots: 0.1
   ammoCapacity: 10
   basePulseSpeed: 15
   pulsePush: 2
+  follower: {fileID: 0}
 --- !u!54 &4225017865571262620
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -236,3 +243,103 @@ MonoBehaviour:
   recoilForce: 2
   attackPressed: 0
   muzzleFlash: {fileID: 0}
+--- !u!114 &9188578126152391058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3822568247093357152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b77ceb81ceb104fa8e2078e98290d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  bullet: {fileID: 4319456932187111785, guid: 79e0832d3bffd4a45b801c4d26ee8b9f, type: 3}
+  rangedSpawnPoint: {fileID: 0}
+  camTran: {fileID: 0}
+  shootForce: 10
+  upwardShootForce: 0
+  shootPush: 5
+  timeBetweenAttacks: 2
+  spreadRange: 0
+  reloadTime: 0
+  timeBetweenBullets: 0
+  magazineSize: 0
+  bulletsPerAttack: 0
+  bulletsLeft: 0
+  bulletsShot: 0
+  playerRb: {fileID: 0}
+  recoilForce: 0
+  attackPressed: 0
+  muzzleFlash: {fileID: 0}
+  grenadeDamage: 0
+  grenadeForce: 15
+  grenadeRadius: 12
+--- !u!114 &3614577494691735614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3822568247093357152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546fdbb1dbffea54588df87c5c926d7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  bullet: {fileID: 0}
+  rangedSpawnPoint: {fileID: 0}
+  camTran: {fileID: 0}
+  shootForce: 0
+  upwardShootForce: 0
+  shootPush: 0
+  timeBetweenAttacks: 0
+  spreadRange: 0
+  reloadTime: 0
+  timeBetweenBullets: 0
+  magazineSize: 0
+  bulletsPerAttack: 0
+  bulletsLeft: 0
+  bulletsShot: 0
+  playerRb: {fileID: 0}
+  recoilForce: 0
+  attackPressed: 0
+  muzzleFlash: {fileID: 0}
+--- !u!114 &1066602899473959288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3822568247093357152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0888ce275ae19044db16a6cf5b202bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  bullet: {fileID: 4319456932187111785, guid: 03ac61d46309eda46ad2be7aa1819404, type: 3}
+  rangedSpawnPoint: {fileID: 0}
+  camTran: {fileID: 0}
+  shootForce: 10
+  upwardShootForce: 0
+  shootPush: 10
+  timeBetweenAttacks: 1
+  spreadRange: 0
+  reloadTime: 0
+  timeBetweenBullets: 0
+  magazineSize: 0
+  bulletsPerAttack: 0
+  bulletsLeft: 0
+  bulletsShot: 0
+  playerRb: {fileID: 0}
+  recoilForce: 0
+  attackPressed: 0
+  muzzleFlash: {fileID: 0}
+  grenadeDamage: 0
+  grenadeRadius: 7
+  grenadeForce: 400
+  grenadeTimer: 3

@@ -55,7 +55,7 @@ public abstract class SecondaryGun : MonoBehaviour
         //Change display of bullets here, this may also be better done in the controller
     }
 
-    //Default: continue shooting until released
+
     public abstract void ShootHeld();
 
 

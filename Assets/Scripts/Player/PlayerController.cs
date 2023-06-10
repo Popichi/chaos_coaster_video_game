@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
     private float chargeLvl2 = 3f;
     private bool testCharge1, testCharge2;
     private bool secondaryPressed;
+    private bool swapPressed;
+    private float currentSwapTime;
+    private float wheelThreshold;
 
     private float horizontalMov;
     private float verticalMov;
@@ -83,7 +86,10 @@ public class PlayerController : MonoBehaviour
         {
             weapons[i].setUpWeapon(this.GetComponent<Rigidbody>(), cameraPos, rangedSpawnPoint);
         }
-        currentWeapon = 0;
+        currentWeapon = 3;
+        swapPressed = false;
+        currentSwapTime = 0f;
+        wheelThreshold = 1f;
     }
 
     // Update is called once per frame
@@ -130,15 +136,17 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("lvl 1 Charged");
             }
         }
-        if (false)
-        {
-            if (currentTimeBetweenShots >= timeBetweenShots)
-            {
-                ShootPulseRifle();
-            }
-            currentTimeBetweenShots += Time.deltaTime;
 
+        if (swapPressed)
+        {
+            currentSwapTime += Time.deltaTime;
+            if (currentSwapTime >= wheelThreshold)
+            {
+                //Display weapon wheel
+                Debug.Log("Wheapon Wheel displayed");
+            }
         }
+
     }
 
     private void FixedUpdate()
@@ -246,20 +254,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ShootPulseRifle()
-    {
-        GameObject projectile = Instantiate(primaryProjectile, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
-        projectile.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        Rigidbody rbProjectile = projectile.GetComponent<Rigidbody>();
-        float spreadRange = 0.05f;
-        float spreadX = Random.Range(-spreadRange, spreadRange);
-        float spreadY = Random.Range(-spreadRange, spreadRange);
-        Vector3 direction = cameraPos.forward + new Vector3(spreadX, spreadY, 0);
-        rbProjectile.velocity = direction * basePulseSpeed;
-        rbProjectile.useGravity = false;
-        rb.AddForce((-1f * basePulseSpeed * cameraPos.forward).normalized * pulsePush, ForceMode.Impulse);
-        currentTimeBetweenShots = 0;
-    }
+    
 
     //May need to remove this if the player is getting launched, try without this first or set a different max speed
     void SpeedControl()
@@ -275,5 +270,16 @@ public class PlayerController : MonoBehaviour
     void ResetJump()
     {
         readyToJump = true;
+    }
+
+    void OnWeaponSwap()
+    {
+        swapPressed = !swapPressed;
+        //When it has been released and it was not pressed long enough to take out wheapon wheel
+        if (!swapPressed && currentSwapTime < wheelThreshold)
+        {
+            currentWeapon = (currentWeapon + 1) % weapons.Length;
+        }
+
     }
 }
