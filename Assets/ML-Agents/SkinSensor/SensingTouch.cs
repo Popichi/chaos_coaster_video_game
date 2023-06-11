@@ -9,14 +9,18 @@ public class SensingTouch : MonoBehaviour
     public int sizeX = 20;
     public int sizeY = 20;
     public Texture2D feelTex;
+
+    [HideInInspector]
     public Collider c;
+
+
     //public RenderTexture render;
     Transform colliderT;
     public float sensitivity = 100f;
     Vector3 bounds;
     Vector3 midBound;
     
-    public int id = 0;
+    public static int id = 0;
     // Start is called before the first frame update
     //Renderer renderer;
     public wraper mainWraper;

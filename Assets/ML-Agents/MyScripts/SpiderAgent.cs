@@ -54,6 +54,12 @@ public class SpiderAgent : Agent, IReward
     public int myID;
     public override void Initialize()
     {
+        covers = new List<GameObject>();
+        for (int i= 0; i< numberCovers; ++i)
+        {
+            covers.Add(Instantiate(coverPrefab));
+            covers[i].transform.parent = trainingGround.transform;
+        }
         myID = id++;
         m_OrientationCube = rootPrefab.GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = rootPrefab.GetComponentInChildren<DirectionIndicator>();
@@ -77,10 +83,25 @@ public class SpiderAgent : Agent, IReward
     /// </summary>
     /// 
     Transform rootRoot;
+
+    public int numberCovers;
+    public GameObject coverPrefab;
+    List<GameObject> covers;
+
     public override void OnEpisodeBegin()
     {
         //test
-        target.GetComponent<TargetController>().MoveTargetToRandomPosition();
+        TargetController targetController = target.GetComponent<TargetController>();
+        for (int i = 0; i < numberCovers; ++i)
+        {
+            covers[i].active = true;
+            Rigidbody r = covers[i].GetComponent<Rigidbody>();
+            r.velocity = Vector3.zero;
+            r.angularVelocity = Vector3.zero;
+            r.transform.rotation = Quaternion.Euler(0, Random.value*360, 0);
+           covers[i].transform.position = targetController.getRandom.randomPosOnGrid(2);
+        }
+           targetController.MoveTargetToRandomPosition();
         //Reset all of the body parts
         foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
         {
@@ -98,7 +119,7 @@ public class SpiderAgent : Agent, IReward
         }
         void rotate()
         {
-            Quaternion rot = Quaternion.Euler(0, Random.value * 360, 0);//Random.rotation;
+            Quaternion rot = Quaternion.Euler(movingPlattform.transform.up * 360);//Random.rotation;
            
             mainBody.transform.rotation *= rot;
             float off = 14;
@@ -200,12 +221,12 @@ public class SpiderAgent : Agent, IReward
     public Vector3 up = new Vector3(0, 0, 1);
     public Vector3 Forward(Transform t)
     {
-        return forward;
+        return t.TransformDirection(forward);
     }
  
     public Vector3 UP(Transform t)
     {
-        return up;
+        return t.TransformDirection(up);
     }
     public GameObject movingPlattform;
     public override void CollectObservations(VectorSensor sensor)
@@ -323,6 +344,7 @@ public class SpiderAgent : Agent, IReward
     float nearestY = 0;
     float startDistance;
     float startY;
+    public float velocityBonus = 0.1f;
     public void reward()
     {
         if (RewardMode.Ndistance == RewardFunction)
@@ -338,31 +360,46 @@ public class SpiderAgent : Agent, IReward
            
         }
     }
-
+    int onBackCounter = 0;
     void FixedUpdate()
     {
-
-
-        Debug.Log(MaxStep +" " + StepCount);
-        
-        if(StepCount == MaxStep - 2)
+        for (int i = 0; i < numberCovers; ++i)
         {
-
-            //reward();
-            EndEpisode();
-           
+            if(covers[i].transform.position.y < -100)
+            {
+                covers[i].active = false;
+            }
+            
         }
+
+        //Debug.Log(MaxStep +" " + StepCount);
+
+
+
         if (isTraining)
         {
-            if (Vector3.Dot(UP(mainBody.transform), -Vector3.up)>0.9f){
-                //AddReward(-0.3f);
+            if (StepCount == MaxStep - 2)
+            {
+
+                //reward();
+                EndEpisode();
+
+            }
+            if (onBackCounter > 100)
+            {
+                onBackCounter = 0;
+                EndEpisode();
+            }
+            if (Vector3.Dot(UP(mainBody.transform), -movingPlattform.transform.up)>0.9f){
+                AddReward(-0.3f);
+                onBackCounter++;
                 //EndEpisode();
             }
         }
         //AddReward(-0.001f);
-        if (trainingGround.transform.InverseTransformPoint(mainBody.transform.position).y < -10)
+        if (movingPlattform.transform.InverseTransformPoint(mainBody.transform.position).y < -15)
         {
-            AddReward(0);
+            AddReward(-10);
             EndEpisode();
         }
         UpdateOrientationObjects();
@@ -390,7 +427,7 @@ public class SpiderAgent : Agent, IReward
         var cubeForward = m_OrientationCube.transform.forward;
         if (RewardFunction == RewardMode.Velocity)
         {
-            AddReward(Vector3.Dot((mainBody.GetComponent<Rigidbody>().velocity), cubeForward));
+            AddReward(Vector3.Dot((mainBody.GetComponent<Rigidbody>().velocity), cubeForward)* velocityBonus);
         }
         // Set reward for this step according to mixture of the following elements.
         // a. Match target speed

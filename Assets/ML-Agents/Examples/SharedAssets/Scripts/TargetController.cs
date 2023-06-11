@@ -3,8 +3,7 @@ using Random = UnityEngine.Random;
 using Unity.MLAgents;
 using UnityEngine.Events;
 
-namespace Unity.MLAgentsExamples
-{
+
     /// <summary>
     /// Utility class to allow target placement and collision detection with an agent
     /// Add this script to the target you want the agent to touch.
@@ -19,12 +18,15 @@ namespace Unity.MLAgentsExamples
     {
         Box2D,
         Radius,
+        Grid
 
     }
+
     public class TargetController : MonoBehaviour
     {
-        //Target has to be under the map to work properly and on the same level as the Mlagents Agent
-        public Transform rootMap;
+    public GetRandomPositionOnSurface getRandom;
+    //Target has to be under the map to work properly and on the same level as the Mlagents Agent
+    public Transform rootMap;
         public RespawnMode respawnMode;
         public Iid a; 
         [Header("Collider Tag To Detect")]
@@ -62,6 +64,13 @@ namespace Unity.MLAgentsExamples
         public CollisionEvent onCollisionStayEvent = new CollisionEvent();
         public CollisionEvent onCollisionExitEvent = new CollisionEvent();
 
+        
+        public Mesh mesh;
+        public void Awake()
+        {
+            //meshFilter = GetComponent<MeshFilter>();
+            //mesh = meshFilter.mesh;
+        }
         // Start is called before the first frame update
         void OnEnable()
         {
@@ -83,7 +92,7 @@ namespace Unity.MLAgentsExamples
                 }
             }
         }
-
+    
         /// <summary>
         /// Moves target to a random position within specified radius.
         /// </summary>
@@ -106,7 +115,10 @@ namespace Unity.MLAgentsExamples
                     transform.localPosition = newTargetPos;
                     break;
 
-
+                case (RespawnMode.Grid):
+                   
+                    transform.position = getRandom.randomPosOnGrid(1);
+                    break;
 
 
             }
@@ -183,4 +195,3 @@ namespace Unity.MLAgentsExamples
             }
         }
     }
-}

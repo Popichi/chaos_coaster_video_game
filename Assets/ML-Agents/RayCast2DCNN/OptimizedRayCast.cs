@@ -20,7 +20,7 @@ public class OptimizedRayCast : MonoBehaviour
     [HideInInspector]
     public static int id = 0;
     public int stack = 1;
-
+    public LayerMask mask;
     private void Awake()
     {
         texture2D = new Texture2D(width, height, TextureFormat.RGB24, false);
@@ -117,11 +117,11 @@ public class OptimizedRayCast : MonoBehaviour
             
 
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, rayMaxDistance))
+            if (Physics.Raycast(ray, out hit, rayMaxDistance, mask))
             {
                 Vector3 v = (hit.distance * ray.direction) / rayMaxDistance;
                 v = root.InverseTransformDirection(v);
-                Debug.Log(v);
+                //Debug.Log(v);
                 SaveInTexture(v, uvs[i]);
                 debugC = Color.red;
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, debugC);
