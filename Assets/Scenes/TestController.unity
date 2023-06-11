@@ -1818,25 +1818,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1671350779}
     - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
-      propertyPath: weapons.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
       propertyPath: playerTempSpawnPoint
       value: 
       objectReference: {fileID: 460470052}
-    - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
-      propertyPath: weapons.Array.data[2]
-      value: 
-      objectReference: {fileID: 3076951529510837197}
-    - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
-      propertyPath: weapons.Array.data[3]
-      value: 
-      objectReference: {fileID: 3076951529510837195}
-    - target: {fileID: 1953487107638786499, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2751818603580073614, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -1905,37 +1889,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 9188578126152391058, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
-      propertyPath: grenadeForce
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
---- !u!114 &3076951529510837195 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3614577494691735614, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
-  m_PrefabInstance: {fileID: 3076951529510837191}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546fdbb1dbffea54588df87c5c926d7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3076951529510837197 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1066602899473959288, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
-  m_PrefabInstance: {fileID: 3076951529510837191}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0888ce275ae19044db16a6cf5b202bc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8062944814064753647
 PrefabInstance:
   m_ObjectHideFlags: 0

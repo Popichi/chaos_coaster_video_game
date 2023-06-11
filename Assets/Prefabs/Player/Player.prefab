@@ -290,14 +290,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: 
-  bullet: {fileID: 0}
+  bullet: {fileID: 6865008514427057507, guid: 8c1b01a9af32eeb4abc92c89d5ac25a0, type: 3}
   rangedSpawnPoint: {fileID: 0}
   camTran: {fileID: 0}
-  shootForce: 0
+  shootForce: 20
   upwardShootForce: 0
-  shootPush: 0
-  timeBetweenAttacks: 0
-  spreadRange: 0
+  shootPush: 1
+  timeBetweenAttacks: 0.1
+  spreadRange: 0.01
   reloadTime: 0
   timeBetweenBullets: 0
   magazineSize: 0
@@ -308,6 +308,10 @@ MonoBehaviour:
   recoilForce: 0
   attackPressed: 0
   muzzleFlash: {fileID: 0}
+  smartMode: 0
+  shootDelay: 0
+  mgRadius: 0
+  targetAngle: 0
 --- !u!114 &1066602899473959288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,5 +345,5 @@ MonoBehaviour:
   muzzleFlash: {fileID: 0}
   grenadeDamage: 0
   grenadeRadius: 7
-  grenadeForce: 400
-  grenadeTimer: 3
+  grenadeForce: 750
+  grenadeTimer: 2
