@@ -8,9 +8,12 @@ public class Enemy : MonoBehaviour
   public int maxHealth = 100;
   public int currentHealth;
 
+  private WaveSpawner WaveSpawner;
+
   // Start is called before the first frame update
   void Start() {
     currentHealth = maxHealth;
+    WaveSpawner = GetComponentInParent<WaveSpawner>();
   }
 
   // Update is called once per frame
@@ -22,6 +25,7 @@ public class Enemy : MonoBehaviour
     currentHealth -= amount;
     if (currentHealth <= 0) {
       Destroy(gameObject);
+      --WaveSpawner.waves[WaveSpawner.CurrentWaveIndex].EnemiesLeft;
     }
   }
 }
