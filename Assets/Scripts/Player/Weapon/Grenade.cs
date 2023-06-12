@@ -48,7 +48,7 @@ public class Grenade : MonoBehaviour
                 nearbyRb.AddExplosionForce(force, transform.position, radius);
             }
 
-            EnemyHealth enemyHealth = nearbyObject.GetComponent<EnemyHealth>();
+            Enemy enemyHealth = nearbyObject.GetComponent<Enemy>();
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(20);
