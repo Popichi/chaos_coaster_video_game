@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using System.Linq;
 
-public class SpiderAgent : Agent, IReward
+public class SpiderAgent : Agent, IReward, Iid
 {
     public bool isTraining = true;
     public GameObject mainBody;
@@ -130,7 +130,7 @@ public class SpiderAgent : Agent, IReward
         if (isTraining)
         {
 
-            rotate();
+            rotate2();
             //mainBody.transform.rotation = rot;
             foreach (var a in bodyparts)
             {
@@ -171,13 +171,13 @@ public class SpiderAgent : Agent, IReward
         }
       
     }
-    public bool debugTraining;
+    public bool debugTraining = true;
     public void DebugReward(float f, string message = "")
     {
         if (debugTraining)
         {
             message = " " + message + " ";
-            Debug.Log("Reward:" + message + "f");
+            Debug.Log("Reward:" + message + f);
         }
         AddReward(f);
         
@@ -363,6 +363,7 @@ public class SpiderAgent : Agent, IReward
     int onBackCounter = 0;
     void FixedUpdate()
     {
+        UpdateOrientationObjects();
         for (int i = 0; i < numberCovers; ++i)
         {
             if(covers[i].transform.position.y < -100)
@@ -391,26 +392,26 @@ public class SpiderAgent : Agent, IReward
                 EndEpisode();
             }
             if (Vector3.Dot(UP(mainBody.transform), -movingPlattform.transform.up)>0.9f){
-                AddReward(-0.3f);
+                DebugReward(-0.3f, "Being upside down");
                 onBackCounter++;
                 //EndEpisode();
             }
         }
         //AddReward(-0.001f);
-        if (movingPlattform.transform.InverseTransformPoint(mainBody.transform.position).y < -15)
+        if (movingPlattform.transform.InverseTransformPoint(mainBody.transform.position).y < -30)
         {
-            AddReward(-10);
+            DebugReward(-100, "fell from plattform");
             EndEpisode();
         }
-        UpdateOrientationObjects();
+        
         if (RewardFunction == RewardMode.Nearest || RewardFunction == RewardMode.JustGetit)
-            AddReward(-1);
+            DebugReward(-1, "living penalty");
             if (RewardFunction == RewardMode.Ndistance)
         {
             float f = Vector3.Distance(mainBody.transform.position, target.transform.position);
             if (f < nearestDistance)
             {
-                AddReward(nearestDistance - f);
+                DebugReward(nearestDistance - f, "Get nearer");
                 nearestDistance = f;
             }
             f = Mathf.Abs(target.transform.position.y -  mainBody.transform.position.y);
@@ -425,9 +426,10 @@ public class SpiderAgent : Agent, IReward
         float r = 1-Mathf.Clamp01(Vector3.Distance(target.position, mainBody.transform.position) / 35);
         //AddReward(r*0.1f);
         var cubeForward = m_OrientationCube.transform.forward;
+
         if (RewardFunction == RewardMode.Velocity)
-        {
-            AddReward(Vector3.Dot((mainBody.GetComponent<Rigidbody>().velocity), cubeForward)* velocityBonus);
+        { Vector3 vel = mainBody.GetComponent<Rigidbody>().velocity;
+            DebugReward((Vector3.Dot((vel), cubeForward)* velocityBonus), "Velocity: " + vel);
         }
         // Set reward for this step according to mixture of the following elements.
         // a. Match target speed
@@ -463,13 +465,13 @@ public class SpiderAgent : Agent, IReward
         }
         if (RewardFunction == RewardMode.Nearest)
         {
-            AddReward(1 - Mathf.Clamp01(Vector3.Distance(mainBody.transform.position, target.transform.position) / 200) );
+            DebugReward(1 - Mathf.Clamp01(Vector3.Distance(mainBody.transform.position, target.transform.position) / 200), "Distance Bonus" );
         }
         else {
 
             if(RewardFunction == RewardMode.Gaze)
         {
-                AddReward(matchSpeedReward * lookAtTargetReward);
+                DebugReward(matchSpeedReward * lookAtTargetReward,"Gaze");
             }
         }
         
@@ -510,17 +512,20 @@ public class SpiderAgent : Agent, IReward
     /// <summary>
     /// Agent touched the target
     /// </summary>
+    /// 
+    public float reachTargetreward = 1000;
+    public float timeRewardMult = 100f;
     public void TouchedTarget()
     {
-        float d= (MaxStep - StepCount) / (MaxStep * 1.0f);
+        float d= reachTargetreward + ((MaxStep - StepCount) / (MaxStep * 1.0f))* timeRewardMult;
         if (RewardFunction==RewardMode.Nearest || RewardFunction==RewardMode.Ndistance || RewardFunction ==RewardMode.JustGetit
             || RewardFunction == RewardMode.Velocity)
         {
-            AddReward(d*2);
+            DebugReward(d, "Touched: " + (MaxStep - StepCount));
         }
         else
         {
-            AddReward(10);
+            DebugReward(10, "Standard touch reward");
         }
     }
 
@@ -532,5 +537,10 @@ public class SpiderAgent : Agent, IReward
     public void SetResetParameters()
     {
         SetTorsoMass();
+    }
+
+    public int GetID()
+    {
+        return myID;
     }
 }

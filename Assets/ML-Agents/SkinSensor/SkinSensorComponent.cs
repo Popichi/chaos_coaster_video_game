@@ -195,6 +195,8 @@ namespace Unity.MLAgents.Sensors
                 //ObservationToTexture(m_RenderTexture, m_Texture);
                 // TODO support more types here, e.g. JPG
                 var compressed = m_Texture.EncodeToPNG();
+                sensingTouch.mainWraper.resetPixels(true);
+                Debug.Log("Written");
                 return compressed;
             }
         }
@@ -205,7 +207,8 @@ namespace Unity.MLAgents.Sensors
           
                 
             var numWritten = writer.WriteTexture(m_Texture, m_Grayscale);
-            sensingTouch.mainWraper.resetPixels();
+            //sensingTouch.mainWraper.resetPixels(true);
+            //Debug.Log("Written");
             return numWritten;
 
         }
@@ -241,6 +244,7 @@ namespace Unity.MLAgents.Sensors
             texture2D.ReadPixels(new Rect(0, 0, texture2D.width, texture2D.height), 0, 0);
             texture2D.Apply();
             RenderTexture.active = prevActiveRt;
+        
         }
 
         /// <summary>

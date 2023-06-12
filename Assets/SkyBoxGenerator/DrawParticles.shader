@@ -6,12 +6,15 @@ Shader "Custom/DrawParticle"
     }
         SubShader
     {
-        Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
+        //Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
         LOD 100
 
         Pass
         {
-            Blend SrcAlpha OneMinusSrcAlpha
+           
+        Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite On
+            
             CGPROGRAM
             #pragma vertex vert
             #pragma geometry geom
