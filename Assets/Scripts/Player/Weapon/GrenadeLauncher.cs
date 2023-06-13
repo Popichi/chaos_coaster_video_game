@@ -28,7 +28,7 @@ public class GrenadeLauncher : SecondaryGun
         if (currentTimeBetweenAttacks <= timeBetweenAttacks)
         {
             currentTimeBetweenAttacks += Time.deltaTime;
-        } else if (attackPressed)
+        } else if (attackPressed && bulletsLeft > 0)
         {
             currentTimeBetweenAttacks = 0f;
             ShootGrenade();
@@ -43,6 +43,7 @@ public class GrenadeLauncher : SecondaryGun
         Rigidbody rbProjectile = projectile.GetComponent<Rigidbody>();
         rbProjectile.velocity = camTran.forward * shootForce;
         playerRb.AddForce((-1f * camTran.forward).normalized * shootPush, ForceMode.Impulse);
+        bulletsLeft--;
     }
 
 
