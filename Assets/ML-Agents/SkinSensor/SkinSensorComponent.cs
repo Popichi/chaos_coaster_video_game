@@ -196,7 +196,7 @@ namespace Unity.MLAgents.Sensors
                 // TODO support more types here, e.g. JPG
                 var compressed = m_Texture.EncodeToPNG();
                 sensingTouch.mainWraper.resetPixels(true);
-                Debug.Log("Written");
+                Debug.Log("Written Sense");
                 return compressed;
             }
         }
@@ -207,7 +207,7 @@ namespace Unity.MLAgents.Sensors
           
                 
             var numWritten = writer.WriteTexture(m_Texture, m_Grayscale);
-            //sensingTouch.mainWraper.resetPixels(true);
+            sensingTouch.mainWraper.resetPixels(true);
             //Debug.Log("Written");
             return numWritten;
 

@@ -22,6 +22,7 @@ public class OptimizedRayCast : MonoBehaviour
     public int stack = 1;
     public LayerMask mask;
     public bool clean;
+    public bool onlyDistance = true;
     private void Awake()
     {
         texture2D = new Texture2D(width, height, TextureFormat.RGB24, false);
@@ -30,7 +31,15 @@ public class OptimizedRayCast : MonoBehaviour
         //init sensor
         RayCNNComponent r = gameObject.AddComponent<RayCNNComponent>();
         r.optimizedRayCast = this;
-        r.Grayscale = false;
+        if (!onlyDistance)
+        {
+            r.Grayscale = false;
+        }
+        else
+        {
+            r.Grayscale = true;
+        }
+        
         //r.RenderTexture = render;
         r.texture2D = texture2D;
         r.CompressionType = SensorCompressionType.PNG;
@@ -150,8 +159,16 @@ public class OptimizedRayCast : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, rayMaxDistance, mask))
             {
-                Vector3 v = (root.InverseTransformDirection(hit.normal).normalized * hit.distance)/ rayMaxDistance;
+                Vector3 v;
                 //Debug.Log(i+" :i uvs[i]" + uvs[i]);
+                if (onlyDistance)
+                {
+                    v = new float3(hit.distance / rayMaxDistance);
+                }
+                else
+                {
+                    v = (root.InverseTransformDirection(hit.normal).normalized * hit.distance) / rayMaxDistance;
+                }
                 SaveInTexture(v, uvs[i]);
                 if (debug)
                 {

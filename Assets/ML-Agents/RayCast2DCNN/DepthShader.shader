@@ -24,7 +24,7 @@ _LogBase("Log Base", Range(1, 100)) = 6
             v2f vert(appdata v) {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.depth = o.vertex.z/o.vertex.w;
+                o.depth = 0;
                 //o.depth = log2(_LogBase + o.vertex.z) / log2(_LogBase + 150);
                 return o;
             }
@@ -35,6 +35,7 @@ _LogBase("Log Base", Range(1, 100)) = 6
 
             // return log2(i.depth * 0.5 + 0.5 + _base)/log2(_base + 1);
             //return i.depth;
+                i.depth = (i.vertex.z / i.vertex.w)/50;
             return 1 - (i.depth * 0.5 + 0.5);
             }
             ENDCG
