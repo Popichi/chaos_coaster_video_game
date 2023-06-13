@@ -43,7 +43,7 @@ public class SingularityProjectile : MonoBehaviour
                 nearbyRb.AddForce(forceDirection * force, ForceMode.Impulse);
             }
 
-            EnemyHealth enemyHealth = nearbyObject.GetComponent<EnemyHealth>();
+            Enemy enemyHealth = nearbyObject.GetComponent<Enemy>();
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(20);

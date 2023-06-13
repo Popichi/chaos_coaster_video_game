@@ -37,6 +37,7 @@ public abstract class SecondaryGun : MonoBehaviour
     //Textmeshpro for basic UI
 
     bool firstShot;
+    private WeaponVisuals visuals;
 
 
     // Start is called before the first frame update
@@ -61,7 +62,7 @@ public abstract class SecondaryGun : MonoBehaviour
 
     public abstract void ShootReleased();
 
-    public void setUpWeapon(Rigidbody playerRb, Transform cameraTran, Transform projectileSpawnPoint)
+    public void setUpWeapon(Rigidbody playerRb, Transform cameraTran, Transform projectileSpawnPoint, WeaponVisuals _visuals)
     {
         this.playerRb = playerRb;
         this.camTran = cameraTran;
@@ -73,6 +74,7 @@ public abstract class SecondaryGun : MonoBehaviour
         firstShot = true;
         attackPressed = false;
         bulletsShot = bulletsPerAttack;
+        visuals = _visuals;
     }
 
 

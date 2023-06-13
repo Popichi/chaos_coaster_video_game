@@ -35,7 +35,7 @@ public class MachineGun : SecondaryGun
         {
             currentTimeBetweenAttacks += Time.deltaTime;
         }
-        else if (attackPressed)
+        else if (attackPressed && bulletsLeft > 0)
         {
             ShootMachineGun();
         }
@@ -65,5 +65,6 @@ public class MachineGun : SecondaryGun
         rbProjectile.useGravity = false;
         playerRb.AddForce((-1f * camTran.forward).normalized * shootPush, ForceMode.Impulse);
         currentTimeBetweenAttacks = 0;
+        bulletsLeft--;
     }
 }

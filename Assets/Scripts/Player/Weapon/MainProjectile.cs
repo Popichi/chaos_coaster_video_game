@@ -22,7 +22,7 @@ public class MainProjectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy")) //look into using layers for efficiency, also for other projectiles
         {
 
-            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(10);
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(10);
         }
 
 
