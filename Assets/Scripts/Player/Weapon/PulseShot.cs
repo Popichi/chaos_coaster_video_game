@@ -34,7 +34,7 @@ public class PulseShot : SecondaryGun
 
 
         }
-        else if (attackPressed)
+        else if (attackPressed && bulletsLeft > 0)
         {
             bulletsShot = 0;
         }
