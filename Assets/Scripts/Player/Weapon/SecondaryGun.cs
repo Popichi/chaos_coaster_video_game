@@ -77,6 +77,15 @@ public abstract class SecondaryGun : MonoBehaviour
         visuals = _visuals;
     }
 
+    //No animation this time
+    public void Reload(int amount)
+    {
+        bulletsLeft += amount;
+        if (bulletsLeft > magazineSize)
+        {
+            bulletsLeft = magazineSize;
+        } 
+    }
 
     /*
     //Needs to be public I think
@@ -124,20 +133,5 @@ public abstract class SecondaryGun : MonoBehaviour
     }
     */
 
-    //also probably public
-    //Also unclear if secondary will even be able to reload
-    //Still might be useful
-    private void Reload()
-    {
-        reloading = true;
-        
-        Invoke(nameof(ReloadFinished), reloadTime);
-    }
 
-    private void ReloadFinished()
-    {
-        //Fill magazine
-        bulletsLeft = magazineSize;
-        reloading = false;
-    }
 }

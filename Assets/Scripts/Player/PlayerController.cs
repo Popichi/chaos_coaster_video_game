@@ -332,4 +332,15 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    public void WeaponReload(int weapon, int amount)
+    {
+        weapons[weapon].Reload(amount);
+        //Reload UI?
+    }
+
+    public bool WeaponFull(int weapon)
+    {
+        return weapons[weapon].bulletsLeft >= weapons[weapon].magazineSize;
+    }
 }
