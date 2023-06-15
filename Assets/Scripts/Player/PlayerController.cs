@@ -25,10 +25,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed;
+    public float maxSpeedY;
+    public float speedDecay;
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
+    bool speedControlEnabled;
     public Transform parent;
     public Transform playerTempSpawnPoint;
 
@@ -86,8 +89,10 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < weapons.Length; i++)
         {
             weapons[i].setUpWeapon(this.GetComponent<Rigidbody>(), cameraPos, rangedSpawnPoint, weaponVisuals);
+            weapons[i].enabled = false;
         }
-        currentWeapon = 3;
+        //weaponVisuals.ChangeWeapon(currentWeapon);
+        weapons[currentWeapon].enabled = true;
         swapPressed = false;
         currentSwapTime = 0f;
         wheelThreshold = 1f;
@@ -115,11 +120,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.drag = 0;
+            rb.drag = 0.5f; //Test
         }
         SpeedControl();
 
-        //Weapon Cooldown, needs more work for multiple weapons
         if (currentCooldown >= 0)
         {
             currentCooldown -= Time.deltaTime;
@@ -198,11 +202,13 @@ public class PlayerController : MonoBehaviour
         if (grounded)
         {
             rb.AddForce(direction * moveSpeed * 10f, ForceMode.Force);
+            
         }
         else
         {
             rb.AddForce(direction * moveSpeed * airMultiplier * 10f, ForceMode.Force);
         }
+
     }
 
     void OnJump(InputValue value)
@@ -310,8 +316,13 @@ public class PlayerController : MonoBehaviour
         Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         if (flatVel.magnitude > moveSpeed)
         {
-            Vector3 newVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(newVel.x, rb.velocity.y, newVel.z);
+
+            Vector3 newVel = flatVel.normalized * speedDecay;
+            rb.velocity -= new Vector3(newVel.x * Time.deltaTime, 0, newVel.z * Time.deltaTime);
+        }
+        if (Mathf.Abs(rb.velocity.y) > maxSpeedY)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, Mathf.Sign(rb.velocity.y) * maxSpeedY, rb.velocity.z);
         }
     }
 
@@ -326,7 +337,9 @@ public class PlayerController : MonoBehaviour
         //When it has been released and it was not pressed long enough to take out wheapon wheel
         if (!swapPressed && currentSwapTime < wheelThreshold)
         {
+            weapons[currentWeapon].enabled = false;
             currentWeapon = (currentWeapon + 1) % weapons.Length;
+            weapons[currentWeapon].enabled = true;
             weaponVisuals.ChangeWeapon(currentWeapon);
             currentSwapTime = 0;
         }

@@ -37,6 +37,7 @@ public class PulseShot : SecondaryGun
         else if (attackPressed && bulletsLeft > 0)
         {
             bulletsShot = 0;
+            visuals.ChangeShooting();
         }
     }
 
@@ -56,6 +57,7 @@ public class PulseShot : SecondaryGun
         currentTimeBetweenBullets = 0;
         if (bulletsShot >= bulletsPerAttack)
         {
+            visuals.ChangeShooting();
             //bulletsShot = 0;
             shooting = false;
             currentTimeBetweenAttacks = 0;

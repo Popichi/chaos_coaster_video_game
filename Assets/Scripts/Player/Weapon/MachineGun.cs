@@ -10,22 +10,26 @@ public class MachineGun : SecondaryGun
     public float mgRadius;
     public float targetAngle;
     private GameObject currentTarget;
+    private float animDelay;
 
 
     public override void ShootHeld()
     {
         attackPressed = true;
+        
+        visuals.ChangeShooting();
     }
 
     public override void ShootReleased()
     {
         attackPressed = false;
+        visuals.ChangeShooting();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        animDelay = timeBetweenAttacks;
     }
 
     // Update is called once per frame
@@ -37,8 +41,17 @@ public class MachineGun : SecondaryGun
         }
         else if (attackPressed && bulletsLeft > 0)
         {
+            if (!shooting)
+            {
+                shooting = true;
+            }
             ShootMachineGun();
+        } else if (!attackPressed && bulletsLeft > 0 && shooting)
+        {
+            shooting = false;
         }
+        
+        visuals.ChangeShooting(shooting);
     }
 
     void FindTarget()
@@ -66,5 +79,9 @@ public class MachineGun : SecondaryGun
         playerRb.AddForce((-1f * camTran.forward).normalized * shootPush, ForceMode.Impulse);
         currentTimeBetweenAttacks = 0;
         bulletsLeft--;
+        if (bulletsLeft <= 0)
+        {
+            shooting = false;
+        }
     }
 }

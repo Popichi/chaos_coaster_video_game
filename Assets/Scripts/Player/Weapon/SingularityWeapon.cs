@@ -46,6 +46,7 @@ public class SingularityWeapon : SecondaryGun
 
     void ShootSingularity()
     {
+        visuals.ChangeShooting();
         GameObject projectile = Instantiate(bullet, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
         currentProjectile = projectile.GetComponent<SingularityProjectile>();
         currentProjectile.SetValues(grenadeDamage, grenadeRadius, grenadeForce);
@@ -59,6 +60,7 @@ public class SingularityWeapon : SecondaryGun
 
     void DetonateSingularity()
     {
+        visuals.ChangeShooting();
         currentProjectile.Explode();
         currentProjectile = null;
         shooting = false;

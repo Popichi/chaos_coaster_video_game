@@ -109,6 +109,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3068546893845304772, guid: 4f19a82f064f42349a5865f79fc4f790, type: 3}
   m_PrefabInstance: {fileID: 677809346612370042}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2966139578238219749 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2324359031337562015, guid: 4f19a82f064f42349a5865f79fc4f790, type: 3}
+  m_PrefabInstance: {fileID: 677809346612370042}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d38072b98ba0a294fbb6ade1fa119f51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1899329446737777277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -203,6 +214,10 @@ PrefabInstance:
       propertyPath: sensitivityY
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
+      propertyPath: weaponVisuals
+      value: 
+      objectReference: {fileID: 2966139578238219749}
     - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
       propertyPath: rangedSpawnPoint
       value: 
@@ -322,15 +337,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8197639665776140878, guid: 68afefb2b6c15c542bda5e19bdec0937, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.551964
+      value: -0.20196533
       objectReference: {fileID: 0}
     - target: {fileID: 8197639665776140878, guid: 68afefb2b6c15c542bda5e19bdec0937, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.334084
+      value: -1.4259167
       objectReference: {fileID: 0}
     - target: {fileID: 8197639665776140878, guid: 68afefb2b6c15c542bda5e19bdec0937, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.133665
+      value: 4.803665
       objectReference: {fileID: 0}
     - target: {fileID: 8197639665776140878, guid: 68afefb2b6c15c542bda5e19bdec0937, type: 3}
       propertyPath: m_LocalRotation.w
