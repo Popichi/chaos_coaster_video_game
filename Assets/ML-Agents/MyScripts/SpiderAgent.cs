@@ -217,8 +217,8 @@ public class SpiderAgent : Agent, IReward, Iid
     /// Loop over body parts to add them to observation.
     /// </summary>
     /// 
-    public Vector3 forward = new Vector3(0, -1, 0);
-    public Vector3 up = new Vector3(0, 0, 1);
+    public Vector3 forward = new Vector3(0, 0,1);
+    public Vector3 up = new Vector3(0, 1, 0);
     public Vector3 Forward(Transform t)
     {
         return t.TransformDirection(forward);
@@ -464,6 +464,8 @@ public class SpiderAgent : Agent, IReward, Iid
         // b. Rotation alignment with target direction.
         //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
         var lookAtTargetReward = (Vector3.Dot(cubeForward, Forward(mainHead.transform)) + 1) * .5F;
+        //var lookAtTargetReward = Vector3.Dot(cubeForward, Forward(mainHead.transform)) ;
+        //Debug.DrawRay(mainHead.transform.position, Forward(mainHead.transform)*5);
         var targetDir = (target.transform.position - mainHead.transform.position).normalized;
         var c = Vector3.Cross(targetDir, UP(mainHead.transform));
         c = Vector3.Cross(c, targetDir);

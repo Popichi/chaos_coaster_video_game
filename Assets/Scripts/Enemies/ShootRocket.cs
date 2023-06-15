@@ -35,10 +35,10 @@ public class ShootRocket : MonoBehaviour
         {
             for (int i = 0; i < numberOfShots; i++)
             {
-                GameObject projectile = Instantiate(projectilePrefab, root.position, Quaternion.identity*Quaternion.Euler(-90,0,0));
+                GameObject projectile = Instantiate(projectilePrefab, root.position, Quaternion.identity * Quaternion.Euler(-90,0,0));
                 projectile.GetComponentInChildren<RocketController>().manager = this;
                 projectile.GetComponentInChildren<Rigidbody>().velocity = root.TransformDirection(shootDirection) * power;
-                Destroy(projectile,20);
+                Destroy(projectile,15);
                 yield return new WaitForSeconds(shootInterval);
             }
 
