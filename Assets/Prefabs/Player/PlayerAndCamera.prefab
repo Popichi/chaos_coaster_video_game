@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3110574087411103368}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32,7 +32,7 @@ Transform:
   - {fileID: 3163548522858451872}
   - {fileID: 2593434732620550078}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &677809346612370042
 PrefabInstance:
@@ -120,6 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38072b98ba0a294fbb6ade1fa119f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &3963525166705001726 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4497219306374880900, guid: 4f19a82f064f42349a5865f79fc4f790, type: 3}
+  m_PrefabInstance: {fileID: 677809346612370042}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1899329446737777277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -203,9 +208,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 3429240349397351083}
     m_Modifications:
     - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
+      propertyPath: follower
+      value: 
+      objectReference: {fileID: 3110574087411103368}
+    - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
       propertyPath: cameraPos
       value: 
       objectReference: {fileID: 2593434732620550078}
+    - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
+      propertyPath: maxSpeedY
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
+      propertyPath: moveSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
+      propertyPath: speedDecay
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
       propertyPath: sensitivityX
       value: 75
@@ -226,6 +247,10 @@ PrefabInstance:
       propertyPath: groundLayer.m_Bits
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1581414588238113376, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
+      propertyPath: visualMainSpawnPoint
+      value: 
+      objectReference: {fileID: 3963525166705001726}
     - target: {fileID: 2453754021115521040, guid: 89ca82c9c23fd60419f574f53e1b5c0f, type: 3}
       propertyPath: m_Material
       value: 
