@@ -15,8 +15,8 @@ public class WeaponVisuals : MonoBehaviour
     void Start()
     {
         currentSecondary = 0;
-        lightSphere.color = Color.cyan;
-        materialSphere.color = Color.cyan;
+        lightSphere.color = Color.red;
+        materialSphere.color = Color.red;
         //materialSphere.EnableKeyword("_EMISSION"); Does not work //Stick to color for now
         //materialSphere.SetColor("_EmissionColor", Color.blue);
     }
@@ -62,6 +62,12 @@ public class WeaponVisuals : MonoBehaviour
     public void ChangeShooting()
     {
         shootingSecondary = !shootingSecondary;
+        animator.SetBool("ShootingSecondary", shootingSecondary);
+    }
+
+    public void ChangeShooting(bool value)
+    {
+        shootingSecondary = value;
         animator.SetBool("ShootingSecondary", shootingSecondary);
     }
 }

@@ -12,7 +12,7 @@ public abstract class SecondaryGun : MonoBehaviour
     public GameObject bullet;
     public Transform rangedSpawnPoint;
     public Transform camTran;
-
+    public bool isActive;
     //bullet force
     public float shootForce, upwardShootForce, shootPush;
 
@@ -37,7 +37,7 @@ public abstract class SecondaryGun : MonoBehaviour
     //Textmeshpro for basic UI
 
     bool firstShot;
-    private WeaponVisuals visuals;
+    public WeaponVisuals visuals;
 
 
     // Start is called before the first frame update
@@ -46,7 +46,7 @@ public abstract class SecondaryGun : MonoBehaviour
     void Start()
     {
         //magazine full at the start
-        
+        isActive = false;
     }
 
     // Update is called once per frame
@@ -67,7 +67,7 @@ public abstract class SecondaryGun : MonoBehaviour
         this.playerRb = playerRb;
         this.camTran = cameraTran;
         this.rangedSpawnPoint = projectileSpawnPoint;
-        currentTimeBetweenAttacks = 0;
+        currentTimeBetweenAttacks = timeBetweenAttacks;
         currentTimeBetweenBullets = 0;
         bulletsLeft = magazineSize;
         readyToShoot = true;

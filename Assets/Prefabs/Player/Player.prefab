@@ -165,6 +165,8 @@ MonoBehaviour:
   sensitivityX: 75
   sensitivityY: 75
   moveSpeed: 5
+  maxSpeedY: 0
+  speedDecay: 0
   jumpForce: 7
   jumpCooldown: 1
   airMultiplier: 0.4
@@ -181,7 +183,7 @@ MonoBehaviour:
   - {fileID: 9188578126152391058}
   - {fileID: 1066602899473959288}
   - {fileID: 3614577494691735614}
-  currentWeapon: 1
+  currentWeapon: 0
   weaponVisuals: {fileID: 0}
   follower: {fileID: 0}
 --- !u!54 &4225017865571262620
@@ -242,6 +244,7 @@ MonoBehaviour:
   recoilForce: 2
   attackPressed: 0
   muzzleFlash: {fileID: 0}
+  visuals: {fileID: 0}
 --- !u!114 &9188578126152391058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,6 +276,7 @@ MonoBehaviour:
   recoilForce: 0
   attackPressed: 0
   muzzleFlash: {fileID: 0}
+  visuals: {fileID: 0}
   grenadeDamage: 0
   grenadeForce: 15
   grenadeRadius: 12
@@ -307,6 +311,7 @@ MonoBehaviour:
   recoilForce: 0
   attackPressed: 0
   muzzleFlash: {fileID: 0}
+  visuals: {fileID: 0}
   smartMode: 0
   shootDelay: 0
   mgRadius: 0
@@ -342,7 +347,9 @@ MonoBehaviour:
   recoilForce: 0
   attackPressed: 0
   muzzleFlash: {fileID: 0}
+  visuals: {fileID: 0}
   grenadeDamage: 0
   grenadeRadius: 7
   grenadeForce: 750
   grenadeTimer: 2
+  animDelay: 0
