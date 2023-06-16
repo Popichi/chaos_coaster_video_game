@@ -49,6 +49,7 @@ public class GrenadeLauncher : SecondaryGun
         rbProjectile.velocity = camTran.forward * shootForce;
         playerRb.AddForce((-1f * camTran.forward).normalized * shootPush, ForceMode.Impulse);
         bulletsLeft--;
+        UpdateAmmoUI();
     }
 
 

@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3429240349397351083, guid: 4f106d511c8c7b74a872507be0db9d8c, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3429240349397351083, guid: 4f106d511c8c7b74a872507be0db9d8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -177,11 +177,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7744510894177298225, guid: 4f106d511c8c7b74a872507be0db9d8c, type: 3}
       propertyPath: sensitivityX
-      value: 100
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 7744510894177298225, guid: 4f106d511c8c7b74a872507be0db9d8c, type: 3}
       propertyPath: sensitivityY
-      value: 100
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 7744510894177298225, guid: 4f106d511c8c7b74a872507be0db9d8c, type: 3}
       propertyPath: playerTempSpawnPoint

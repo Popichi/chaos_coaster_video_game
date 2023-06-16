@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     public SecondaryGun[] weapons;
     public int currentWeapon;
     public WeaponVisuals weaponVisuals;
+    public PlayerUI playerUI;
 
 
 
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
         testCharge2 = false;
         for (int i = 0; i < weapons.Length; i++)
         {
-            weapons[i].setUpWeapon(this.GetComponent<Rigidbody>(), cameraPos, rangedSpawnPoint, weaponVisuals);
+            weapons[i].setUpWeapon(this.GetComponent<Rigidbody>(), cameraPos, rangedSpawnPoint, weaponVisuals, playerUI);
             weapons[i].enabled = false;
         }
         //weaponVisuals.ChangeWeapon(currentWeapon);
@@ -98,6 +99,10 @@ public class PlayerController : MonoBehaviour
         wheelThreshold = 1f;
         mainFailed = false;
         secondaryFailed = false;
+        playerUI.Init();
+        playerUI.UpdatePlayerHealth(1f);
+        playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
+        playerUI.ResetMainCharge();
     }
 
     // Update is called once per frame
@@ -120,7 +125,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.drag = 0.5f; //Test
+            rb.drag = 0.3f;
         }
         SpeedControl();
 
@@ -138,9 +143,11 @@ public class PlayerController : MonoBehaviour
             chargeTimer += Time.deltaTime;
             if (!testCharge2 && chargeTimer >= chargeLvl2)
             {
+
                 testCharge2 = true;
                 Debug.Log("lvl 2 Charged");
                 weaponVisuals.ChangeCharge(3);
+                playerUI.IncreaseMainCharge();
                 currentMainProjectile.transform.localScale *= 2;
                 currentMainRb.mass *= 2;
             }
@@ -149,6 +156,7 @@ public class PlayerController : MonoBehaviour
                 testCharge1 = true;
                 Debug.Log("lvl 1 Charged");
                 weaponVisuals.ChangeCharge(2);
+                playerUI.IncreaseMainCharge();
                 currentMainProjectile.transform.localScale *= 2;
                 currentMainRb.mass *= 2;
             }
@@ -233,6 +241,7 @@ public class PlayerController : MonoBehaviour
         {
             primaryCharging = true;
             weaponVisuals.ChangeCharge(1);
+            playerUI.IncreaseMainCharge();
             currentMainProjectile = Instantiate(primaryProjectile, visualMainSpawnPoint.position, Quaternion.identity);
             currentMainRb = currentMainProjectile.GetComponent<Rigidbody>();
             currentMainRb.isKinematic = true;
@@ -271,6 +280,7 @@ public class PlayerController : MonoBehaviour
             currentMainRb = null;
             primaryCharging = false;
             weaponVisuals.ChangeCharge(0);
+            playerUI.ResetMainCharge();
             chargeTimer = 0;
             testCharge1 = false;
             testCharge2 = false;
@@ -341,6 +351,7 @@ public class PlayerController : MonoBehaviour
             currentWeapon = (currentWeapon + 1) % weapons.Length;
             weapons[currentWeapon].enabled = true;
             weaponVisuals.ChangeWeapon(currentWeapon);
+            playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
             currentSwapTime = 0;
         }
 
