@@ -65,5 +65,6 @@ public class SingularityWeapon : SecondaryGun
         currentProjectile = null;
         shooting = false;
         currentTimeBetweenAttacks = 0;
+        UpdateAmmoUI();
     }
 }

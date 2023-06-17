@@ -79,6 +79,7 @@ public class MachineGun : SecondaryGun
         playerRb.AddForce((-1f * camTran.forward).normalized * shootPush, ForceMode.Impulse);
         currentTimeBetweenAttacks = 0;
         bulletsLeft--;
+        UpdateAmmoUI();
         if (bulletsLeft <= 0)
         {
             shooting = false;

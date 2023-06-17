@@ -38,6 +38,7 @@ public abstract class SecondaryGun : MonoBehaviour
 
     bool firstShot;
     public WeaponVisuals visuals;
+    public PlayerUI ui;
 
 
     // Start is called before the first frame update
@@ -62,7 +63,7 @@ public abstract class SecondaryGun : MonoBehaviour
 
     public abstract void ShootReleased();
 
-    public void setUpWeapon(Rigidbody playerRb, Transform cameraTran, Transform projectileSpawnPoint, WeaponVisuals _visuals)
+    public void setUpWeapon(Rigidbody playerRb, Transform cameraTran, Transform projectileSpawnPoint, WeaponVisuals _visuals, PlayerUI _ui)
     {
         this.playerRb = playerRb;
         this.camTran = cameraTran;
@@ -75,6 +76,7 @@ public abstract class SecondaryGun : MonoBehaviour
         attackPressed = false;
         bulletsShot = bulletsPerAttack;
         visuals = _visuals;
+        ui = _ui;
     }
 
     //No animation this time
@@ -85,6 +87,11 @@ public abstract class SecondaryGun : MonoBehaviour
         {
             bulletsLeft = magazineSize;
         } 
+    }
+
+    public void UpdateAmmoUI()
+    {
+        ui.UpdateAmmo(bulletsLeft);
     }
 
     /*

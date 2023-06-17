@@ -40,7 +40,7 @@ public class WeaponVisuals : MonoBehaviour
 
     private Color DetermineColor(int index)
     {
-        Color color = Color.cyan;
+        Color color = Color.white;
         if (index == 0)
             color = Color.red;
         else if (index == 1)
@@ -48,7 +48,7 @@ public class WeaponVisuals : MonoBehaviour
         else if (index == 2)
             color = Color.yellow;
         else if (index == 3)
-            color = Color.white;
+            color = Color.cyan;
 
         return color;
     } 
