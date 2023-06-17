@@ -8,6 +8,7 @@ public class MovementAlert : MonoBehaviour
     public Sprite roadSign;
     public float alertTime = 4f;
     public GameObject spritePlaceholder;
+    private GameObject movementIndicatorFrame;
     private UnityEngine.UI.Image spritePlaceholderImage;
     private UnityEngine.AudioSource spritePlaceholderSound;
 
@@ -17,8 +18,9 @@ public class MovementAlert : MonoBehaviour
         Resources.Load(roadSign.name);
         if (spritePlaceholder == null)
         {
-            spritePlaceholder = GameObject.Find("AlertSpritePlaceholder");
+            spritePlaceholder = GameObject.Find("AlertSpritePlaceholder");            
         }
+        movementIndicatorFrame = GameObject.Find("MovementIndicatorFrame");
         spritePlaceholderImage = spritePlaceholder.GetComponent<UnityEngine.UI.Image>();
         spritePlaceholderSound = spritePlaceholder.GetComponent<UnityEngine.AudioSource>();
     }
@@ -35,6 +37,7 @@ public class MovementAlert : MonoBehaviour
         {
             spritePlaceholderImage.sprite = roadSign;
             spritePlaceholderImage.enabled = true;
+            movementIndicatorFrame.SetActive(false);
             StartCoroutine(WaitAndDisableAlert());
             spritePlaceholderSound.Play();
         }
@@ -44,5 +47,6 @@ public class MovementAlert : MonoBehaviour
     {
         yield return new WaitForSeconds(alertTime);
         spritePlaceholderImage.enabled = false;
+        movementIndicatorFrame.SetActive(true);
     }
 }
