@@ -463,7 +463,8 @@ public class SpiderAgent : Agent, IReward, Iid
 
         // b. Rotation alignment with target direction.
         //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
-        var lookAtTargetReward = (Vector3.Dot(cubeForward, Forward(mainHead.transform)) + 1) * .5F;
+        var lookAtTargetReward = (Vector3.Dot(cubeForward, mainBody.transform.forward) + 1) * .5F;
+        Debug.DrawRay(mainBody.transform.position, mainBody.transform.forward);
         //var lookAtTargetReward = Vector3.Dot(cubeForward, Forward(mainHead.transform)) ;
         //Debug.DrawRay(mainHead.transform.position, Forward(mainHead.transform)*5);
         var targetDir = (target.transform.position - mainHead.transform.position).normalized;
