@@ -8,6 +8,7 @@ public class Grenade : MonoBehaviour
     float damage;
     float radius;
     float force;
+    public GameObject explosionVFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +55,10 @@ public class Grenade : MonoBehaviour
                 enemyHealth.TakeDamage(20);
             }
         }
+        GameObject ps = Instantiate(explosionVFX, transform.position, Quaternion.identity);
+        Destroy(ps, 1f);
 
         Destroy(gameObject);
+
     }
 }

@@ -8843,6 +8843,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaveSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 5927889632803326247, guid: 106f88f43b9674919b0d776214ff2c13, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6490196233034641483, guid: 106f88f43b9674919b0d776214ff2c13, type: 3}
       propertyPath: m_RootOrder
       value: -1

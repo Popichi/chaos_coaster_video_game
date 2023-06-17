@@ -32,7 +32,6 @@ public class PlayerUI : MonoBehaviour
     public void ChangeWeapon(int weaponIndex, int maxAmmo, int currentAmmo)
     {
         //Change Icon
-        Debug.Log(weaponIndex);
         weaponIcon.sprite = allIcons[weaponIndex];
         maxAmmoText = maxAmmo.ToString();
         UpdateAmmo(currentAmmo);

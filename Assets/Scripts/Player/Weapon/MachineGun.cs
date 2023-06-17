@@ -70,6 +70,10 @@ public class MachineGun : SecondaryGun
     void ShootMachineGun()
     {
         GameObject projectile = Instantiate(bullet, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
+        GameObject flash = Instantiate(muzzleFlash, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
+        flash.transform.localScale *= 2;
+        flash.layer = 11;
+        Destroy(flash, 0.4f);
         Rigidbody rbProjectile = projectile.GetComponent<Rigidbody>();
         float spreadX = Random.Range(-spreadRange, spreadRange);
         float spreadY = Random.Range(-spreadRange, spreadRange);

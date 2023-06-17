@@ -7,6 +7,7 @@ public class PulseShotProjectile : MonoBehaviour
     public float timeDetonation;
     Rigidbody rb;
     GameObject other;
+    public GameObject ps;
 
     bool collided;
     Vector3 collisionDirection;
@@ -17,11 +18,7 @@ public class PulseShotProjectile : MonoBehaviour
         collided = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
@@ -49,6 +46,8 @@ public class PulseShotProjectile : MonoBehaviour
         Rigidbody targetRB = other.GetComponent<Rigidbody>();
         if (targetRB != null)
             targetRB.AddForce(collisionDirection.normalized * 3f, ForceMode.Impulse);
-        Destroy(gameObject, 0.5f);
+        GameObject particleHit = Instantiate(ps, transform.position, Quaternion.identity, transform.parent);
+        Destroy(particleHit, 0.5f);
+        Destroy(gameObject);
     }
 }
