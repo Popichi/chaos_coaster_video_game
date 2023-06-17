@@ -361,6 +361,9 @@ public class PlayerController : MonoBehaviour
     public void WeaponReload(int weapon, int amount)
     {
         weapons[weapon].Reload(amount);
+        //weaponVisuals.ChangeWeapon(currentWeapon);
+        if (weapon == currentWeapon)
+            playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
         //Reload UI?
     }
 
