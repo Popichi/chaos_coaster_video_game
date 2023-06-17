@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using System.Linq;
 
-public class SpiderAgent : Agent, IReward
+public class SpiderAgent : Agent, IReward, Iid
 {
     public bool isTraining = true;
     public GameObject mainBody;
@@ -87,7 +87,24 @@ public class SpiderAgent : Agent, IReward
     public int numberCovers;
     public GameObject coverPrefab;
     List<GameObject> covers;
+    void rotate2()
+    {
+        Quaternion rot = Quaternion.Euler(0, Random.value * 360, 0);//Random.rotation;
+        rootRoot = rootPrefab.transform.parent;
+        rootRoot.rotation *= rot;
+        rootPrefab.transform.parent = null;
+        rootRoot.rotation = Quaternion.identity;
+        rootPrefab.parent = rootRoot;
+    }
+    void rotate()
+    {
+        Quaternion rot = Quaternion.Euler(movingPlattform.transform.up * 360);//Random.rotation;
 
+        mainBody.transform.rotation *= rot;
+        float off = 14;
+        mainBody.transform.position += new Vector3(Random.value * off - off / 2, 0, Random.value * off - off / 2);
+
+    }
     public override void OnEpisodeBegin()
     {
         //test
@@ -108,24 +125,7 @@ public class SpiderAgent : Agent, IReward
             bodyPart.Reset(bodyPart);
         }
 
-        void rotate2()
-        {
-            Quaternion rot = Quaternion.Euler(0, Random.value * 360, 0);//Random.rotation;
-            rootRoot = rootPrefab.transform.parent;
-            rootRoot.rotation *= rot;
-            rootPrefab.transform.parent = null;
-            rootRoot.rotation = Quaternion.identity;
-            rootPrefab.parent = rootRoot;
-        }
-        void rotate()
-        {
-            Quaternion rot = Quaternion.Euler(movingPlattform.transform.up * 360);//Random.rotation;
-           
-            mainBody.transform.rotation *= rot;
-            float off = 14;
-            mainBody.transform.position += new Vector3(Random.value * off - off / 2, 0, Random.value * off - off / 2); 
-       
-        }
+        
         //Random start rotation to help generalize
         if (isTraining)
         {
@@ -171,13 +171,13 @@ public class SpiderAgent : Agent, IReward
         }
       
     }
-    public bool debugTraining;
+    public bool debugTraining = true;
     public void DebugReward(float f, string message = "")
     {
         if (debugTraining)
         {
             message = " " + message + " ";
-            Debug.Log("Reward:" + message + "f");
+            Debug.Log("Reward:" + message + f);
         }
         AddReward(f);
         
@@ -217,8 +217,8 @@ public class SpiderAgent : Agent, IReward
     /// Loop over body parts to add them to observation.
     /// </summary>
     /// 
-    public Vector3 forward = new Vector3(0, -1, 0);
-    public Vector3 up = new Vector3(0, 0, 1);
+    public Vector3 forward = new Vector3(0, 0,1);
+    public Vector3 up = new Vector3(0, 1, 0);
     public Vector3 Forward(Transform t)
     {
         return t.TransformDirection(forward);
@@ -337,7 +337,9 @@ public class SpiderAgent : Agent, IReward
         Nearest,
         Ndistance,
         JustGetit,
-        Velocity
+        MaxVelocity,
+        AvgVelocity
+
     }
     public RewardMode RewardFunction;
     public float nearestDistance = 0;
@@ -360,9 +362,11 @@ public class SpiderAgent : Agent, IReward
            
         }
     }
+    public bool backCounteractivated;
     int onBackCounter = 0;
     void FixedUpdate()
     {
+        UpdateOrientationObjects();
         for (int i = 0; i < numberCovers; ++i)
         {
             if(covers[i].transform.position.y < -100)
@@ -385,32 +389,37 @@ public class SpiderAgent : Agent, IReward
                 EndEpisode();
 
             }
-            if (onBackCounter > 100)
+            if (backCounteractivated)
             {
-                onBackCounter = 0;
-                EndEpisode();
+                if (onBackCounter > 100)
+                {
+                    onBackCounter = 0;
+                    EndEpisode();
+                }
+                if (Vector3.Dot(UP(mainBody.transform), -movingPlattform.transform.up) > 0.9f)
+                {
+                    DebugReward(-0.3f, "Being upside down");
+                    onBackCounter++;
+                    //EndEpisode();
+                }
             }
-            if (Vector3.Dot(UP(mainBody.transform), -movingPlattform.transform.up)>0.9f){
-                AddReward(-0.3f);
-                onBackCounter++;
-                //EndEpisode();
-            }
+            
         }
         //AddReward(-0.001f);
-        if (movingPlattform.transform.InverseTransformPoint(mainBody.transform.position).y < -15)
+        if (movingPlattform.transform.InverseTransformPoint(mainBody.transform.position).y < -30)
         {
-            AddReward(-10);
+            DebugReward(-100, "fell from plattform");
             EndEpisode();
         }
-        UpdateOrientationObjects();
+        
         if (RewardFunction == RewardMode.Nearest || RewardFunction == RewardMode.JustGetit)
-            AddReward(-1);
+            DebugReward(-1, "living penalty");
             if (RewardFunction == RewardMode.Ndistance)
         {
             float f = Vector3.Distance(mainBody.transform.position, target.transform.position);
             if (f < nearestDistance)
             {
-                AddReward(nearestDistance - f);
+                DebugReward(nearestDistance - f, "Get nearer");
                 nearestDistance = f;
             }
             f = Mathf.Abs(target.transform.position.y -  mainBody.transform.position.y);
@@ -425,15 +434,22 @@ public class SpiderAgent : Agent, IReward
         float r = 1-Mathf.Clamp01(Vector3.Distance(target.position, mainBody.transform.position) / 35);
         //AddReward(r*0.1f);
         var cubeForward = m_OrientationCube.transform.forward;
-        if (RewardFunction == RewardMode.Velocity)
-        {
-            AddReward(Vector3.Dot((mainBody.GetComponent<Rigidbody>().velocity), cubeForward)* velocityBonus);
+
+        if (RewardFunction == RewardMode.MaxVelocity)
+        { Vector3 vel = mainBody.GetComponent<Rigidbody>().velocity;
+            DebugReward((Vector3.Dot((vel), cubeForward)* velocityBonus), "Velocity: " + vel);
         }
+
         // Set reward for this step according to mixture of the following elements.
         // a. Match target speed
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
         var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
-
+        if (RewardFunction == RewardMode.AvgVelocity)
+        {
+            var g = GetAvgVelocity();
+            var o = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, g);
+            DebugReward(o, "AvgVelocity: " + g);
+        }
         //Check for NaNs
         if (float.IsNaN(matchSpeedReward))
         {
@@ -448,6 +464,8 @@ public class SpiderAgent : Agent, IReward
         // b. Rotation alignment with target direction.
         //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
         var lookAtTargetReward = (Vector3.Dot(cubeForward, Forward(mainHead.transform)) + 1) * .5F;
+        //var lookAtTargetReward = Vector3.Dot(cubeForward, Forward(mainHead.transform)) ;
+        //Debug.DrawRay(mainHead.transform.position, Forward(mainHead.transform)*5);
         var targetDir = (target.transform.position - mainHead.transform.position).normalized;
         var c = Vector3.Cross(targetDir, UP(mainHead.transform));
         c = Vector3.Cross(c, targetDir);
@@ -463,13 +481,13 @@ public class SpiderAgent : Agent, IReward
         }
         if (RewardFunction == RewardMode.Nearest)
         {
-            AddReward(1 - Mathf.Clamp01(Vector3.Distance(mainBody.transform.position, target.transform.position) / 200) );
+            DebugReward(1 - Mathf.Clamp01(Vector3.Distance(mainBody.transform.position, target.transform.position) / 200), "Distance Bonus" );
         }
         else {
 
             if(RewardFunction == RewardMode.Gaze)
         {
-                AddReward(matchSpeedReward * lookAtTargetReward);
+                DebugReward(matchSpeedReward * lookAtTargetReward,"Gaze");
             }
         }
         
@@ -510,17 +528,20 @@ public class SpiderAgent : Agent, IReward
     /// <summary>
     /// Agent touched the target
     /// </summary>
+    /// 
+    public float reachTargetreward = 0;
+    public float timeRewardMult = 1;
     public void TouchedTarget()
     {
-        float d= (MaxStep - StepCount) / (MaxStep * 1.0f);
+        float d= reachTargetreward + ((MaxStep - StepCount) / (MaxStep * 1.0f))* timeRewardMult;
         if (RewardFunction==RewardMode.Nearest || RewardFunction==RewardMode.Ndistance || RewardFunction ==RewardMode.JustGetit
-            || RewardFunction == RewardMode.Velocity)
+            || RewardFunction == RewardMode.MaxVelocity)
         {
-            AddReward(d*2);
+            DebugReward(d, "Touched: " + (MaxStep - StepCount));
         }
         else
         {
-            AddReward(10);
+            DebugReward(1, "Standard touch reward");
         }
     }
 
@@ -532,5 +553,10 @@ public class SpiderAgent : Agent, IReward
     public void SetResetParameters()
     {
         SetTorsoMass();
+    }
+
+    public int GetID()
+    {
+        return myID;
     }
 }

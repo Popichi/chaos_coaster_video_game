@@ -5,6 +5,7 @@ using UnityEngine;
 public class GrenadeLauncher : SecondaryGun
 {
     public float grenadeDamage, grenadeRadius, grenadeForce, grenadeTimer;
+    public float animDelay;
     //Shoot grenade projectiles, small delay between shots, more bouncy, explode after a time delay, no explosion on contact, affected by gravity
     public override void ShootHeld()
     {
@@ -16,23 +17,27 @@ public class GrenadeLauncher : SecondaryGun
         attackPressed = false;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (currentTimeBetweenAttacks <= timeBetweenAttacks)
         {
+            
             currentTimeBetweenAttacks += Time.deltaTime;
-        } else if (attackPressed)
+
+        } else if (attackPressed && bulletsLeft > 0)
         {
             currentTimeBetweenAttacks = 0f;
             ShootGrenade();
+            visuals.ChangeShooting();
+            Invoke(nameof(AnimDelay), animDelay);
         }
+    }
+
+    //animation ends after a small delay
+    void AnimDelay()
+    {
+        visuals.ChangeShooting();
     }
 
     void ShootGrenade()
@@ -43,6 +48,8 @@ public class GrenadeLauncher : SecondaryGun
         Rigidbody rbProjectile = projectile.GetComponent<Rigidbody>();
         rbProjectile.velocity = camTran.forward * shootForce;
         playerRb.AddForce((-1f * camTran.forward).normalized * shootPush, ForceMode.Impulse);
+        bulletsLeft--;
+        UpdateAmmoUI();
     }
 
 

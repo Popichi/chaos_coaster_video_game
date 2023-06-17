@@ -33,7 +33,7 @@ public class SingularityWeapon : SecondaryGun
         {
             currentTimeBetweenAttacks += Time.deltaTime;
         }
-        else if (attackPressed && !shooting)
+        else if (attackPressed && !shooting && bulletsLeft > 0)
         {
             ShootSingularity();
         }
@@ -46,6 +46,7 @@ public class SingularityWeapon : SecondaryGun
 
     void ShootSingularity()
     {
+        visuals.ChangeShooting();
         GameObject projectile = Instantiate(bullet, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
         currentProjectile = projectile.GetComponent<SingularityProjectile>();
         currentProjectile.SetValues(grenadeDamage, grenadeRadius, grenadeForce);
@@ -54,13 +55,16 @@ public class SingularityWeapon : SecondaryGun
         rbProjectile.velocity = camTran.forward * shootForce;
         playerRb.AddForce((-1f * camTran.forward).normalized * shootPush, ForceMode.Impulse);
         shooting = true;
+        bulletsLeft--;
     }
 
     void DetonateSingularity()
     {
+        visuals.ChangeShooting();
         currentProjectile.Explode();
         currentProjectile = null;
         shooting = false;
         currentTimeBetweenAttacks = 0;
+        UpdateAmmoUI();
     }
 }

@@ -12,7 +12,7 @@ public abstract class SecondaryGun : MonoBehaviour
     public GameObject bullet;
     public Transform rangedSpawnPoint;
     public Transform camTran;
-
+    public bool isActive;
     //bullet force
     public float shootForce, upwardShootForce, shootPush;
 
@@ -37,6 +37,8 @@ public abstract class SecondaryGun : MonoBehaviour
     //Textmeshpro for basic UI
 
     bool firstShot;
+    public WeaponVisuals visuals;
+    public PlayerUI ui;
 
 
     // Start is called before the first frame update
@@ -45,7 +47,7 @@ public abstract class SecondaryGun : MonoBehaviour
     void Start()
     {
         //magazine full at the start
-        
+        isActive = false;
     }
 
     // Update is called once per frame
@@ -61,20 +63,36 @@ public abstract class SecondaryGun : MonoBehaviour
 
     public abstract void ShootReleased();
 
-    public void setUpWeapon(Rigidbody playerRb, Transform cameraTran, Transform projectileSpawnPoint)
+    public void setUpWeapon(Rigidbody playerRb, Transform cameraTran, Transform projectileSpawnPoint, WeaponVisuals _visuals, PlayerUI _ui)
     {
         this.playerRb = playerRb;
         this.camTran = cameraTran;
         this.rangedSpawnPoint = projectileSpawnPoint;
-        currentTimeBetweenAttacks = 0;
+        currentTimeBetweenAttacks = timeBetweenAttacks;
         currentTimeBetweenBullets = 0;
         bulletsLeft = magazineSize;
         readyToShoot = true;
         firstShot = true;
         attackPressed = false;
         bulletsShot = bulletsPerAttack;
+        visuals = _visuals;
+        ui = _ui;
     }
 
+    //No animation this time
+    public void Reload(int amount)
+    {
+        bulletsLeft += amount;
+        if (bulletsLeft > magazineSize)
+        {
+            bulletsLeft = magazineSize;
+        } 
+    }
+
+    public void UpdateAmmoUI()
+    {
+        ui.UpdateAmmo(bulletsLeft);
+    }
 
     /*
     //Needs to be public I think
@@ -122,20 +140,5 @@ public abstract class SecondaryGun : MonoBehaviour
     }
     */
 
-    //also probably public
-    //Also unclear if secondary will even be able to reload
-    //Still might be useful
-    private void Reload()
-    {
-        reloading = true;
-        
-        Invoke(nameof(ReloadFinished), reloadTime);
-    }
 
-    private void ReloadFinished()
-    {
-        //Fill magazine
-        bulletsLeft = magazineSize;
-        reloading = false;
-    }
 }

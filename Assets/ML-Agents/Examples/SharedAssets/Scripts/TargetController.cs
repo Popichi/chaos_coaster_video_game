@@ -68,6 +68,7 @@ using UnityEngine.Events;
         public Mesh mesh;
         public void Awake()
         {
+        a = rootMap.gameObject.GetComponentInChildren<Iid>();
             //meshFilter = GetComponent<MeshFilter>();
             //mesh = meshFilter.mesh;
         }

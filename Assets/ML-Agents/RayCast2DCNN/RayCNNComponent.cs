@@ -196,6 +196,7 @@ namespace Unity.MLAgents.Sensors
                 //ObservationToTexture(m_RenderTexture, m_Texture);
                 // TODO support more types here, e.g. JPG
                 var compressed = m_Texture.EncodeToPNG();
+                optimizedRayCast.ResetPixels();
                 return compressed;
             }
         }

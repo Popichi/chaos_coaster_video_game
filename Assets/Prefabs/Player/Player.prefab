@@ -39,7 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1303313040190595886
 MeshFilter:
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 3b988337293fd054fa8274e727c7d6a6, type: 3}
   m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -161,15 +162,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   cameraPos: {fileID: 0}
-  sensitivityX: 100
-  sensitivityY: 100
+  sensitivityX: 75
+  sensitivityY: 75
   moveSpeed: 5
+  maxSpeedY: 0
+  speedDecay: 0
   jumpForce: 7
   jumpCooldown: 1
   airMultiplier: 0.4
   parent: {fileID: 0}
   playerTempSpawnPoint: {fileID: 0}
   rangedSpawnPoint: {fileID: 0}
+  visualMainSpawnPoint: {fileID: 0}
   primaryProjectile: {fileID: 7396368185016720279, guid: 229e42bfed9524a3caa63d9ea8f712fb, type: 3}
   baseProjectileSpeed: 50
   weaponCooldown: 1
@@ -179,11 +183,8 @@ MonoBehaviour:
   - {fileID: 9188578126152391058}
   - {fileID: 1066602899473959288}
   - {fileID: 3614577494691735614}
-  currentWeapon: 1
-  timeBetweenShots: 0.1
-  ammoCapacity: 10
-  basePulseSpeed: 15
-  pulsePush: 2
+  currentWeapon: 0
+  weaponVisuals: {fileID: 0}
   follower: {fileID: 0}
 --- !u!54 &4225017865571262620
 Rigidbody:
@@ -235,7 +236,7 @@ MonoBehaviour:
   spreadRange: 0.05
   reloadTime: 10
   timeBetweenBullets: 0.1
-  magazineSize: 50
+  magazineSize: 15
   bulletsPerAttack: 5
   bulletsLeft: 0
   bulletsShot: 0
@@ -243,6 +244,7 @@ MonoBehaviour:
   recoilForce: 2
   attackPressed: 0
   muzzleFlash: {fileID: 0}
+  visuals: {fileID: 0}
 --- !u!114 &9188578126152391058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +268,7 @@ MonoBehaviour:
   spreadRange: 0
   reloadTime: 0
   timeBetweenBullets: 0
-  magazineSize: 0
+  magazineSize: 3
   bulletsPerAttack: 0
   bulletsLeft: 0
   bulletsShot: 0
@@ -274,6 +276,7 @@ MonoBehaviour:
   recoilForce: 0
   attackPressed: 0
   muzzleFlash: {fileID: 0}
+  visuals: {fileID: 0}
   grenadeDamage: 0
   grenadeForce: 15
   grenadeRadius: 12
@@ -300,7 +303,7 @@ MonoBehaviour:
   spreadRange: 0.01
   reloadTime: 0
   timeBetweenBullets: 0
-  magazineSize: 0
+  magazineSize: 20
   bulletsPerAttack: 0
   bulletsLeft: 0
   bulletsShot: 0
@@ -308,6 +311,7 @@ MonoBehaviour:
   recoilForce: 0
   attackPressed: 0
   muzzleFlash: {fileID: 0}
+  visuals: {fileID: 0}
   smartMode: 0
   shootDelay: 0
   mgRadius: 0
@@ -335,7 +339,7 @@ MonoBehaviour:
   spreadRange: 0
   reloadTime: 0
   timeBetweenBullets: 0
-  magazineSize: 0
+  magazineSize: 8
   bulletsPerAttack: 0
   bulletsLeft: 0
   bulletsShot: 0
@@ -343,7 +347,9 @@ MonoBehaviour:
   recoilForce: 0
   attackPressed: 0
   muzzleFlash: {fileID: 0}
+  visuals: {fileID: 0}
   grenadeDamage: 0
   grenadeRadius: 7
   grenadeForce: 750
   grenadeTimer: 2
+  animDelay: 0

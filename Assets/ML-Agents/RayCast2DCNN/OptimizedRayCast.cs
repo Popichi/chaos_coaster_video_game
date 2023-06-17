@@ -21,6 +21,8 @@ public class OptimizedRayCast : MonoBehaviour
     public static int id = 0;
     public int stack = 1;
     public LayerMask mask;
+    public bool clean;
+    public bool onlyDistance = true;
     private void Awake()
     {
         texture2D = new Texture2D(width, height, TextureFormat.RGB24, false);
@@ -29,25 +31,44 @@ public class OptimizedRayCast : MonoBehaviour
         //init sensor
         RayCNNComponent r = gameObject.AddComponent<RayCNNComponent>();
         r.optimizedRayCast = this;
-        r.Grayscale = false;
+        if (!onlyDistance)
+        {
+            r.Grayscale = false;
+        }
+        else
+        {
+            r.Grayscale = true;
+        }
+        
         //r.RenderTexture = render;
         r.texture2D = texture2D;
         r.CompressionType = SensorCompressionType.PNG;
         r.SensorName = s;
         r.ObservationStacks = stack;
-
+        if(clean)
+        CleanMesh();
+        if (!root)
+        {
+            root = transform;
+        }
+        numberOfRays = mesh.vertices.Length;
+        results = new NativeArray<RaycastHit>(numberOfRays, Allocator.Persistent);
+        commands = new NativeArray<RaycastCommand>(numberOfRays, Allocator.Persistent);
 
 
     }
     void CleanMesh()
     {
 
-        mesh = GetComponent<MeshFilter>().mesh;
+        
         Vector3[] vertices = mesh.vertices;
+        Debug.Log("Vertices before: " + vertices.Length);
         int[] triangles = mesh.triangles;
-
+        Vector2 []uvs = mesh.uv;
+        Debug.Log("UVS before: " + uvs.Length);
         // Use a dictionary to remove duplicates.
         System.Collections.Generic.Dictionary<Vector3, int> vertexDictionary = new System.Collections.Generic.Dictionary<Vector3, int>();
+        System.Collections.Generic.Dictionary<Vector2, int> uvDictionary = new System.Collections.Generic.Dictionary<Vector2, int>();
 
         for (int i = 0; i < vertices.Length; i++)
         {
@@ -56,38 +77,46 @@ public class OptimizedRayCast : MonoBehaviour
                 vertexDictionary.Add(vertices[i], vertexDictionary.Count);
             }
         }
+        for (int i = 0; i < uvs.Length; i++)
+        {
+            if (!uvDictionary.ContainsKey(uvs[i]))
+            {
+                uvDictionary.Add(uvs[i], uvDictionary.Count);
+            }
+        }
 
         // Reassign the vertices and triangles.
         Vector3[] newVertices = new Vector3[vertexDictionary.Count];
         int[] newTriangles = new int[triangles.Length];
-
+        int [] newUV = new int [vertexDictionary.Count];
         vertexDictionary.Keys.CopyTo(newVertices, 0);
-
+        vertexDictionary.Values.CopyTo(newUV, 0);
         for (int i = 0; i < triangles.Length; i++)
         {
             newTriangles[i] = vertexDictionary[vertices[triangles[i]]];
         }
+        Vector2[] newUV2 = new Vector2[newUV.Length];
+        for (int i = 0; i < newUV2.Length; i++)
+        {
+            newUV2[i] = new float2(uvs[newUV[i]]);
+        }
 
-        mesh.Clear();
-
+            mesh.Clear();
+        //mesh.uv = newUV;
         mesh.vertices = newVertices;
+        mesh.uv = newUV2;
         mesh.triangles = newTriangles;
 
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
 
-
+        Debug.Log("Vertices after: " + mesh.vertices.Length);
+        Debug.Log("uv after: " + mesh.uv.Length);
     }
     int numberOfRays = 0;
     private void Start()
     {
-        if (!root)
-        {
-            root = transform;
-        }
-        numberOfRays = mesh.vertexCount;
-        results = new NativeArray<RaycastHit>(numberOfRays, Allocator.Persistent);
-        commands = new NativeArray<RaycastCommand>(numberOfRays, Allocator.Persistent);
+
     }
     private void FixedUpdate()
     {
@@ -95,19 +124,30 @@ public class OptimizedRayCast : MonoBehaviour
     }
     public void SaveInTexture(float3 v, Vector2 uv)
     {
+        if (!texture2D)
+        {
+            Debug.Log("textureNull");
+            return;
+        }
+        uv = math.clamp(uv, 0, 1);
         v = (v + 1) / 2.0f;
         v = math.clamp(v,0,1);
         Color c = new Color(v.x,v.y,v.z);
+        int x = (int)(uv.x * (texture2D.width-1));
+        int y = (int)(uv.y * (texture2D.height-1));
         
-        texture2D.SetPixel((int)(uv.x * texture2D.width),(int)(uv.y*texture2D.height),c); 
+        int index = x + y * texture2D.width;
+        //Debug.Log(index);
+        colors[index] = c;
     }
+    public bool debug = true;
     Color[] colors;
     private void CastMainThreadRays()
     {
-        ResetPixels();
+        //ResetPixels();
         Vector3[] vertices = mesh.vertices;
         Vector2[] uvs = mesh.uv;
-        //colors = texture2D.GetPixels();
+        colors = texture2D.GetPixels();
         for (int i = 0; i < numberOfRays; i++)
         {
             
@@ -119,19 +159,33 @@ public class OptimizedRayCast : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, rayMaxDistance, mask))
             {
-                Vector3 v = (hit.distance * ray.direction) / rayMaxDistance;
-                v = root.InverseTransformDirection(v);
-                //Debug.Log(v);
+                Vector3 v;
+                //Debug.Log(i+" :i uvs[i]" + uvs[i]);
+                if (onlyDistance)
+                {
+                    v = new float3(hit.distance / rayMaxDistance);
+                }
+                else
+                {
+                    v = (root.InverseTransformDirection(hit.normal).normalized * hit.distance) / rayMaxDistance;
+                }
                 SaveInTexture(v, uvs[i]);
-                debugC = Color.red;
-                Debug.DrawRay(ray.origin, ray.direction * hit.distance, debugC);
-            }
+                if (debug)
+                {
+
+
+                    debugC = Color.red;
+                    Debug.DrawRay(ray.origin, ray.direction * hit.distance, debugC);
+                }
+                }
             else
             {
+                if(debug)
                 Debug.DrawRay(ray.origin, ray.direction * rayMaxDistance, debugC);
             }
             
         }
+        texture2D.SetPixels(colors);
         texture2D.Apply();
     }
     public void ResetPixels()
@@ -140,7 +194,7 @@ public class OptimizedRayCast : MonoBehaviour
         int ii = 0;
         foreach (var x in colors)
         {
-            colors[ii] = new Color(0, 0, 0);
+            colors[ii] = Color.black;
             ii++;
         }
         texture2D.SetPixels(colors);

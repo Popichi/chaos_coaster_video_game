@@ -34,9 +34,10 @@ public class PulseShot : SecondaryGun
 
 
         }
-        else if (attackPressed)
+        else if (attackPressed && bulletsLeft > 0)
         {
             bulletsShot = 0;
+            visuals.ChangeShooting();
         }
     }
 
@@ -53,9 +54,11 @@ public class PulseShot : SecondaryGun
         playerRb.AddForce((-1f * camTran.forward).normalized * shootPush, ForceMode.Impulse);
         bulletsLeft--;
         bulletsShot++;
+        UpdateAmmoUI();
         currentTimeBetweenBullets = 0;
         if (bulletsShot >= bulletsPerAttack)
         {
+            visuals.ChangeShooting();
             //bulletsShot = 0;
             shooting = false;
             currentTimeBetweenAttacks = 0;
