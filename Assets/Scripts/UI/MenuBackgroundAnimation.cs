@@ -14,6 +14,6 @@ public class MenuBackgroundAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.up * Time.deltaTime * rotationDegressPerSecond);
+        transform.Rotate(Vector3.up * Time.deltaTime * rotationDegressPerSecond * 1);
     }
 }
