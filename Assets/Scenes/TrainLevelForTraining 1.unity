@@ -3414,6 +3414,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1157664479 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5041721319210157903, guid: 357596b2931c5b445b044c995d999697, type: 3}
+  m_PrefabInstance: {fileID: 231450860}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1198149818
 GameObject:
   m_ObjectHideFlags: 0
@@ -5642,6 +5647,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovementAlert
       objectReference: {fileID: 0}
+    - target: {fileID: 6882214871372007948, guid: 3cf0619cb54a1fc4daf6528c23afe387, type: 3}
+      propertyPath: alertTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882214871372007948, guid: 3cf0619cb54a1fc4daf6528c23afe387, type: 3}
+      propertyPath: spritePlaceholder
+      value: 
+      objectReference: {fileID: 1157664479}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
