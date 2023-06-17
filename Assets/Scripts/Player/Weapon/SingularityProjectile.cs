@@ -7,6 +7,8 @@ public class SingularityProjectile : MonoBehaviour
     float damage;
     float radius;
     float force;
+    public GameObject sphereRadius;
+    public GameObject particleEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +51,15 @@ public class SingularityProjectile : MonoBehaviour
                 enemyHealth.TakeDamage(20);
             }
         }
+        GameObject ps = Instantiate(particleEffect, transform.position, Quaternion.identity, this.transform.parent);
+        Destroy(ps, 1);
 
         Destroy(gameObject);
+    }
+
+    private IEnumerator RadiusDetonation()
+    {
+        yield return new WaitForEndOfFrame();
+            
     }
 }

@@ -6,6 +6,7 @@ public class MachineGunBullet : MonoBehaviour
 {
     private float force;
     private float damage;
+    public GameObject ps;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,8 @@ public class MachineGunBullet : MonoBehaviour
     {
         if (!collision.collider.CompareTag("Player"))
         {
+            GameObject impact = Instantiate(ps, transform.position, Quaternion.identity, transform.parent);
+            Destroy(impact, 0.4f);
             Destroy(gameObject);
         }
     }

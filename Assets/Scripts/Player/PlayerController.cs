@@ -246,7 +246,8 @@ public class PlayerController : MonoBehaviour
             currentMainRb = currentMainProjectile.GetComponent<Rigidbody>();
             currentMainRb.isKinematic = true;
             currentMainProjectile.GetComponent<SphereCollider>().enabled = false;
-            currentMainProjectile.layer = 11;
+            currentMainProjectile.layer = 11; //Weapon layer, for rendering properly
+            currentMainProjectile.transform.parent = transform.parent;
         }
         else
         //if (currentCooldown <= 0)
