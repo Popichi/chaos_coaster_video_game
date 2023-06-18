@@ -40,6 +40,11 @@ public abstract class SecondaryGun : MonoBehaviour
     public WeaponVisuals visuals;
     public PlayerUI ui;
 
+    [Header("Sound")]
+    public AudioClip gunshotSound;
+    public AudioClip chargingSound;
+    public AudioSource weaponSoundAudioSource;
+
 
     // Start is called before the first frame update
     //Start or awake
@@ -57,6 +62,32 @@ public abstract class SecondaryGun : MonoBehaviour
         //Change display of bullets here, this may also be better done in the controller
     }
 
+
+    public void PlayGunshotSound()
+    {
+        if (gunshotSound != null)
+        {
+            weaponSoundAudioSource.clip = gunshotSound;
+            weaponSoundAudioSource.Play();
+        }
+    }
+
+    public void StopGunshotSound()
+    {
+        if (weaponSoundAudioSource != null)
+        {         
+            weaponSoundAudioSource.Stop();
+        }
+    }
+
+    public void PlayChargingSound()
+    {
+        if(chargingSound != null)
+        {
+            weaponSoundAudioSource.clip = chargingSound;
+            weaponSoundAudioSource.Play();
+        }        
+    }
 
     public abstract void ShootHeld();
 

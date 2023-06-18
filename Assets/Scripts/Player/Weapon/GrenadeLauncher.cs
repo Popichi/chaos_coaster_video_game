@@ -42,6 +42,7 @@ public class GrenadeLauncher : SecondaryGun
 
     void ShootGrenade()
     {
+        PlayGunshotSound();
         GameObject projectile = Instantiate(bullet, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
         Grenade grenade = projectile.GetComponent<Grenade>();
         grenade.SetValues(grenadeDamage, grenadeRadius, grenadeForce, grenadeTimer);

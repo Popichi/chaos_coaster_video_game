@@ -15,13 +15,14 @@ public class MachineGun : SecondaryGun
 
     public override void ShootHeld()
     {
+        PlayGunshotSound();
         attackPressed = true;
-        
         visuals.ChangeShooting();
     }
 
     public override void ShootReleased()
     {
+        StopGunshotSound();
         attackPressed = false;
         visuals.ChangeShooting();
     }
@@ -68,7 +69,7 @@ public class MachineGun : SecondaryGun
     }
 
     void ShootMachineGun()
-    {
+    {       
         GameObject projectile = Instantiate(bullet, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
         GameObject flash = Instantiate(muzzleFlash, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
         flash.transform.localScale *= 2;

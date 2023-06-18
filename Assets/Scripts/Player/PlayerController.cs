@@ -57,8 +57,15 @@ public class PlayerController : MonoBehaviour
     private GameObject currentMainProjectile;
     private Rigidbody currentMainRb;
 
+    [Header("Sound")]
+    public AudioClip mainWeaponChargeSound;
+    public AudioClip mainWeaponReleaseSound;
+    public AudioClip pulseWeaponSound;
+    public AudioSource weaponAudioSource;
+
     private float horizontalMov;
     private float verticalMov;
+    
 
     [Header("Other Weapons")]
     public SecondaryGun[] weapons;
@@ -239,6 +246,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!primaryCharging)
         {
+            PlayWeaponSound(mainWeaponChargeSound);
             primaryCharging = true;
             weaponVisuals.ChangeCharge(1);
             playerUI.IncreaseMainCharge();
@@ -261,7 +269,7 @@ public class PlayerController : MonoBehaviour
             {
                 lvlCharge = 1;
             }
-
+            PlayWeaponSound(mainWeaponReleaseSound);
             Debug.Log("Shot with charge = " + lvlCharge);
             //GameObject projectile = Instantiate(primaryProjectile, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
             //Scale the projectile based on charge, might need no make this differently
@@ -293,6 +301,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void PlayWeaponSound(AudioClip clip)
+    {
+        weaponAudioSource.clip = clip;
+        weaponAudioSource.Play();
+    }
+
     void OnSpawn()
     {
         transform.position = playerTempSpawnPoint.position;
@@ -305,15 +319,16 @@ public class PlayerController : MonoBehaviour
             secondaryFailed = !secondaryFailed;
             return;
         }
+        var currentWeaponScript = weapons[currentWeapon];
         if (!secondaryPressed)
         {
             //Do something while the button is being held
-            weapons[currentWeapon].ShootHeld();
+            currentWeaponScript.ShootHeld();
             secondaryPressed = true;
         }
         else
         {
-            weapons[currentWeapon].ShootReleased();
+            currentWeaponScript.ShootReleased();
             //Do something when the button is released
             secondaryPressed = false;
         }
