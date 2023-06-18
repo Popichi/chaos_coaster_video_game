@@ -9199,6 +9199,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3121801176825519052, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: sensitivityX
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121801176825519052, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: sensitivityY
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121801176825519052, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: baseProjectileSpeed
       value: 40
       objectReference: {fileID: 0}

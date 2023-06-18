@@ -45,10 +45,15 @@ public class SingularityProjectile : MonoBehaviour
                 nearbyRb.AddForce(forceDirection * force, ForceMode.Impulse);
             }
 
-            Enemy enemyHealth = nearbyObject.GetComponent<Enemy>();
-            if (enemyHealth != null)
+            if (nearbyObject.gameObject.CompareTag("agent"))
             {
-                enemyHealth.TakeDamage(20);
+                GameObject current = nearbyObject.gameObject.transform.parent.gameObject;
+                while (current.GetComponent<Enemy>() == null)
+                {
+                    current = current.transform.parent.gameObject;
+                }
+                current.GetComponent<Enemy>().TakeDamage((int)damage);
+                Debug.Log("Enemy Took damage finally");
             }
         }
         GameObject ps = Instantiate(particleEffect, transform.position, Quaternion.identity, this.transform.parent);

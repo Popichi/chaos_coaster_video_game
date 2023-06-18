@@ -3343,6 +3343,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3489683050052548820, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: grenadeDamage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694139006532036670, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: grenadeDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664497182855138415, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.20197296
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664497182855138415, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.4259033
+      objectReference: {fileID: 0}
+    - target: {fileID: 6126460070445260278, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 6781594399581831885, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: m_Name
       value: PlayerAndUI

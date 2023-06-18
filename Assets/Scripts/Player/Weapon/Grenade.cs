@@ -49,10 +49,15 @@ public class Grenade : MonoBehaviour
                 nearbyRb.AddExplosionForce(force, transform.position, radius);
             }
 
-            Enemy enemyHealth = nearbyObject.GetComponent<Enemy>();
-            if (enemyHealth != null)
+            if (nearbyObject.gameObject.CompareTag("agent"))
             {
-                enemyHealth.TakeDamage(20);
+                GameObject current = nearbyObject.gameObject.transform.parent.gameObject;
+                while (current.GetComponent<Enemy>() == null)
+                {
+                    current = current.transform.parent.gameObject;
+                }
+                current.GetComponent<Enemy>().TakeDamage((int)damage);
+                Debug.Log("Enemy Took damage finally");
             }
         }
         GameObject ps = Instantiate(explosionVFX, transform.position, Quaternion.identity);

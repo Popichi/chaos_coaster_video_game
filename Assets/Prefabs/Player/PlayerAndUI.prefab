@@ -1147,7 +1147,7 @@ Transform:
   - {fileID: 4189604721489537665}
   - {fileID: 8937556958290303668}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8167132401919820824
 GameObject:
@@ -1437,9 +1437,25 @@ PrefabInstance:
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1121411445462528268, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: grenadeDamage
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121411445462528268, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: weaponSoundAudioSource
       value: 
       objectReference: {fileID: 5654329387214688141}
+    - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: lvl0Damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: lvl1Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: lvl2Damage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: sensitivityX
       value: 5
@@ -1637,6 +1653,10 @@ PrefabInstance:
       value: 1.521
       objectReference: {fileID: 0}
     - target: {fileID: 7708010833125413934, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708010833125413934, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: gunshotSound
       value: 
       objectReference: {fileID: 8300000, guid: b63670fe77e65f645bc88a73bfaed3c2, type: 3}
@@ -1650,11 +1670,11 @@ PrefabInstance:
       objectReference: {fileID: 5654329387214688141}
     - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.20197296
+      value: -0.15332794
       objectReference: {fileID: 0}
     - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4259033
+      value: 1.269867
       objectReference: {fileID: 0}
     - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1702,7 +1722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9140402289711325670, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: grenadeDamage
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9140402289711325670, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: grenadeRadius
@@ -1999,7 +2019,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovementIndicatorWithFrame
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5519718292709298076, guid: f70a17b9a27a8ac489e9428db12b4d79, type: 3}
+    - {fileID: 2541126005925084492, guid: f70a17b9a27a8ac489e9428db12b4d79, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
