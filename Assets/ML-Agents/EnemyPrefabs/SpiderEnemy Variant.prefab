@@ -715,7 +715,7 @@ PrefabInstance:
     - target: {fileID: -9165797768001435688, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ff470996b4ef1c748a470de2d6dc4db9, type: 2}
+      objectReference: {fileID: 2100000, guid: 5ff1d4a75909fd745a311fa2d1aea579, type: 2}
     - target: {fileID: -9005693157468554291, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Layer
       value: 22
@@ -783,7 +783,7 @@ PrefabInstance:
     - target: {fileID: -8016412588606473749, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ff470996b4ef1c748a470de2d6dc4db9, type: 2}
+      objectReference: {fileID: 2100000, guid: 8496dbd7ecafe8b4e910722075f10022, type: 2}
     - target: {fileID: -7640558969779515294, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Layer
       value: 22
@@ -819,7 +819,7 @@ PrefabInstance:
     - target: {fileID: -6002508473797582251, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ff470996b4ef1c748a470de2d6dc4db9, type: 2}
+      objectReference: {fileID: 2100000, guid: 8496dbd7ecafe8b4e910722075f10022, type: 2}
     - target: {fileID: -5964151974850389871, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Layer
       value: 22
@@ -851,7 +851,7 @@ PrefabInstance:
     - target: {fileID: -4612520378060379669, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ff470996b4ef1c748a470de2d6dc4db9, type: 2}
+      objectReference: {fileID: 2100000, guid: 5ff1d4a75909fd745a311fa2d1aea579, type: 2}
     - target: {fileID: -4568391817747561196, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Layer
       value: 22
@@ -863,7 +863,7 @@ PrefabInstance:
     - target: {fileID: -4202798675411607032, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ff470996b4ef1c748a470de2d6dc4db9, type: 2}
+      objectReference: {fileID: 2100000, guid: 8496dbd7ecafe8b4e910722075f10022, type: 2}
     - target: {fileID: -3542852092398272455, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -927,7 +927,7 @@ PrefabInstance:
     - target: {fileID: -1526964690268444965, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ff470996b4ef1c748a470de2d6dc4db9, type: 2}
+      objectReference: {fileID: 2100000, guid: 5ff1d4a75909fd745a311fa2d1aea579, type: 2}
     - target: {fileID: -1018664272722485354, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Layer
       value: 22
@@ -939,11 +939,11 @@ PrefabInstance:
     - target: {fileID: -809828480950454423, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ff470996b4ef1c748a470de2d6dc4db9, type: 2}
+      objectReference: {fileID: 2100000, guid: 5ff1d4a75909fd745a311fa2d1aea579, type: 2}
     - target: {fileID: -678588488315902003, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ff470996b4ef1c748a470de2d6dc4db9, type: 2}
+      objectReference: {fileID: 2100000, guid: c6070ce6c4b20114cae393acc5a988ec, type: 2}
     - target: {fileID: -516098083770646512, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Layer
       value: 22
@@ -1035,7 +1035,7 @@ PrefabInstance:
     - target: {fileID: 5742066667910392887, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ff470996b4ef1c748a470de2d6dc4db9, type: 2}
+      objectReference: {fileID: 2100000, guid: 8496dbd7ecafe8b4e910722075f10022, type: 2}
     - target: {fileID: 6586784372779809273, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Layer
       value: 22
@@ -1316,7 +1316,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.13873386, y: -0.08336353, z: -0.16568184}
+  m_ConnectedAnchor: {x: -0.13873383, y: -0.08336348, z: -0.16568127}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
@@ -1508,7 +1508,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000006405171, y: 0.33929896, z: 0.00000037648715}
+  m_ConnectedAnchor: {x: -0.000000015133992, y: 0.33929914, z: -0.00000001094304}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
@@ -1705,7 +1705,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.13873386, y: -0.08336353, z: -0.16568184}
+  m_ConnectedAnchor: {x: 0.13873392, y: -0.08336352, z: -0.16568112}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
@@ -1897,7 +1897,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.13873386, y: -0.08336353, z: 0.07106209}
+  m_ConnectedAnchor: {x: -0.13873392, y: -0.083363526, z: 0.07106237}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
@@ -2106,7 +2106,7 @@ MonoBehaviour:
   mainBody: {fileID: 5450107666897048440}
   mainHead: {fileID: 5450107666897048440}
   m_TargetWalkingSpeed: 20
-  randomizeWalkSpeedEachEpisode: 1
+  randomizeWalkSpeedEachEpisode: 0
   target: {fileID: 1421371423194467491}
   bodyparts: []
   rootPrefab: {fileID: 4099559605588702582}
@@ -2332,7 +2332,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000034994446, y: 0.3392991, z: 0.0000000752043}
+  m_ConnectedAnchor: {x: -0.0000000146683306, y: 0.33929914, z: -0.00000002165325}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
@@ -2524,7 +2524,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0000008570496, y: 0.33929935, z: -0.00000042654574}
+  m_ConnectedAnchor: {x: -0.000000007683411, y: 0.33929914, z: 0.000000035390258}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
@@ -2716,7 +2716,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.13873386, y: -0.08336353, z: 0.07106209}
+  m_ConnectedAnchor: {x: 0.13873383, y: -0.08336356, z: 0.07106248}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
@@ -2913,7 +2913,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000060279854, y: 0.3392992, z: -0.00000013038516}
+  m_ConnectedAnchor: {x: 0.000000037951395, y: 0.3392992, z: 0.000000026077032}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
