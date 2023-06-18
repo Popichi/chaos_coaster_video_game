@@ -45,15 +45,20 @@ namespace Unity.MLAgentsExamples
                     
                 }
 
-                if (agentDoneOnGroundContact)
+                if (agentDoneOnGroundContact )
                 {
                     sa = (IReward) agent;
-                    sa.reward();
-                    agent.EndEpisode();
+                    state = ((IState) agent).GetState();
+                    if(state == EnemyState.training)
+                    {
+                        sa.reward();
+                        agent.EndEpisode();
+                    }
+         
                 }
             }
         }
-
+        EnemyState state;
         /// <summary>
         /// Check for end of ground collision and reset flag appropriately.
         /// </summary>

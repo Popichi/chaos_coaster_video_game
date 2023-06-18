@@ -19,6 +19,7 @@ public class RocketController : MonoBehaviour
     void FixedUpdate()
     {
         rb.AddForce(transform.forward * power);
+        rb.velocity += manager.speed * Time.deltaTime;
         var a = (manager.target.position - transform.position).normalized;
         controlledObject.DesiredOrientation = Quaternion.LookRotation(a);
     }

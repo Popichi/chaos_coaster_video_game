@@ -12,6 +12,7 @@ public class ShootRocket : MonoBehaviour
     private Coroutine shootCoroutine;
     public Transform target;
     public float power = 5;
+    GetMovement movement;
     private void OnEnable()
     {
         if (shootCoroutine == null)
@@ -19,7 +20,11 @@ public class ShootRocket : MonoBehaviour
             shootCoroutine = StartCoroutine(ShootProjectile());
         }
     }
-
+    public Vector3 speed;
+    private void FixedUpdate()
+    {
+        speed = movement.GetSpeed();
+    }
     private void OnDisable()
     {
         if (shootCoroutine != null)
@@ -37,12 +42,24 @@ public class ShootRocket : MonoBehaviour
             {
                 GameObject projectile = Instantiate(projectilePrefab, root.position, Quaternion.identity * Quaternion.Euler(-90,0,0));
                 projectile.GetComponentInChildren<RocketController>().manager = this;
-                projectile.GetComponentInChildren<Rigidbody>().velocity = root.TransformDirection(shootDirection) * power;
+                if(movement != null)
+                {
+                    projectile.GetComponentInChildren<Rigidbody>().velocity = root.TransformDirection(shootDirection) * power + movement.GetSpeed();
+                }
+                else
+                {
+                    projectile.GetComponentInChildren<Rigidbody>().velocity = root.TransformDirection(shootDirection) * power;
+                }
+                
                 Destroy(projectile,15);
                 yield return new WaitForSeconds(shootInterval);
             }
 
             yield return new WaitForSeconds(pauseInterval);
         }
+    }
+    private void Awake()
+    {
+        movement = FindObjectOfType<GetMovement>();
     }
 }

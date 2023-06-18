@@ -8,9 +8,20 @@ using BodyPart = Unity.MLAgentsExamples.BodyPart;
 using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using System.Linq;
-
-public class SpiderAgent : Agent, IReward, Iid
+using UnityEngine.Animations;
+public enum EnemyState
 {
+    training,
+    playing,
+    dead
+}
+public interface IState
+{
+    public EnemyState GetState();
+}
+public class SpiderAgent : Agent, IReward, Iid, IState
+{
+    public EnemyState state;
     public bool isTraining = true;
     public GameObject mainBody;
     public GameObject mainHead;
@@ -52,14 +63,37 @@ public class SpiderAgent : Agent, IReward, Iid
     EnvironmentParameters m_ResetParams;
     public static int id = 0;
     public int myID;
+    public Transform Player;
     public override void Initialize()
     {
-        covers = new List<GameObject>();
-        for (int i= 0; i< numberCovers; ++i)
+        mainBodyRigidBody = mainBody.GetComponent<Rigidbody>();
+        if (state == EnemyState.training)
         {
-            covers.Add(Instantiate(coverPrefab));
-            covers[i].transform.parent = trainingGround.transform;
+            covers = new List<GameObject>();
+            for (int i = 0; i < numberCovers; ++i)
+            {
+                covers.Add(Instantiate(coverPrefab));
+                covers[i].transform.parent = trainingGround.transform;
+            }
         }
+        if(state == EnemyState.playing)
+        {
+            gameObject.GetComponentInChildren<ShootRocket>().enabled = true;
+            MaxStep = 0;
+            Player = FindFirstObjectByType<PlayerController>().transform;
+            PositionConstraint positionConstraint = target.gameObject.AddComponent<PositionConstraint>(); // Add the PositionConstraint component
+
+            ConstraintSource source = new ConstraintSource();
+            source.sourceTransform = Player; // Use the sourceObject's transform as the source
+            source.weight = 1.0f; // Set the weight
+
+            positionConstraint.AddSource(source); // Add the source to the PositionConstraint
+            positionConstraint.constraintActive = true; // Activate the constraint
+            if (!debug)
+                Destroy(target.GetComponent<Renderer>());
+            Destroy(target.GetComponent<Collider>());
+        }
+
         myID = id++;
         m_OrientationCube = rootPrefab.GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = rootPrefab.GetComponentInChildren<DirectionIndicator>();
@@ -105,29 +139,37 @@ public class SpiderAgent : Agent, IReward, Iid
         mainBody.transform.position += new Vector3(Random.value * off - off / 2, 0, Random.value * off - off / 2);
 
     }
-    public override void OnEpisodeBegin()
+    public void ResetPose()
     {
-        //test
-        TargetController targetController = target.GetComponent<TargetController>();
-        for (int i = 0; i < numberCovers; ++i)
-        {
-            covers[i].active = true;
-            Rigidbody r = covers[i].GetComponent<Rigidbody>();
-            r.velocity = Vector3.zero;
-            r.angularVelocity = Vector3.zero;
-            r.transform.rotation = Quaternion.Euler(0, Random.value*360, 0);
-           covers[i].transform.position = targetController.getRandom.randomPosOnGrid(2);
-        }
-           targetController.MoveTargetToRandomPosition();
-        //Reset all of the body parts
         foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
         {
             bodyPart.Reset(bodyPart);
         }
+    }
+    public override void OnEpisodeBegin()
+    {
+        //test
+        TargetController targetController = target.GetComponent<TargetController>();
+        if (state == EnemyState.training)
+        {
+            for (int i = 0; i < numberCovers; ++i)
+            {
+                covers[i].active = true;
+                Rigidbody r = covers[i].GetComponent<Rigidbody>();
+                r.velocity = Vector3.zero;
+                r.angularVelocity = Vector3.zero;
+                r.transform.rotation = Quaternion.Euler(0, Random.value * 360, 0);
+                covers[i].transform.position = targetController.getRandom.randomPosOnGrid(2);
+            }
+            targetController.MoveTargetToRandomPosition();
+        }
+
+        //Reset all of the body parts
+        ResetPose();
 
         
         //Random start rotation to help generalize
-        if (isTraining)
+        if (state == EnemyState.training)
         {
 
             rotate();
@@ -171,10 +213,10 @@ public class SpiderAgent : Agent, IReward, Iid
         }
       
     }
-    public bool debugTraining = true;
+    public bool debug = true;
     public void DebugReward(float f, string message = "")
     {
-        if (debugTraining)
+        if (debug)
         {
             message = " " + message + " ";
             Debug.Log("Reward:" + message + f);
@@ -362,26 +404,24 @@ public class SpiderAgent : Agent, IReward, Iid
            
         }
     }
-    public bool backCounteractivated;
-    int onBackCounter = 0;
+    public bool backCounterActivated = true;
+    public int onBackCounter = 0;
+    public int maxFramesOnBack = 140;
+    public float backForce = 3;
+    Rigidbody mainBodyRigidBody;
     void FixedUpdate()
     {
         UpdateOrientationObjects();
-        for (int i = 0; i < numberCovers; ++i)
+        if(state == EnemyState.training)
         {
-            if(covers[i].transform.position.y < -100)
+            for (int i = 0; i < numberCovers; ++i)
             {
-                covers[i].active = false;
+                if (covers[i].transform.position.y < -100)
+                {
+                    covers[i].active = false;
+                }
+
             }
-            
-        }
-
-        //Debug.Log(MaxStep +" " + StepCount);
-
-
-
-        if (isTraining)
-        {
             if (StepCount == MaxStep - 2)
             {
 
@@ -389,27 +429,51 @@ public class SpiderAgent : Agent, IReward, Iid
                 EndEpisode();
 
             }
-            if (backCounteractivated)
+            if (backCounterActivated)
             {
                 if (onBackCounter > 100)
                 {
                     onBackCounter = 0;
-                    EndEpisode();
+                    if(state == EnemyState.training)
+                    {
+                        EndEpisode();
+                    }
+                    if(state == EnemyState.playing)
+                    {
+                        mainBodyRigidBody.AddTorque(mainBody.transform.forward * backForce, ForceMode.VelocityChange);
+                        mainBodyRigidBody.AddForce(-mainBody.transform.up * backForce, ForceMode.VelocityChange);
+
+                    }
+                   
                 }
-                if (Vector3.Dot(UP(mainBody.transform), -movingPlattform.transform.up) > 0.9f)
+                if (Vector3.Dot(mainBody.transform.up, -movingPlattform.transform.up) > 0.5f)
                 {
                     DebugReward(-0.3f, "Being upside down");
                     onBackCounter++;
                     //EndEpisode();
                 }
             }
-            
         }
+
+
+        //Debug.Log(MaxStep +" " + StepCount);
+
+
+
+      
         //AddReward(-0.001f);
         if (movingPlattform.transform.InverseTransformPoint(mainBody.transform.position).y < -30)
         {
             DebugReward(-100, "fell from plattform");
-            EndEpisode();
+            if(state == EnemyState.training)
+            {
+                EndEpisode();
+            }
+            else
+            {
+                //Dead();
+            }
+         
         }
         
         if (RewardFunction == RewardMode.Nearest || RewardFunction == RewardMode.JustGetit)
@@ -534,16 +598,25 @@ public class SpiderAgent : Agent, IReward, Iid
     public float timeRewardMult = 1;
     public void TouchedTarget()
     {
-        float d= reachTargetreward + ((MaxStep - StepCount) / (MaxStep * 1.0f))* timeRewardMult;
-        if (RewardFunction==RewardMode.Nearest || RewardFunction==RewardMode.Ndistance || RewardFunction ==RewardMode.JustGetit
-            || RewardFunction == RewardMode.MaxVelocity)
+        if(state == EnemyState.training)
         {
-            DebugReward(d, "Touched: " + (MaxStep - StepCount));
+            float d = 0;
+            if (MaxStep != 0)
+            {
+                d = reachTargetreward + ((MaxStep - StepCount) / (MaxStep * 1.0f)) * timeRewardMult;
+            }
+           
+            if (RewardFunction == RewardMode.Nearest || RewardFunction == RewardMode.Ndistance || RewardFunction == RewardMode.JustGetit
+                || RewardFunction == RewardMode.MaxVelocity)
+            {
+                DebugReward(d, "Touched: " + (MaxStep - StepCount));
+            }
+            else
+            {
+                DebugReward(1, "Standard touch reward");
+            }
         }
-        else
-        {
-            DebugReward(1, "Standard touch reward");
-        }
+
     }
 
     public void SetTorsoMass()
@@ -559,5 +632,10 @@ public class SpiderAgent : Agent, IReward, Iid
     public int GetID()
     {
         return myID;
+    }
+
+    public EnemyState GetState()
+    {
+        return state;
     }
 }

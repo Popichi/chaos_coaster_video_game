@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
   // Start is called before the first frame update
   void Start() {
     currentHealth = maxHealth;
-    WaveSpawner = GetComponentInParent<WaveSpawner>();
+    WaveSpawner = FindAnyObjectByType<WaveSpawner>();
   }
 
   // Update is called once per frame

@@ -84,16 +84,21 @@ public class GetMovement : MonoBehaviour
     }
     public Vector3 GetSpeed()
     {
-        speed = maSpeed.GetAverage();
-        if (!ContainsNaNOrInfinity(speed))
+        if(maSpeed != null)
         {
-            return speed;
+            speed = maSpeed.GetAverage();
+            if (!ContainsNaNOrInfinity(speed))
+            {
+                return speed;
+            }
+            else
+            {
+                return Vector3.zero;
+            }
         }
-        else
-        {
-            return Vector3.zero;
-        }
-       
+
+        return Vector3.zero;
+
     }
     MovingAverage maRot;
     MovingAverage maSpeed;
