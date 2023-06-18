@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 116635695339661166}
   - component: {fileID: 4458586004454005439}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Directional Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 2541126005925084492}
   - component: {fileID: 3386345982655248746}
   - component: {fileID: 5151418827380830627}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MovementIndicatorFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 660735889873417612}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MovementIndicatorWithFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,7 @@ Transform:
   m_GameObject: {fileID: 7486525472991457143}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.388044, y: -0.745924, z: -0.15633392}
-  m_LocalScale: {x: 0.002, y: 0.002, z: 0.002}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1473560401216091513}
@@ -512,9 +512,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovementIndicator
       objectReference: {fileID: 0}
+    - target: {fileID: 2988233419481445381, guid: 79d6988215817b7489486a5b89fc0e45, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4265188284326863092, guid: 79d6988215817b7489486a5b89fc0e45, type: 3}
       propertyPath: m_LocalPosition.y
       value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275922218960347415, guid: 79d6988215817b7489486a5b89fc0e45, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
