@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class MainProjectile : MonoBehaviour
 {
+    public int damage;
+    private int damageCounter;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-
+        damageCounter = 2;
     }
 
     // Update is called once per frame
@@ -19,12 +22,17 @@ public class MainProjectile : MonoBehaviour
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")) //look into using layers for efficiency, also for other projectiles
+
+        if (damageCounter > 0 && collision.gameObject.CompareTag("agent"))
         {
-
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(10);
+            GameObject current = collision.gameObject.transform.parent.gameObject;
+            while(current.GetComponent<Enemy>() == null)
+            {
+                current = current.transform.parent.gameObject;
+            }
+            current.GetComponent<Enemy>().TakeDamage(damage);
+            Debug.Log("Enemy Took damage finally");
+            damageCounter--;
         }
-
-
     }
 }

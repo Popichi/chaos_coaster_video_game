@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour
     private float chargeTimer;
     private float chargeLvl1 = 1f;
     private float chargeLvl2 = 3f;
+    public int lvl0Damage;
+    public int lvl1Damage;
+    public int lvl2Damage;
     private bool testCharge1, testCharge2;
     private bool secondaryPressed;
     private bool swapPressed;
@@ -251,6 +254,7 @@ public class PlayerController : MonoBehaviour
             weaponVisuals.ChangeCharge(1);
             playerUI.IncreaseMainCharge();
             currentMainProjectile = Instantiate(primaryProjectile, visualMainSpawnPoint.position, Quaternion.identity);
+            currentMainProjectile.GetComponent<MainProjectile>().damage = lvl0Damage;
             currentMainRb = currentMainProjectile.GetComponent<Rigidbody>();
             currentMainRb.isKinematic = true;
             currentMainProjectile.GetComponent<SphereCollider>().enabled = false;
@@ -264,10 +268,12 @@ public class PlayerController : MonoBehaviour
             if (testCharge2)
             {
                 lvlCharge = 2;
+                currentMainProjectile.GetComponent<MainProjectile>().damage = lvl2Damage;
             }
             else if (testCharge1)
             {
                 lvlCharge = 1;
+                currentMainProjectile.GetComponent<MainProjectile>().damage = lvl1Damage;
             }
             PlayWeaponSound(mainWeaponReleaseSound);
             Debug.Log("Shot with charge = " + lvlCharge);

@@ -8,6 +8,7 @@ public class PulseShotProjectile : MonoBehaviour
     Rigidbody rb;
     GameObject other;
     public GameObject ps;
+    int damage;
 
     bool collided;
     Vector3 collisionDirection;
@@ -16,6 +17,11 @@ public class PulseShotProjectile : MonoBehaviour
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
         collided = false;
+    }
+
+    public void SetDamage(int _damage)
+    {
+        damage = _damage;
     }
 
 
@@ -43,6 +49,17 @@ public class PulseShotProjectile : MonoBehaviour
 
     private void Detonate()
     {
+        if (other.gameObject.CompareTag("agent"))
+        {
+            GameObject current = other.gameObject.transform.parent.gameObject;
+            while (current.GetComponent<Enemy>() == null)
+            {
+                current = current.transform.parent.gameObject;
+            }
+            current.GetComponent<Enemy>().TakeDamage((int)damage);
+            Debug.Log("Enemy Took damage finally");
+            
+        }
         Rigidbody targetRB = other.GetComponent<Rigidbody>();
         if (targetRB != null)
             targetRB.AddForce(collisionDirection.normalized * 3f, ForceMode.Impulse);
