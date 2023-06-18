@@ -1441,6 +1441,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5654329387214688141}
     - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: sensitivityX
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: sensitivityY
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: pulseWeaponSound
       value: 
       objectReference: {fileID: 8300000, guid: b63670fe77e65f645bc88a73bfaed3c2, type: 3}
