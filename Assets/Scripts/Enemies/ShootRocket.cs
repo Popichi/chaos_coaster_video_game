@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using System.Collections.Generic;
 public class ShootRocket : MonoBehaviour
 {
     public GameObject projectilePrefab; // Assign this in the Inspector
@@ -13,6 +13,7 @@ public class ShootRocket : MonoBehaviour
     public Transform target;
     public float power = 5;
     GetMovement movement;
+    
     private void OnEnable()
     {
         if (shootCoroutine == null)
@@ -62,4 +63,5 @@ public class ShootRocket : MonoBehaviour
     {
         movement = FindObjectOfType<GetMovement>();
     }
+
 }

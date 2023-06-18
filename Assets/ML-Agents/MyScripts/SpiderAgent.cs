@@ -419,7 +419,8 @@ public class SpiderAgent : Agent, IReward, Iid, IState
     public bool backCounterActivated = true;
     public int onBackCounter = 0;
     public int maxFramesOnBack = 140;
-    public float backForce = 3;
+    public float backForce = 30;
+    public float backTorque = 100;
     Rigidbody mainBodyRigidBody;
     void FixedUpdate()
     {
@@ -452,7 +453,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState
                     }
                     if(state == EnemyState.playing)
                     {
-                        mainBodyRigidBody.AddTorque(mainBody.transform.forward * backForce, ForceMode.VelocityChange);
+                        mainBodyRigidBody.AddTorque(mainBody.transform.forward * backTorque, ForceMode.VelocityChange);
                         mainBodyRigidBody.AddForce(-mainBody.transform.up * backForce, ForceMode.VelocityChange);
 
                     }
