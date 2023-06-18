@@ -2116,7 +2116,7 @@ MonoBehaviour:
   waveSpawner: {fileID: 0}
   numberCovers: 2
   coverPrefab: {fileID: 7383270634239199598, guid: 2c9cba3f4f998734ba17a183f06eaf64, type: 3}
-  debug: 1
+  debug: 0
   trainingGround: {fileID: 0}
   forward: {x: 0, y: 0, z: 1}
   up: {x: 0, y: 1, z: 0}
