@@ -68,7 +68,9 @@ using UnityEngine.Events;
         public Mesh mesh;
         public void Awake()
         {
+        rootMap = FindAnyObjectByType<WaveSpawner>().mapMoving;
         a = rootMap.gameObject.GetComponentInChildren<Iid>();
+       
             //meshFilter = GetComponent<MeshFilter>();
             //mesh = meshFilter.mesh;
         }
@@ -78,6 +80,7 @@ using UnityEngine.Events;
             m_startingPos = transform.localPosition;
             if (respawnIfTouched)
             {
+            if (((IState)a).GetState() == EnemyState.training)
                 MoveTargetToRandomPosition();
             }
         }
@@ -89,6 +92,7 @@ using UnityEngine.Events;
                 if (transform.localPosition.y < m_startingPos.y - fallDistance)
                 {
                     Debug.Log($"{transform.name} Fell Off Platform");
+                if (((IState)a).GetState() == EnemyState.training)
                     MoveTargetToRandomPosition();
                 }
             }
@@ -134,6 +138,7 @@ using UnityEngine.Events;
                     onCollisionEnterEvent.Invoke(col);
                     if (respawnIfTouched)
                     {
+                    if(((IState) a).GetState() == EnemyState.training)
                         MoveTargetToRandomPosition();
                     }
                 }

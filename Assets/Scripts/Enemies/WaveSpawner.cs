@@ -7,6 +7,14 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private float countdown;
 
     [SerializeField] private GameObject[] SpawnPoints;
+    public Transform TrainingGround;
+    public GetMovement getMovement;
+    public Transform mapMoving;
+
+    public Transform up;
+    public Transform forward;
+    public Transform position;
+
 
     public Wave[] waves;
 
@@ -54,7 +62,8 @@ public class WaveSpawner : MonoBehaviour
                 
                 // Instantiate the enemy at the chosen spawn point
                 Enemy enemy = Instantiate(waves[CurrentWaveIndex].enemies[i], SpawnPoint.transform);
-                enemy.transform.SetParent(SpawnPoint.transform);
+
+                enemy.transform.SetParent(TrainingGround);
                 yield return new WaitForSeconds(waves[CurrentWaveIndex].TimeToNextEnemy);
             }
         }

@@ -64,8 +64,20 @@ public class SpiderAgent : Agent, IReward, Iid, IState
     public static int id = 0;
     public int myID;
     public Transform Player;
+    public WaveSpawner waveSpawner;
     public override void Initialize()
     {
+        
+        if(state == EnemyState.playing)
+        {
+            waveSpawner = FindAnyObjectByType<WaveSpawner>();
+            getSpeed = waveSpawner.getMovement;
+            trainingGround = waveSpawner.TrainingGround.gameObject;
+            movingPlattform = waveSpawner.mapMoving.gameObject;
+
+        }
+
+
         mainBodyRigidBody = mainBody.GetComponent<Rigidbody>();
         if (state == EnemyState.training)
         {
