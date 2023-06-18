@@ -16,7 +16,7 @@ public class SingularityWeapon : SecondaryGun
     }
 
     public override void ShootHeld()
-    {
+    {       
         attackPressed = true;
     }
 
@@ -46,6 +46,7 @@ public class SingularityWeapon : SecondaryGun
 
     void ShootSingularity()
     {
+        PlayGunshotSound();
         visuals.ChangeShooting();
         GameObject projectile = Instantiate(bullet, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
         currentProjectile = projectile.GetComponent<SingularityProjectile>();

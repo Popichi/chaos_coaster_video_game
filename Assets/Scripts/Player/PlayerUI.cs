@@ -83,4 +83,9 @@ public class PlayerUI : MonoBehaviour
     {
         waves.text = "Wave: " + currentWave + "/" + totalWaves;
     }
+
+    public void SetTutorialText()
+    {
+
+    }
 }

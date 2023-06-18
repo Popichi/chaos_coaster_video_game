@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2988233419481409569}
   - component: {fileID: 2988233419480606721}
   - component: {fileID: 2988233419479509697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WheelRail02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2988233419481409571}
   - component: {fileID: 2988233419480606723}
   - component: {fileID: 2988233419479509699}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: driveshaft_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,6 +197,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2988233419481409581}
+  - {fileID: 4265188284326863092}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -261,7 +262,7 @@ GameObject:
   - component: {fileID: 2988233419481409575}
   - component: {fileID: 2988233419480606727}
   - component: {fileID: 2988233419479509703}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gate_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +345,7 @@ GameObject:
   - component: {fileID: 2988233419481409577}
   - component: {fileID: 2988233419480606729}
   - component: {fileID: 2988233419479509705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ladder03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +428,7 @@ GameObject:
   - component: {fileID: 2988233419481409579}
   - component: {fileID: 2988233419480606731}
   - component: {fileID: 2988233419479509707}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WheelRail03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +512,7 @@ GameObject:
   - component: {fileID: 2988233419480606733}
   - component: {fileID: 2988233419479509709}
   - component: {fileID: 2988233419490920389}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SubwayTrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -643,7 +644,7 @@ GameObject:
   - component: {fileID: 2988233419481409583}
   - component: {fileID: 2988233419480606735}
   - component: {fileID: 2988233419479509711}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -726,7 +727,7 @@ GameObject:
   - component: {fileID: 2988233419481409585}
   - component: {fileID: 2988233419480606737}
   - component: {fileID: 2988233419479509713}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: driveshaft_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -809,7 +810,7 @@ GameObject:
   - component: {fileID: 2988233419481409587}
   - component: {fileID: 2988233419480606739}
   - component: {fileID: 2988233419479509715}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerChasis_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -892,7 +893,7 @@ GameObject:
   - component: {fileID: 2988233419481409589}
   - component: {fileID: 2988233419480606741}
   - component: {fileID: 2988233419479509717}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EngineParts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -975,7 +976,7 @@ GameObject:
   - component: {fileID: 2988233419481409591}
   - component: {fileID: 2988233419480606743}
   - component: {fileID: 2988233419479509719}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gate_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,7 +1059,7 @@ GameObject:
   - component: {fileID: 2988233419481409593}
   - component: {fileID: 2988233419480606745}
   - component: {fileID: 2988233419479509721}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ladder02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1141,7 +1142,7 @@ GameObject:
   - component: {fileID: 2988233419481409595}
   - component: {fileID: 2988233419480606747}
   - component: {fileID: 2988233419479509723}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gate_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1224,7 +1225,7 @@ GameObject:
   - component: {fileID: 2988233419481409597}
   - component: {fileID: 2988233419480606749}
   - component: {fileID: 2988233419479509725}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gate_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1307,7 +1308,7 @@ GameObject:
   - component: {fileID: 2988233419481409599}
   - component: {fileID: 2988233419480606751}
   - component: {fileID: 2988233419479509727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1390,7 +1391,7 @@ GameObject:
   - component: {fileID: 2988233419481409537}
   - component: {fileID: 2988233419480606817}
   - component: {fileID: 2988233419479509537}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1473,7 +1474,7 @@ GameObject:
   - component: {fileID: 2988233419481409539}
   - component: {fileID: 2988233419480606819}
   - component: {fileID: 2988233419479509539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1556,7 +1557,7 @@ GameObject:
   - component: {fileID: 2988233419481409541}
   - component: {fileID: 2988233419480606821}
   - component: {fileID: 2988233419479509541}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: driveshaft_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1639,7 +1640,7 @@ GameObject:
   - component: {fileID: 2988233419481409543}
   - component: {fileID: 2988233419480606823}
   - component: {fileID: 2988233419479509543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1722,7 +1723,7 @@ GameObject:
   - component: {fileID: 2988233419481409545}
   - component: {fileID: 2988233419480606825}
   - component: {fileID: 2988233419479509545}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1805,7 +1806,7 @@ GameObject:
   - component: {fileID: 2988233419481409547}
   - component: {fileID: 2988233419480606827}
   - component: {fileID: 2988233419479509547}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerChasis_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1888,7 +1889,7 @@ GameObject:
   - component: {fileID: 2988233419481409549}
   - component: {fileID: 2988233419480606829}
   - component: {fileID: 2988233419479509549}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1971,7 +1972,7 @@ GameObject:
   - component: {fileID: 2988233419481409551}
   - component: {fileID: 2988233419480606831}
   - component: {fileID: 2988233419479509551}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2054,7 +2055,7 @@ GameObject:
   - component: {fileID: 2988233419481409553}
   - component: {fileID: 2988233419480606833}
   - component: {fileID: 2988233419479509553}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WheelRail01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2137,7 +2138,7 @@ GameObject:
   - component: {fileID: 2988233419481409555}
   - component: {fileID: 2988233419480606835}
   - component: {fileID: 2988233419479509555}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ladder01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2220,7 +2221,7 @@ GameObject:
   - component: {fileID: 2988233419481409557}
   - component: {fileID: 2988233419480606837}
   - component: {fileID: 2988233419479509557}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2303,7 +2304,7 @@ GameObject:
   - component: {fileID: 2988233419481409559}
   - component: {fileID: 2988233419480606839}
   - component: {fileID: 2988233419479509559}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WheelRail04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2386,7 +2387,7 @@ GameObject:
   - component: {fileID: 2988233419481409565}
   - component: {fileID: 2988233419480606845}
   - component: {fileID: 2988233419479509565}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: driveshaft_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2469,7 +2470,7 @@ GameObject:
   - component: {fileID: 2988233419481409567}
   - component: {fileID: 2988233419480606847}
   - component: {fileID: 2988233419479509567}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ladder04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2541,3 +2542,97 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4275922218960347415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4265188284326863092}
+  - component: {fileID: 694771436927800970}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4265188284326863092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4275922218960347415}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 0.73, y: 37.3, z: -1.72}
+  m_LocalScale: {x: 0.2728385, y: 4.580189, z: 0.2728385}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2988233419481409573}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!108 &694771436927800970
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4275922218960347415}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 1
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0

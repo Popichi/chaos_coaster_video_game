@@ -52,14 +52,9 @@ public class SingularityProjectile : MonoBehaviour
             }
         }
         GameObject ps = Instantiate(particleEffect, transform.position, Quaternion.identity, this.transform.parent);
-        Destroy(ps, 1);
+        Destroy(ps, 2);
 
         Destroy(gameObject);
     }
 
-    private IEnumerator RadiusDetonation()
-    {
-        yield return new WaitForEndOfFrame();
-            
-    }
 }
