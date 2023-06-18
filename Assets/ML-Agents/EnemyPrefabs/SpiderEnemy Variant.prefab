@@ -171,7 +171,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2405117514693772564, guid: cc4ca485c535bfa4b8fe00fde2dd3ccb, type: 3}
   shootInterval: 0.25
   pauseInterval: 4
-  numberOfShots: 20
+  numberOfShots: 1
   shootDirection: {x: 0, y: 1, z: 0}
   root: {fileID: 2957784385495783393}
   target: {fileID: 1421371423194467491}
