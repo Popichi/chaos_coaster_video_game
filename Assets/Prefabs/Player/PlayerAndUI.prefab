@@ -1147,7 +1147,7 @@ Transform:
   - {fileID: 4189604721489537665}
   - {fileID: 8937556958290303668}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8167132401919820824
 GameObject:
@@ -1445,6 +1445,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5654329387214688141}
     - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: lvl0Damage
       value: 5
       objectReference: {fileID: 0}
@@ -1469,12 +1473,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: b63670fe77e65f645bc88a73bfaed3c2, type: 3}
     - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: pushbackVertical
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: weaponAudioSource
       value: 
       objectReference: {fileID: 5654329387214688141}
     - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: pushbackHorizontal
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: baseProjectileSpeed
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: invicibilityDuration
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: mainWeaponChargeSound
@@ -2011,13 +2027,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5151418827380830627, guid: f70a17b9a27a8ac489e9428db12b4d79, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5519718292709298076, guid: f70a17b9a27a8ac489e9428db12b4d79, type: 3}
       propertyPath: m_VersionIndex
-      value: 2394
+      value: 2403
       objectReference: {fileID: 0}
     - target: {fileID: 7486525472991457143, guid: f70a17b9a27a8ac489e9428db12b4d79, type: 3}
       propertyPath: m_Name

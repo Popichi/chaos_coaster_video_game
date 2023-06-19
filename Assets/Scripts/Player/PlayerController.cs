@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,6 +35,16 @@ public class PlayerController : MonoBehaviour
     bool speedControlEnabled;
     public Transform parent;
     public Transform playerTempSpawnPoint;
+
+    [Header("Health")]
+    public int health;
+    public float invicibilityDuration;
+    public float pushbackHorizontal;
+    public float pushbackVertical;
+
+    private float currentInvincibilityDuration;
+    private bool isInvincible;
+
 
     [Header("Shooting")]
     public Transform rangedSpawnPoint;
@@ -113,6 +124,8 @@ public class PlayerController : MonoBehaviour
         playerUI.UpdatePlayerHealth(1f);
         playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
         playerUI.ResetMainCharge();
+        isInvincible = false;
+        currentInvincibilityDuration = 0f;
     }
 
     // Update is called once per frame
@@ -137,7 +150,8 @@ public class PlayerController : MonoBehaviour
         {
             rb.drag = 0.3f;
         }
-        SpeedControl();
+        if (!isInvincible)
+            SpeedControl();
 
         if (currentCooldown >= 0)
         {
@@ -187,6 +201,47 @@ public class PlayerController : MonoBehaviour
             currentMainProjectile.transform.position = visualMainSpawnPoint.position;
         }
 
+        if (isInvincible)
+        {
+            currentInvincibilityDuration += Time.deltaTime;
+            if (currentInvincibilityDuration >= invicibilityDuration)
+            {
+                isInvincible = false;
+                currentInvincibilityDuration = 0f;
+            }
+        }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("agent") && !isInvincible)
+        {
+            isInvincible = true;
+            TakeDamage(25);
+            Vector3 forceDir = collision.transform.forward;
+            rb.AddForce(-transform.forward * pushbackHorizontal, ForceMode.Impulse);
+            rb.AddForce(transform.up * pushbackVertical, ForceMode.Impulse);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (health >= 20 && (health - damage) <= 0)
+        {
+            health = 1; //Last chance 
+        } 
+        else
+        {
+            health -= damage;
+        }
+        Debug.Log("Health: " + health);
+        playerUI.UpdatePlayerHealth(((float)health) / 100f);
+        if (health <= 0)
+        {
+            Debug.Log("I died lol");
+            SceneManager.LoadScene("Menu");
+        }
     }
 
     private void FixedUpdate()
