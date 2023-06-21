@@ -11,6 +11,7 @@ public class MachineGun : SecondaryGun
     public float targetAngle;
     private GameObject currentTarget;
     private float animDelay;
+    public float damage;
 
 
     public override void ShootHeld()
@@ -71,7 +72,8 @@ public class MachineGun : SecondaryGun
     void ShootMachineGun()
     {       
         GameObject projectile = Instantiate(bullet, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
-
+        MachineGunBullet currentBullet = projectile.GetComponent<MachineGunBullet>();
+        currentBullet.SetValues(damage, shootForce);
         Rigidbody rbProjectile = projectile.GetComponent<Rigidbody>();
         float spreadX = Random.Range(-spreadRange, spreadRange);
         float spreadY = Random.Range(-spreadRange, spreadRange);

@@ -2748,13 +2748,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1459607870}
     m_Modifications:
+    - target: {fileID: 903255972844247442, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1339583025327475472, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1163198501}
     - target: {fileID: 1339583025327475472, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: m_VersionIndex
-      value: 2412
+      value: 2427
       objectReference: {fileID: 0}
     - target: {fileID: 1833907337013458223, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: m_Mesh
@@ -2805,10 +2809,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3121801176825519052, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
-      propertyPath: health
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121801176825519052, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: pushbackVertical
       value: 7
       objectReference: {fileID: 0}
@@ -2816,9 +2816,9 @@ PrefabInstance:
       propertyPath: pushbackHorizontal
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 3121801176825519052, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
-      propertyPath: invicibilityDuration
-      value: 1
+    - target: {fileID: 3489683050052548820, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: grenadeDamage
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3739724867210129332, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: pathCreator
@@ -2828,6 +2828,14 @@ PrefabInstance:
       propertyPath: pathFollower
       value: 
       objectReference: {fileID: 4329452155262200349}
+    - target: {fileID: 4694139006532036670, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: grenadeDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6126460070445260278, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6781594399581831885, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: m_Name
       value: PlayerAndUI
@@ -3720,7 +3728,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-87984
+  m_Name: pb_Mesh-3406
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -5107,7 +5115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1088678383068193644, guid: 66b370eb90535fc418ab807c123fb2f4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1414631196116270503, guid: 66b370eb90535fc418ab807c123fb2f4, type: 3}
       propertyPath: m_LocalRotation.w

@@ -8,7 +8,7 @@ public class PulseShotProjectile : MonoBehaviour
     Rigidbody rb;
     GameObject other;
     public GameObject ps;
-    int damage;
+    public int damage;
 
     bool collided;
     Vector3 collisionDirection;
