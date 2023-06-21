@@ -442,38 +442,38 @@ public class SpiderAgent : Agent, IReward, Iid, IState
                 EndEpisode();
 
             }
-            if (backCounterActivated)
+            
+        }
+        if (backCounterActivated)
+        {
+            if (onBackCounter > maxFramesOnBack)
             {
-                if (onBackCounter > 100)
+                onBackCounter = 0;
+                if (state == EnemyState.training)
                 {
-                    onBackCounter = 0;
-                    if(state == EnemyState.training)
-                    {
-                        EndEpisode();
-                    }
-                    if(state == EnemyState.playing)
-                    {
-                        mainBodyRigidBody.AddTorque(mainBody.transform.forward * backTorque, ForceMode.VelocityChange);
-                        mainBodyRigidBody.AddForce(-mainBody.transform.up * backForce, ForceMode.VelocityChange);
+                    EndEpisode();
+                }
+                if (state == EnemyState.playing)
+                {
+                    mainBodyRigidBody.AddTorque(mainBody.transform.forward * backTorque, ForceMode.Impulse);
+                    mainBodyRigidBody.AddForce(-mainBody.transform.up * backForce, ForceMode.Impulse);
 
-                    }
-                   
                 }
-                if (Vector3.Dot(mainBody.transform.up, -movingPlattform.transform.up) > 0.5f)
-                {
-                    DebugReward(-0.3f, "Being upside down");
-                    onBackCounter++;
-                    //EndEpisode();
-                }
+
+            }
+            if (Vector3.Dot(mainBody.transform.up, -trainingGround.transform.up) > 0.5f)
+            {
+                DebugReward(-0.3f, "Being upside down");
+                onBackCounter++;
+                //EndEpisode();
             }
         }
-
 
         //Debug.Log(MaxStep +" " + StepCount);
 
 
 
-      
+
         //AddReward(-0.001f);
         if (movingPlattform.transform.InverseTransformPoint(mainBody.transform.position).y < -30)
         {

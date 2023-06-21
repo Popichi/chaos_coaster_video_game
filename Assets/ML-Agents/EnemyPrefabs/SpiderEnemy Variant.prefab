@@ -301,6 +301,7 @@ MonoBehaviour:
   m_ShowGizmos: 1
   m_CompressionType: 1
   m_ObservationStacks: 2
+  _center: {fileID: 0}
 --- !u!114 &6347027822922717519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,7 +784,7 @@ PrefabInstance:
     - target: {fileID: -8016412588606473749, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8496dbd7ecafe8b4e910722075f10022, type: 2}
+      objectReference: {fileID: 2100000, guid: 5ff1d4a75909fd745a311fa2d1aea579, type: 2}
     - target: {fileID: -7640558969779515294, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Layer
       value: 22
@@ -819,7 +820,7 @@ PrefabInstance:
     - target: {fileID: -6002508473797582251, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8496dbd7ecafe8b4e910722075f10022, type: 2}
+      objectReference: {fileID: 2100000, guid: 5ff1d4a75909fd745a311fa2d1aea579, type: 2}
     - target: {fileID: -5964151974850389871, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Layer
       value: 22
@@ -863,7 +864,7 @@ PrefabInstance:
     - target: {fileID: -4202798675411607032, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8496dbd7ecafe8b4e910722075f10022, type: 2}
+      objectReference: {fileID: 2100000, guid: 5ff1d4a75909fd745a311fa2d1aea579, type: 2}
     - target: {fileID: -3542852092398272455, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -1035,7 +1036,7 @@ PrefabInstance:
     - target: {fileID: 5742066667910392887, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8496dbd7ecafe8b4e910722075f10022, type: 2}
+      objectReference: {fileID: 2100000, guid: 5ff1d4a75909fd745a311fa2d1aea579, type: 2}
     - target: {fileID: 6586784372779809273, guid: a3dca216db1d9314bb4b185267f0fcaa, type: 3}
       propertyPath: m_Layer
       value: 22
@@ -2076,7 +2077,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 39e9a6e33a88b1f4f8830cc7aa9bac4a, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 6f6e72acf1ef92b4c8322cd815ddd508, type: 3}
   m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: Spider2
@@ -2128,7 +2129,8 @@ MonoBehaviour:
   backCounterActivated: 1
   onBackCounter: 0
   maxFramesOnBack: 140
-  backForce: 12
+  backForce: 200
+  backTorque: 300
   reachTargetreward: 0
   timeRewardMult: 1
 --- !u!114 &88259506032071828
