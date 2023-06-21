@@ -2681,7 +2681,7 @@ PrefabInstance:
       objectReference: {fileID: 1163198501}
     - target: {fileID: 1339583025327475472, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: m_VersionIndex
-      value: 2397
+      value: 2412
       objectReference: {fileID: 0}
     - target: {fileID: 1833907337013458223, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: m_Mesh
@@ -2730,6 +2730,22 @@ PrefabInstance:
     - target: {fileID: 3061139342528381202, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121801176825519052, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121801176825519052, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: pushbackVertical
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121801176825519052, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: pushbackHorizontal
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121801176825519052, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: invicibilityDuration
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3739724867210129332, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: pathCreator
@@ -3631,7 +3647,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2168
+  m_Name: pb_Mesh-1674
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
