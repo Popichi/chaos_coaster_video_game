@@ -139,6 +139,9 @@ namespace Unity.MLAgentsExamples
         /// <summary>
         /// Create BodyPart object and add it to dictionary.
         /// </summary>
+        public bool standardDoneOnCollision = true;
+        public bool standardDoPenalty = true;
+        public float standardPenalty = -1;
         public void SetupBodyPart(Transform t)
         {
             var bp = new BodyPart
@@ -157,9 +160,9 @@ namespace Unity.MLAgentsExamples
             {
                 bp.groundContact = t.gameObject.AddComponent<GroundContact>();
                 bp.groundContact.agent = gameObject.GetComponent<Agent>();
-                bp.groundContact.agentDoneOnGroundContact = false;
-                bp.groundContact.penalizeGroundContact = false;
-                bp.groundContact.groundContactPenalty = 0;
+                bp.groundContact.agentDoneOnGroundContact = standardDoneOnCollision;
+                bp.groundContact.penalizeGroundContact = standardDoPenalty;
+                bp.groundContact.groundContactPenalty = standardPenalty;
             }
             else
             {

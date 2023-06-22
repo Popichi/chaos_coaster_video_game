@@ -11,6 +11,7 @@ public class WaveSpawner : MonoBehaviour
     public GetMovement getMovement;
     public Transform mapMoving;
 
+    public bool spawn;
     public Transform up;
     public Transform forward;
     public Transform position;
@@ -26,32 +27,41 @@ public class WaveSpawner : MonoBehaviour
 
         ReadyToCountDown = true;
 
+        if (spawn) {
         for (int i = 0; i < waves.Length; ++i) {
             waves[i].EnemiesLeft = waves[i].enemies.Length;
+        }
         }
     }
 
     private void Update() {
+        if (spawn)
+        {
+            if (CurrentWaveIndex >= waves.Length)
+            {
+                Debug.Log("You survived every wave!");
+                return;
+            }
 
-        if (CurrentWaveIndex >= waves.Length) {
-            Debug.Log("You survived every wave!");
-            return;
-        }
+            if (ReadyToCountDown)
+            {
+                countdown -= Time.deltaTime;
+            }
 
-        if (ReadyToCountDown) {
-            countdown -= Time.deltaTime;
-        }
+            if (countdown <= 0)
+            {
+                ReadyToCountDown = false;
+                countdown = waves[CurrentWaveIndex].TimeToNextWave;
+                StartCoroutine(SpawnWave());
+            }
 
-        if (countdown <= 0) {
-            ReadyToCountDown = false;
-            countdown = waves[CurrentWaveIndex].TimeToNextWave;
-            StartCoroutine(SpawnWave());
+            if (waves[CurrentWaveIndex].EnemiesLeft == 0)
+            {
+                ReadyToCountDown = true;
+                ++CurrentWaveIndex;
+            }
         }
-
-        if (waves[CurrentWaveIndex].EnemiesLeft == 0) {
-            ReadyToCountDown = true;
-            ++CurrentWaveIndex;
-        }
+       
     }
 
     private IEnumerator SpawnWave() {

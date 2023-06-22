@@ -17,6 +17,7 @@
 /Build5/
 /Assets/ML-Agents/Brains/
 /LocalPackages/
+/configs/
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/

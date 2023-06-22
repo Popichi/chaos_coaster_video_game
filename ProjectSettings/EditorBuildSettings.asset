@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MovementTest.unity
     guid: 94b70f0ae7131414886cb3a6b89b1db0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menu.unity
     guid: 40cc4b210bf6941c5b1bc5fbaf7a4d78
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AlphaRelease-level1.unity
     guid: dc6e22fb3ad14924da32027cb1833a5d
   - enabled: 0
@@ -38,7 +38,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SpiderWalking.unity
     guid: db61f105260a05c4497db3dcda00ef29
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TutorialAlpha.unity
     guid: b1b381e63a4201242a7abdc4e3509a5d
+  - enabled: 1
+    path: Assets/Scenes/TrainingGrunt.unity
+    guid: 2fb3462796953474eb96775ff0a41076
   m_configObjects: {}

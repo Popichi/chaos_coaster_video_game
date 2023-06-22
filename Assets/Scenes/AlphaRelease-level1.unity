@@ -1466,6 +1466,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpiderEnemy Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 837645025915442753, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8352384129948824584, guid: f38605940042fb342a446537faa08f9c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3225,7 +3229,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-464092
+  m_Name: pb_Mesh-453616
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -4543,6 +4547,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 407244032}
     - target: {fileID: 4193387465435842282, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
+      propertyPath: m_BehaviorName
+      value: Spider2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4193387465435842282, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: m_BrainParameters.VectorActionSpaceType
       value: 1
       objectReference: {fileID: 0}
@@ -4613,6 +4621,14 @@ PrefabInstance:
     - target: {fileID: 5338306085738264816, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: m_Name
       value: GruntAgent Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338306085738264816, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421800621757515427, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6370,6 +6386,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4329452155262200346}
     - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: spawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
       propertyPath: getMovement
       value: 
       objectReference: {fileID: 4329452155262200348}
@@ -6403,7 +6427,11 @@ PrefabInstance:
       objectReference: {fileID: 1163198501}
     - target: {fileID: 5466844596615767811, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
       propertyPath: m_VersionIndex
-      value: 2514
+      value: 2517
+      objectReference: {fileID: 0}
+    - target: {fileID: 5759989262809571708, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5867928121024307519, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
       propertyPath: m_RootOrder

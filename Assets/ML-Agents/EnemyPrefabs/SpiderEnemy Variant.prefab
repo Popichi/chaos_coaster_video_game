@@ -301,6 +301,7 @@ MonoBehaviour:
   m_ShowGizmos: 1
   m_CompressionType: 1
   m_ObservationStacks: 2
+  _center: {fileID: 0}
 --- !u!114 &6347027822922717519
 MonoBehaviour:
   m_ObjectHideFlags: 0
