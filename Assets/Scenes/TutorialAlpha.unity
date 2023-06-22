@@ -1031,7 +1031,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-69820
+  m_Name: pb_Mesh-29134
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -9509,6 +9509,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 226393370}
+    - target: {fileID: 1339583025327475472, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: m_VersionIndex
+      value: 2418
+      objectReference: {fileID: 0}
     - target: {fileID: 1643728834786922441, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -9517,6 +9521,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -25.34
       objectReference: {fileID: 0}
+    - target: {fileID: 1833907337013458223, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 226393370}
     - target: {fileID: 3061139342528381202, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -9592,6 +9600,14 @@ PrefabInstance:
     - target: {fileID: 4694139006532036670, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: grenadeRadius
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664497182855138415, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.20197296
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664497182855138415, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.4259033
       objectReference: {fileID: 0}
     - target: {fileID: 5664497182855138415, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
       propertyPath: m_LocalPosition.z

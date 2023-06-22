@@ -22,11 +22,11 @@ TagManager:
   - MovementIndicator
   - 
   - 
-  - 
+  - Player
   - Ground
   - Weapon
   - NoSelfCol
-  - 
+  - Projectiles
   - 
   - 
   - 

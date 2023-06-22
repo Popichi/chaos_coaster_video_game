@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6544045779354918901}
   - component: {fileID: 2212433200947259669}
   - component: {fileID: 4873347023898291676}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Singularity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
