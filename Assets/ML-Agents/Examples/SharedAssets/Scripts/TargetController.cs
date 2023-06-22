@@ -70,7 +70,7 @@ using UnityEngine.Events;
         {
         rootMap = FindAnyObjectByType<WaveSpawner>().mapMoving;
         a = rootMap.gameObject.GetComponentInChildren<Iid>();
-       
+        getRandom = FindAnyObjectByType<GetRandomPositionOnSurface>();
             //meshFilter = GetComponent<MeshFilter>();
             //mesh = meshFilter.mesh;
         }

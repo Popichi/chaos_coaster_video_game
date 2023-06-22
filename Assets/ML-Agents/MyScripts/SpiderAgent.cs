@@ -68,14 +68,17 @@ public class SpiderAgent : Agent, IReward, Iid, IState
     public override void Initialize()
     {
         
-        if(state == EnemyState.playing)
-        {
+
             waveSpawner = FindAnyObjectByType<WaveSpawner>();
+        if (waveSpawner)
+        {
             getSpeed = waveSpawner.getMovement;
             trainingGround = waveSpawner.TrainingGround.gameObject;
             movingPlattform = waveSpawner.mapMoving.gameObject;
-
         }
+       
+
+        
 
 
         mainBodyRigidBody = mainBody.GetComponent<Rigidbody>();
