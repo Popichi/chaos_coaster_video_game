@@ -171,13 +171,6 @@ namespace PathCreationEditor {
                         }
                     }
 
-                    if (GUILayout.Button ("Reset Path")) {
-                        Undo.RecordObject (creator, "Reset Path");
-                        bool in2DEditorMode = EditorSettings.defaultBehaviorMode == EditorBehaviorMode.Mode2D;
-                        data.ResetBezierPath (creator.transform.position, in2DEditorMode);
-                        EditorApplication.QueuePlayerLoopUpdate ();
-                    }
-
                     GUILayout.Space (inspectorSectionSpacing);
                 }
 
