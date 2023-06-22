@@ -319,17 +319,20 @@ public class PlayerController : MonoBehaviour
         else
         //if (currentCooldown <= 0)
         {
+            Rigidbody rbProjectile = currentMainProjectile.GetComponent<Rigidbody>();
             int lvlCharge = 0;
             if (testCharge2)
             {
                 lvlCharge = 2;
                 currentMainProjectile.GetComponent<MainProjectile>().damage = lvl2Damage;
+
             }
             else if (testCharge1)
             {
                 lvlCharge = 1;
                 currentMainProjectile.GetComponent<MainProjectile>().damage = lvl1Damage;
             }
+            rbProjectile.mass *= (lvlCharge + 1);
             PlayWeaponSound(mainWeaponReleaseSound);
             Debug.Log("Shot with charge = " + lvlCharge);
             //GameObject projectile = Instantiate(primaryProjectile, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
@@ -341,7 +344,7 @@ public class PlayerController : MonoBehaviour
             currentMainProjectile.GetComponent<SphereCollider>().enabled = true;
             currentMainProjectile.transform.parent = transform.parent;
             currentMainProjectile.transform.localScale *= 2;
-            Rigidbody rbProjectile = currentMainProjectile.GetComponent<Rigidbody>();
+            
             currentMainRb.velocity = cameraPos.forward * baseProjectileSpeed;
             rb.AddForce((-1f * baseProjectileSpeed * cameraPos.forward).normalized * weaponPush * (1 + lvlCharge), ForceMode.Impulse);
             currentCooldown = weaponCooldown;

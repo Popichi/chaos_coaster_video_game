@@ -6,7 +6,7 @@ namespace PathCreation.Examples {
     public class RoadMeshCreator : PathSceneTool {
         [Header ("Road settings")]
         public float roadWidth = .4f;
-        [Range (0, .5f)]
+        [Range (0, 5f)]
         public float thickness = .15f;
         public bool flattenSurface;
 
@@ -146,7 +146,7 @@ namespace PathCreation.Examples {
 
         void AssignMaterials () {
             if (roadMaterial != null && undersideMaterial != null) {
-                meshRenderer.sharedMaterials = new Material[] { roadMaterial, undersideMaterial, undersideMaterial };
+                meshRenderer.sharedMaterials = new Material[] { roadMaterial, roadMaterial, roadMaterial };
                 meshRenderer.sharedMaterials[0].mainTextureScale = new Vector3 (1, textureTiling);
             }
         }

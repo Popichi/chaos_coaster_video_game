@@ -172,12 +172,23 @@ MonoBehaviour:
   airMultiplier: 0.4
   parent: {fileID: 0}
   playerTempSpawnPoint: {fileID: 0}
+  health: 0
+  invicibilityDuration: 0
+  pushbackHorizontal: 0
+  pushbackVertical: 0
   rangedSpawnPoint: {fileID: 0}
   visualMainSpawnPoint: {fileID: 0}
   primaryProjectile: {fileID: 7396368185016720279, guid: 229e42bfed9524a3caa63d9ea8f712fb, type: 3}
   baseProjectileSpeed: 50
   weaponCooldown: 1
   weaponPush: 10
+  lvl0Damage: 0
+  lvl1Damage: 0
+  lvl2Damage: 0
+  mainWeaponChargeSound: {fileID: 0}
+  mainWeaponReleaseSound: {fileID: 0}
+  pulseWeaponSound: {fileID: 0}
+  weaponAudioSource: {fileID: 0}
   weapons:
   - {fileID: 7756609681364642906}
   - {fileID: 9188578126152391058}
@@ -185,6 +196,7 @@ MonoBehaviour:
   - {fileID: 3614577494691735614}
   currentWeapon: 0
   weaponVisuals: {fileID: 0}
+  playerUI: {fileID: 0}
   follower: {fileID: 0}
 --- !u!54 &4225017865571262620
 Rigidbody:
@@ -229,6 +241,7 @@ MonoBehaviour:
   bullet: {fileID: 1772472521664258998, guid: 67106f96175449849a680089785b7eba, type: 3}
   rangedSpawnPoint: {fileID: 0}
   camTran: {fileID: 0}
+  isActive: 0
   shootForce: 15
   upwardShootForce: 0
   shootPush: 2
@@ -245,6 +258,11 @@ MonoBehaviour:
   attackPressed: 0
   muzzleFlash: {fileID: 0}
   visuals: {fileID: 0}
+  ui: {fileID: 0}
+  gunshotSound: {fileID: 0}
+  chargingSound: {fileID: 0}
+  weaponSoundAudioSource: {fileID: 0}
+  damage: 0
 --- !u!114 &9188578126152391058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +279,7 @@ MonoBehaviour:
   bullet: {fileID: 4319456932187111785, guid: 79e0832d3bffd4a45b801c4d26ee8b9f, type: 3}
   rangedSpawnPoint: {fileID: 0}
   camTran: {fileID: 0}
+  isActive: 0
   shootForce: 10
   upwardShootForce: 0
   shootPush: 5
@@ -277,7 +296,11 @@ MonoBehaviour:
   attackPressed: 0
   muzzleFlash: {fileID: 0}
   visuals: {fileID: 0}
-  grenadeDamage: 0
+  ui: {fileID: 0}
+  gunshotSound: {fileID: 0}
+  chargingSound: {fileID: 0}
+  weaponSoundAudioSource: {fileID: 0}
+  grenadeDamage: 2
   grenadeForce: 15
   grenadeRadius: 12
 --- !u!114 &3614577494691735614
@@ -296,6 +319,7 @@ MonoBehaviour:
   bullet: {fileID: 6865008514427057507, guid: 8c1b01a9af32eeb4abc92c89d5ac25a0, type: 3}
   rangedSpawnPoint: {fileID: 0}
   camTran: {fileID: 0}
+  isActive: 0
   shootForce: 20
   upwardShootForce: 0
   shootPush: 1
@@ -312,10 +336,15 @@ MonoBehaviour:
   attackPressed: 0
   muzzleFlash: {fileID: 0}
   visuals: {fileID: 0}
+  ui: {fileID: 0}
+  gunshotSound: {fileID: 0}
+  chargingSound: {fileID: 0}
+  weaponSoundAudioSource: {fileID: 0}
   smartMode: 0
   shootDelay: 0
   mgRadius: 0
   targetAngle: 0
+  damage: 5
 --- !u!114 &1066602899473959288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +361,7 @@ MonoBehaviour:
   bullet: {fileID: 4319456932187111785, guid: 03ac61d46309eda46ad2be7aa1819404, type: 3}
   rangedSpawnPoint: {fileID: 0}
   camTran: {fileID: 0}
+  isActive: 0
   shootForce: 10
   upwardShootForce: 0
   shootPush: 10
@@ -348,7 +378,11 @@ MonoBehaviour:
   attackPressed: 0
   muzzleFlash: {fileID: 0}
   visuals: {fileID: 0}
-  grenadeDamage: 0
+  ui: {fileID: 0}
+  gunshotSound: {fileID: 0}
+  chargingSound: {fileID: 0}
+  weaponSoundAudioSource: {fileID: 0}
+  grenadeDamage: 6
   grenadeRadius: 7
   grenadeForce: 750
   grenadeTimer: 2
