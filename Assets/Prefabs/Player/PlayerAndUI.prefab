@@ -1147,7 +1147,7 @@ Transform:
   - {fileID: 4189604721489537665}
   - {fileID: 8937556958290303668}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8167132401919820824
 GameObject:
@@ -1493,6 +1493,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: visualMainSpawnPoint
+      value: 
+      objectReference: {fileID: 5107224032701389937}
+    - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: mainWeaponChargeSound
       value: 
       objectReference: {fileID: 8300000, guid: b9e83796d3f88cc429bab16669587af4, type: 3}
@@ -1648,9 +1652,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAndCamera VariantWithMovementIndicator
       objectReference: {fileID: 0}
+    - target: {fileID: 6218485385188397661, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218485385188397661, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218485385188397661, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218485385188397661, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.04316788
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218485385188397661, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.04316788
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218485385188397661, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7057879
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218485385188397661, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7057879
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218485385188397661, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218485385188397661, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 173
+      objectReference: {fileID: 0}
     - target: {fileID: 6533113143872489402, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 2112
+      value: 10304
       objectReference: {fileID: 0}
     - target: {fileID: 6670691128076885565, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_Sprite
@@ -1690,11 +1730,11 @@ PrefabInstance:
       objectReference: {fileID: 5654329387214688141}
     - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.20197296
+      value: -0.15332794
       objectReference: {fileID: 0}
     - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4259033
+      value: 1.269867
       objectReference: {fileID: 0}
     - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1969,6 +2009,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!4 &5107224032701389937 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8727224874194277801, guid: 357596b2931c5b445b044c995d999697, type: 3}
+  m_PrefabInstance: {fileID: 4611076863564745176}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7193762800068621123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6640756512313506459, guid: 357596b2931c5b445b044c995d999697, type: 3}

@@ -110,7 +110,8 @@ public class PlayerController : MonoBehaviour
         testCharge2 = false;
         for (int i = 0; i < weapons.Length; i++)
         {
-            weapons[i].setUpWeapon(this.GetComponent<Rigidbody>(), cameraPos, rangedSpawnPoint, weaponVisuals, playerUI);
+           // weapons[i].setUpWeapon(this.GetComponent<Rigidbody>(), cameraPos, rangedSpawnPoint, weaponVisuals, playerUI);
+            weapons[i].setUpWeapon(this.GetComponent<Rigidbody>(), cameraPos, visualMainSpawnPoint, weaponVisuals, playerUI);
             weapons[i].enabled = false;
         }
         //weaponVisuals.ChangeWeapon(currentWeapon);
@@ -338,8 +339,8 @@ public class PlayerController : MonoBehaviour
             //GameObject projectile = Instantiate(primaryProjectile, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
             //Scale the projectile based on charge, might need no make this differently
             //projectile.transform.localScale *= (1 + lvlCharge);
-            currentMainProjectile.layer = 0;
-            currentMainProjectile.transform.position = rangedSpawnPoint.position;
+            currentMainProjectile.layer = 13;
+            //currentMainProjectile.transform.position = rangedSpawnPoint.position;
             currentMainRb.isKinematic = false;
             currentMainProjectile.GetComponent<SphereCollider>().enabled = true;
             currentMainProjectile.transform.parent = transform.parent;
