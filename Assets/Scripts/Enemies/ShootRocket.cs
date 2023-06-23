@@ -43,6 +43,7 @@ public class ShootRocket : MonoBehaviour
             {
                 GameObject projectile = Instantiate(projectilePrefab, root.position, Quaternion.identity * Quaternion.Euler(-90,0,0));
                 projectile.GetComponentInChildren<RocketController>().manager = this;
+                projectile.transform.parent = movement.transform;
                 if(movement != null)
                 {
                     projectile.GetComponentInChildren<Rigidbody>().velocity = root.TransformDirection(shootDirection) * power + movement.GetSpeed();
