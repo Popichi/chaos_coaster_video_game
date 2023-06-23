@@ -4805,6 +4805,9 @@ MonoBehaviour:
   jointDampen: 5000
   maxJointForceLimit: 40000
   bodyPartsList: []
+  standardDoneOnCollision: 1
+  standardDoPenalty: 1
+  standardPenalty: -1
 --- !u!43 &1622184506
 Mesh:
   m_ObjectHideFlags: 0
@@ -6333,6 +6336,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 886236478261391845, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: damage
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1384007892305386982, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
@@ -6380,6 +6387,10 @@ PrefabInstance:
     - target: {fileID: 1998374371281959020, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327749330016947985, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 15737911
       objectReference: {fileID: 0}
     - target: {fileID: 2861947282943509013, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform

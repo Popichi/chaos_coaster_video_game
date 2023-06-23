@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2097594074495233236}
   - component: {fileID: 697303331456062284}
   - component: {fileID: 5384511458881844731}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PulseProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,3 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeDetonation: 1.5
   ps: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
+  damage: 0
