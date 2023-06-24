@@ -103,11 +103,14 @@ public class PlayerController : MonoBehaviour
     float currentTimeBetweenShots;
     public GameObject follower;
 
-
+    private float pulseSwapDelay;
+    private float currentPulseSwapDelay;
 
     // Start is called before the first frame update
     void Start()
     {
+        pulseSwapDelay = 1f;
+        currentPulseSwapDelay = 0f;
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -181,7 +184,10 @@ public class PlayerController : MonoBehaviour
         //ignore rotation of the follower
         //if (this.gameObject.transform.parent != null)
             //this.gameObject.transform.parent.parent.rotation = Quaternion.Euler(0, 0, -90);
-
+        if (currentPulseSwapDelay > 0)
+        {
+            currentPulseSwapDelay -= Time.deltaTime;
+        }
         cameraPos.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
         transform.localRotation = Quaternion.Euler(0, yRotation, 0);
 
@@ -434,6 +440,11 @@ public class PlayerController : MonoBehaviour
         {
             //Do something while the button is being held
             currentWeaponScript.ShootHeld();
+            //exception for pulse shot
+            if (currentWeapon == 0)
+            {
+                currentPulseSwapDelay = pulseSwapDelay;
+            }
             secondaryPressed = true;
         }
         else
@@ -469,18 +480,21 @@ public class PlayerController : MonoBehaviour
 
     void OnWeaponSwap()
     {
-        swapPressed = !swapPressed;
-        //When it has been released and it was not pressed long enough to take out wheapon wheel
-        if (!swapPressed && currentSwapTime < wheelThreshold)
+        //Messy interaction,
+        if (!secondaryPressed && currentPulseSwapDelay <= 0f)
         {
-            weapons[currentWeapon].enabled = false;
-            currentWeapon = (currentWeapon + 1) % weapons.Length;
-            weapons[currentWeapon].enabled = true;
-            weaponVisuals.ChangeWeapon(currentWeapon);
-            playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
-            currentSwapTime = 0;
+            swapPressed = !swapPressed;
+            //When it has been released and it was not pressed long enough to take out wheapon wheel
+            if (!swapPressed && currentSwapTime < wheelThreshold)
+            {
+                weapons[currentWeapon].enabled = false;
+                currentWeapon = (currentWeapon + 1) % weapons.Length;
+                weapons[currentWeapon].enabled = true;
+                weaponVisuals.ChangeWeapon(currentWeapon);
+                playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
+                currentSwapTime = 0;
+            }
         }
-
     }
 
     public void WeaponReload(int weapon, int amount)

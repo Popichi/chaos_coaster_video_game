@@ -14,15 +14,20 @@ public class AmmoBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    public void InitBox(int type)
+    {
+        ammoType = type;
         meshR = gameObject.GetComponent<MeshRenderer>();
         List<Material> list = new List<Material>();
         list.Add(meshR.materials[0]);
-        list.Add(ammoMaterials[ammoType]);
+        list.Add(ammoMaterials[type]);
         list.Add(meshR.materials[2]);
         meshR.SetMaterials(list);
         //meshR.materials[1] = ammoMaterials[ammoType];
-        boxHighlight.color = ammoMaterials[ammoType].color;
-        
+        boxHighlight.color = ammoMaterials[type].color;
     }
 
     // Update is called once per frame
