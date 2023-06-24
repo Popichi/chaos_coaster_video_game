@@ -19,8 +19,9 @@ public interface IState
 {
     public EnemyState GetState();
 }
-public class SpiderAgent : Agent, IReward, Iid, IState
+public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
 {
+    public Enemy enemy;
     public EnemyState state;
     public bool isTraining = true;
     public GameObject mainBody;
@@ -67,7 +68,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState
     public WaveSpawner waveSpawner;
     public override void Initialize()
     {
-        
+         
 
             waveSpawner = FindAnyObjectByType<WaveSpawner>();
         if (waveSpawner)
@@ -76,12 +77,12 @@ public class SpiderAgent : Agent, IReward, Iid, IState
             trainingGround = waveSpawner.TrainingGround.gameObject;
             movingPlattform = waveSpawner.mapMoving.gameObject;
         }
-       
-
-        
+        enemy = gameObject.GetComponentInParent<Enemy>();
 
 
-        mainBodyRigidBody = mainBody.GetComponent<Rigidbody>();
+
+
+         mainBodyRigidBody = mainBody.GetComponent<Rigidbody>();
        
         if(state == EnemyState.playing)
         {
@@ -639,5 +640,10 @@ public class SpiderAgent : Agent, IReward, Iid, IState
     public EnemyState GetState()
     {
         return state;
+    }
+
+    public void ReactOnDeathPlane()
+    {
+        enemy.TakeDamage(100000);
     }
 }
