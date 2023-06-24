@@ -2077,7 +2077,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 39e9a6e33a88b1f4f8830cc7aa9bac4a, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 53cb1ef8dfa6f0545a087f8433cfdfb3, type: 3}
   m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: Spider2
@@ -2129,8 +2129,8 @@ MonoBehaviour:
   backCounterActivated: 1
   onBackCounter: 0
   maxFramesOnBack: 140
-  backForce: 200
-  backTorque: 300
+  backForce: 150
+  backTorque: 2000
   reachTargetreward: 0
   timeRewardMult: 1
 --- !u!114 &88259506032071828
@@ -2202,6 +2202,9 @@ MonoBehaviour:
   jointDampen: 5000
   maxJointForceLimit: 40000
   bodyPartsList: []
+  standardDoneOnCollision: 1
+  standardDoPenalty: 1
+  standardPenalty: -1
 --- !u!114 &2185608143968933721
 MonoBehaviour:
   m_ObjectHideFlags: 0

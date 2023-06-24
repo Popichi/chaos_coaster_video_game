@@ -82,15 +82,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState
 
 
         mainBodyRigidBody = mainBody.GetComponent<Rigidbody>();
-        if (state == EnemyState.training)
-        {
-            covers = new List<GameObject>();
-            for (int i = 0; i < numberCovers; ++i)
-            {
-                covers.Add(Instantiate(coverPrefab));
-                covers[i].transform.parent = trainingGround.transform;
-            }
-        }
+       
         if(state == EnemyState.playing)
         {
             gameObject.GetComponentInChildren<ShootRocket>().enabled = true;
@@ -167,15 +159,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState
         TargetController targetController = target.GetComponent<TargetController>();
         if (state == EnemyState.training)
         {
-            for (int i = 0; i < numberCovers; ++i)
-            {
-                covers[i].active = true;
-                Rigidbody r = covers[i].GetComponent<Rigidbody>();
-                r.velocity = Vector3.zero;
-                r.angularVelocity = Vector3.zero;
-                r.transform.rotation = Quaternion.Euler(0, Random.value * 360, 0);
-                covers[i].transform.position = targetController.getRandom.randomPosOnGrid(2);
-            }
+
             targetController.MoveTargetToRandomPosition();
         }
 
@@ -395,7 +379,8 @@ public class SpiderAgent : Agent, IReward, Iid, IState
         Ndistance,
         JustGetit,
         MaxVelocity,
-        AvgVelocity
+        AvgVelocity,
+        MaxVelGaze
 
     }
     public RewardMode RewardFunction;
@@ -430,14 +415,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState
         UpdateOrientationObjects();
         if(state == EnemyState.training)
         {
-            for (int i = 0; i < numberCovers; ++i)
-            {
-                if (covers[i].transform.position.y < -100)
-                {
-                    covers[i].active = false;
-                }
-
-            }
+            
             if (StepCount == MaxStep - 2)
             {
 
@@ -524,6 +502,14 @@ public class SpiderAgent : Agent, IReward, Iid, IState
         // a. Match target speed
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
         var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
+
+        if(RewardFunction == RewardMode.MaxVelGaze)
+        {
+            Vector3 vel = mainBody.GetComponent<Rigidbody>().velocity;
+            var rew1 = (Vector3.Dot(vel, cubeForward) + 1) *.5F * velocityBonus;
+            var rew2 = (Vector3.Dot(cubeForward, mainHead.transform.forward) + 1) * .5F;
+            AddReward(rew1 * rew2);
+        }
         if (RewardFunction == RewardMode.AvgVelocity)
         {
             var g = GetAvgVelocity();
@@ -543,8 +529,8 @@ public class SpiderAgent : Agent, IReward, Iid, IState
 
         // b. Rotation alignment with target direction.
         //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
-        var lookAtTargetReward = (Vector3.Dot(cubeForward, mainBody.transform.forward) + 1) * .5F;
-        Debug.DrawRay(mainBody.transform.position, mainBody.transform.forward);
+        var lookAtTargetReward = (Vector3.Dot(cubeForward, mainHead.transform.forward) + 1) * .5F;
+        Debug.DrawRay(mainBody.transform.position, mainHead.transform.forward);
         //var lookAtTargetReward = Vector3.Dot(cubeForward, Forward(mainHead.transform)) ;
         //Debug.DrawRay(mainHead.transform.position, Forward(mainHead.transform)*5);
         var targetDir = (target.transform.position - mainHead.transform.position).normalized;
@@ -623,7 +609,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState
             }
            
             if (RewardFunction == RewardMode.Nearest || RewardFunction == RewardMode.Ndistance || RewardFunction == RewardMode.JustGetit
-                || RewardFunction == RewardMode.MaxVelocity)
+                || RewardFunction == RewardMode.MaxVelocity || RewardFunction == RewardMode.MaxVelGaze)
             {
                 DebugReward(d, "Touched: " + (MaxStep - StepCount));
             }

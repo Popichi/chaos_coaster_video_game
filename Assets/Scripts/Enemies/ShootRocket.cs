@@ -46,7 +46,7 @@ public class ShootRocket : MonoBehaviour
                 projectile.transform.parent = movement.transform;
                 if(movement != null)
                 {
-                    projectile.GetComponentInChildren<Rigidbody>().velocity = root.TransformDirection(shootDirection) * power + movement.GetSpeed();
+                    projectile.GetComponentInChildren<Rigidbody>().velocity = root.TransformDirection(shootDirection) * power; //+ movement.GetSpeed();
                 }
                 else
                 {
