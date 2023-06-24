@@ -301,7 +301,6 @@ MonoBehaviour:
   m_ShowGizmos: 1
   m_CompressionType: 1
   m_ObservationStacks: 2
-  _center: {fileID: 0}
 --- !u!114 &6347027822922717519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3194,6 +3193,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  ammoBox: {fileID: 4583053118789656287, guid: 1ad8a4cd52eba1940a3cd9679249ad52, type: 3}
+  model: {fileID: 8195271533778752164}
+  spawnBoxChance: 1
 --- !u!4 &1421371423194467491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4694108373323459088, guid: d9151520f0ca04f418b93a445285986c, type: 3}

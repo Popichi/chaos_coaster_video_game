@@ -7,6 +7,11 @@ public class Enemy : MonoBehaviour
 
   public int maxHealth = 100;
   public int currentHealth;
+  public GameObject ammoBox;
+    public Transform model;
+    public float spawnBoxChance;
+    private bool hasSpawnedBox = false;
+    
 
   private WaveSpawner WaveSpawner;
 
@@ -24,8 +29,18 @@ public class Enemy : MonoBehaviour
   public void TakeDamage(int amount) {
     currentHealth -= amount;
     if (currentHealth <= 0) {
+            //Instantiate(ammoBox, transform.position, Quaternion.identity, transform.parent);
       Destroy(gameObject);
-      --WaveSpawner.waves[WaveSpawner.CurrentWaveIndex].EnemiesLeft;
+            if (Random.value <= spawnBoxChance && !hasSpawnedBox)
+            {
+                hasSpawnedBox = true;
+                GameObject box = Instantiate(ammoBox, model.position, Quaternion.identity, transform.parent);
+                int boxType = Random.Range(0, 3);
+                box.GetComponent<AmmoBox>().InitBox(boxType);
+            }
+
+
+            --WaveSpawner.waves[WaveSpawner.CurrentWaveIndex].EnemiesLeft;
     }
   }
 }
