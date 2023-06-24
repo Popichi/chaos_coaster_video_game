@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
+    
     private PlayerInput playerInput;
     private Rigidbody rb;
 
@@ -20,6 +22,13 @@ public class PlayerController : MonoBehaviour
     public Transform cameraPos;
     public float sensitivityX;
     public float sensitivityY;
+    public Transform cameraPointStart;
+    public Transform cameraLookAtIntro;
+    public Transform cameraLookAtGame;
+    public Transform cameraFollowGame;
+    public CinemachineVirtualCamera virtualCamera;
+    public float introDuration;
+    public float introSpeed;
 
     private float xRotation;
     private float yRotation;
@@ -35,6 +44,7 @@ public class PlayerController : MonoBehaviour
     bool speedControlEnabled;
     public Transform parent;
     public Transform playerTempSpawnPoint;
+    public bool introSequenceEnabled;
 
     [Header("Health")]
     public int health;
@@ -127,6 +137,41 @@ public class PlayerController : MonoBehaviour
         playerUI.ResetMainCharge();
         isInvincible = false;
         currentInvincibilityDuration = 0f;
+        if (introSequenceEnabled)
+        {
+            virtualCamera.Follow = cameraPointStart;
+            virtualCamera.LookAt = cameraLookAtIntro;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            Invoke(nameof(StartGame), introDuration);
+        }
+    }
+
+    private void StartGame()
+    {
+        StartCoroutine(nameof(IntroFadeIn));
+        
+    }
+
+    private IEnumerator IntroFadeIn()
+    {
+        float startTime = Time.time;
+        Vector3 startPoint = cameraPointStart.position;
+        float journeyLength = Vector3.Distance(cameraPointStart.position, transform.position);
+        float distCovered = 0;
+        while (distCovered <= journeyLength - 0.5f)
+        {
+            distCovered = (Time.time - startTime) * introSpeed;
+
+            // Fraction of journey completed equals current distance divided by total distance.
+            float fractionOfJourney = distCovered / journeyLength;
+
+            // Set our position as a fraction of the distance between the markers.
+            cameraPointStart.position = Vector3.Lerp(startPoint, transform.position, fractionOfJourney);
+            yield return new WaitForEndOfFrame();
+        }
+        virtualCamera.Follow = cameraFollowGame;
+        virtualCamera.LookAt = cameraLookAtGame;
+        rb.constraints = RigidbodyConstraints.None;
     }
 
     // Update is called once per frame
