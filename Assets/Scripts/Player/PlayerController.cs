@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Cinemachine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IReactOnDeathPlane
 {
     
     private PlayerInput playerInput;
@@ -277,10 +277,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool lastChance=true)
     {
         if (health >= 20 && (health - damage) <= 0)
         {
+            if(lastChance)
             health = 1; //Last chance 
         } 
         else
@@ -509,5 +510,10 @@ public class PlayerController : MonoBehaviour
     public bool WeaponFull(int weapon)
     {
         return weapons[weapon].bulletsLeft >= weapons[weapon].magazineSize;
+    }
+
+    public void ReactOnDeathPlane()
+    {
+        TakeDamage(100000, false);
     }
 }
