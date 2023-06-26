@@ -34,13 +34,18 @@ public class PulseShotProjectile : MonoBehaviour
 
             collided = true;
             Vector3 otherPos = other.transform.position;
-            collisionDirection = otherPos - this.transform.position;
+            collisionDirection = rb.velocity.normalized;
             //rb.velocity = new Vector3();
             SphereCollider sCollider = gameObject.GetComponent<SphereCollider>();
             sCollider.isTrigger = true;
             this.transform.parent = other.transform;
             rb.isKinematic = true;
             Invoke(nameof(Detonate), timeDetonation);
+            IsBodyPart takeDamage = collision.gameObject.GetComponent<IsBodyPart>();
+            if (takeDamage)
+            {
+                takeDamage.TakeDamage(damage);
+            }
         }
 
 

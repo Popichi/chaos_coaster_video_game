@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Animations;
+
 public enum EnemyState
 {
     training,
@@ -52,7 +53,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
 
     [Header("Target To Walk Towards")] public Transform target; //Target the agent will walk towards during training.
 
-    public List<IsBodyPart> bodyparts;
+    public List<IsBodyPart> bodyParts;
     public Transform rootPrefab;
     //This will be used as a stabilized model space reference point for observations
     //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning
@@ -66,11 +67,12 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
     public int myID;
     public Transform Player;
     public WaveSpawner waveSpawner;
+    public BodyPartController bodyPartManager;
     public override void Initialize()
     {
-         
+        bodyPartManager = gameObject.AddComponent<BodyPartController>();
 
-            waveSpawner = FindAnyObjectByType<WaveSpawner>();
+           waveSpawner = FindAnyObjectByType<WaveSpawner>();
         if (waveSpawner)
         {
             getSpeed = waveSpawner.getMovement;
@@ -105,13 +107,13 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
         myID = id++;
         m_OrientationCube = rootPrefab.GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = rootPrefab.GetComponentInChildren<DirectionIndicator>();
-        bodyparts = rootPrefab.GetComponentsInChildren<IsBodyPart>().ToList();
+        bodyPartManager.bodyParts = rootPrefab.GetComponentsInChildren<IsBodyPart>().ToList();
         //Setup each body part
         m_JdController = GetComponent<JointDriveController>();
-        foreach(var a in bodyparts)
+        foreach(var a in bodyPartManager.bodyParts)
         {
             a.id = myID;
-            m_JdController.SetupBodyPart(a.transform);
+            m_JdController.SetupBodyPart(a,a.transform);
         }
        
 
@@ -174,7 +176,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
 
             rotate();
             //mainBody.transform.rotation = rot;
-            foreach (var a in bodyparts)
+            foreach (var a in bodyParts)
             {
                //a.transform.rotation *= rot;
                 //a.transform.position += Vector3.up; 
@@ -237,20 +239,32 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
     public GameObject trainingGround;
     public void CollectObservationBodyPart(BodyPart bp, VectorSensor sensor)
     {
-        
+        if (!bp.isBodyPart.detached)
+        {
+            sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
+
+            //Get velocities in the context of our orientation cube's space
+            //Note: You can get these velocities in world space as well but it may not train as well.
+            sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.velocity));
+            sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.angularVelocity));
+
+            //Get position relative to hips in the context of our orientation cube's space
+            sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.position - mainBody.transform.position));
+            //AddRot(sensor, bp.rb.transform.localRotation);
+            sensor.AddObservation(bp.rb.transform.localRotation);
+            sensor.AddObservation(bp.currentStrength / m_JdController.maxJointForceLimit);
+        }
+        else
+        {
+            sensor.AddObservation(false);
+            sensor.AddObservation(Vector3.zero);
+            sensor.AddObservation(Vector3.zero);
+            sensor.AddObservation(Vector3.zero);
+            sensor.AddObservation(Quaternion.identity);
+            sensor.AddObservation(0);
+        }
         //GROUND CHECK
-        sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
-
-        //Get velocities in the context of our orientation cube's space
-        //Note: You can get these velocities in world space as well but it may not train as well.
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.velocity));
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.angularVelocity));
-
-        //Get position relative to hips in the context of our orientation cube's space
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.position - mainBody.transform.position));
-        //AddRot(sensor, bp.rb.transform.localRotation);
-        sensor.AddObservation(bp.rb.transform.localRotation);
-        sensor.AddObservation(bp.currentStrength / m_JdController.maxJointForceLimit);
+      
             
         
     }
@@ -313,7 +327,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
         sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(Vector3.down));
         sensor.AddObservation((Quaternion.FromToRotation(movingPlattform.transform.forward, cubeForward)));
         sensor.AddObservation(Quaternion.FromToRotation(movingPlattform.transform.up, m_OrientationCube.transform.up));
-
+        bodyPartManager.GetObs(sensor);
     }
     public GetMovement getSpeed;
     public bool showOutput = false;
@@ -324,7 +338,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
         var i = -1;
 
         var continuousActions = actionBuffers.ContinuousActions;
-        foreach (var a in bodyparts)
+        foreach (var a in bodyParts)
         {
             Vector3 v = new Vector3();
             bool bodyMoveable = false;
@@ -350,9 +364,13 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
             
             if(bodyMoveable == true)
             {
-                if(bp)
-                bpDict[a.transform].SetJointTargetRotation(v);
-                bpDict[a.transform].SetJointStrength(continuousActions[i]);
+                if (!a.detached)
+                {
+                    bpDict[a.transform].SetJointTargetRotation(v);
+                    bpDict[a.transform].SetJointStrength(continuousActions[i]);
+
+                }
+ 
                 //Debug.Log(continuousActions[i - 1]);
             }
             if(showOutput)

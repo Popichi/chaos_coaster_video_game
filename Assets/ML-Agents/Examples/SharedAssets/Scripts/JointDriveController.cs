@@ -11,11 +11,8 @@ namespace Unity.MLAgentsExamples
     [System.Serializable]
     public class BodyPart
     {
-        public bool slicedOff = false;
-        public bool detached;
-        public float limbHealth;
-        public float limbMaxHealth;
 
+        public IsBodyPart isBodyPart;
         [Header("Body Part Info")] [Space(10)] public ConfigurableJoint joint;
         public Rigidbody rb;
         [HideInInspector] public Vector3 startingPos;
@@ -53,32 +50,7 @@ namespace Unity.MLAgentsExamples
         /// Reset body part to initial configuration.
         /// </summary>
         /// 
-        public void ResetLimb(BodyPart bp)
-        {
-            limbHealth = limbMaxHealth;
-            slicedOff = false;
-            detached = false;
-            AttachJoint();
-            
-        }
-        public void SliceLimb()
-        {
-            slicedOff = true;
-            detached = true;
-            DetechJoint();
-            BodyPart[] parts = GameObject.Get
-        }
-        public void DetechJoint() {
-            joint.xMotion = ConfigurableJointMotion.Free;
-            joint.yMotion = ConfigurableJointMotion.Free;
-            joint.zMotion = ConfigurableJointMotion.Free;
-        }
-        public void AttachJoint()
-        {
-            joint.xMotion = ConfigurableJointMotion.Locked;
-            joint.yMotion = ConfigurableJointMotion.Locked;
-            joint.zMotion = ConfigurableJointMotion.Locked;
-        }
+        
         public void Reset(BodyPart bp)
         {
            
@@ -95,7 +67,7 @@ namespace Unity.MLAgentsExamples
             {
                 bp.targetContact.touchingTarget = false;
             }
-            ResetLimb(bp);
+            isBodyPart.ResetLimb();
         }
 
         /// <summary>
@@ -176,10 +148,12 @@ namespace Unity.MLAgentsExamples
         public bool standardDoneOnCollision = true;
         public bool standardDoPenalty = true;
         public float standardPenalty = -1;
-        public void SetupBodyPart(Transform t)
+        public void SetupBodyPart(IsBodyPart b, Transform t)
         {
+
             var bp = new BodyPart
             {
+                isBodyPart = b,
                 rb = t.GetComponent<Rigidbody>(),
                 joint = t.GetComponent<ConfigurableJoint>(),
                 startingPos = t.localPosition,

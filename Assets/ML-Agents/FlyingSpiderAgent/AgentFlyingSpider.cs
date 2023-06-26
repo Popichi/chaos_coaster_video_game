@@ -67,7 +67,7 @@ public class AgentFlyingSpider : Agent,IReward,Iid
         foreach (var a in bodyparts)
         {
             a.id = myID;
-            m_JdController.SetupBodyPart(a.transform);
+            m_JdController.SetupBodyPart(a,a.transform);
         }
 
 

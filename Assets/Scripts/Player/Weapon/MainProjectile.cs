@@ -35,9 +35,13 @@ public class MainProjectile : MonoBehaviour
             }
             else
             {
-                Debug.Log("No script attached");
+                Debug.Log("No Enemy script attached");
             }
-            
+            IsBodyPart takeDamage = collision.gameObject.GetComponent<IsBodyPart>();
+            if (takeDamage)
+            {
+                takeDamage.TakeDamage(damage);
+            }
         }
     }
 }
