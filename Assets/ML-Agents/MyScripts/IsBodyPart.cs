@@ -19,7 +19,8 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
     public GroundContact groundContact;
     public GameObject visual;
     public SkinnedMeshRenderer skinned;
-
+    public BodyPartController partController;
+    public bool sliceable=true;
     void addVisuals()
     {
         if (skinned)
@@ -29,7 +30,7 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
     }
     private void Start()
     {
-        
+        partController = GetComponentInParent<BodyPartController>();
            joint = GetComponent<ConfigurableJoint>();
         if (!joint && !isMain())
         {
@@ -74,29 +75,53 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
 
     public void ResetLimb()
     {
-        if (!isMain())
+        if (sliceable)
         {
             groundContact.reset();
             limbHealth = limbMaxHealth;
             slicedOff = false;
             detached = false;
             AttachJoint();
+            SwitchVisuals(false);
         }
 
 
+    }
+    public void SwitchVisuals(bool detached)
+    {
+        if (sliceable)
+        {
+            if (detached)
+            {
+                skinned.enabled = false;
+                visual.SetActive(true);
+            }
+            else
+            {
+                skinned.enabled = true;
+                visual.SetActive(false);
+            }
+        }
+        
     }
     public void SliceLimb()
     {
-        if (!isMain())
+
+        if (sliceable)
         {
-            slicedOff = true;
+            partController.CanTouchFloor(true);
+            SwitchVisuals(true);
+            var g = GetComponentsInParent<IsBodyPart>();
+            if (g[1])
+                g[1].SwitchVisuals(true);
+             slicedOff = true;
             joint.xMotion = ConfigurableJointMotion.Free;
             joint.yMotion = ConfigurableJointMotion.Free;
             joint.zMotion = ConfigurableJointMotion.Free;
-            DetechJointRecursive();
+            DetachJointRecursive();
         }
     }
-    void DetechJointRecursive()
+    void DetachJointRecursive()
     {
         
         DetechJoint();
@@ -104,7 +129,7 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
         {
             foreach (var c in children)
             {
-                c.DetechJointRecursive();
+                c.DetachJointRecursive();
             }
         }
 

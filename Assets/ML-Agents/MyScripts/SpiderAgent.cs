@@ -20,7 +20,7 @@ public interface IState
 {
     public EnemyState GetState();
 }
-public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
+public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICanDie
 {
     public Enemy enemy;
     public EnemyState state;
@@ -70,8 +70,8 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
     public BodyPartController bodyPartManager;
     public override void Initialize()
     {
-        bodyPartManager = gameObject.AddComponent<BodyPartController>();
-
+        bodyPartManager = gameObject.GetComponent<BodyPartController>();
+        alive = true;
            waveSpawner = FindAnyObjectByType<WaveSpawner>();
         if (waveSpawner)
         {
@@ -107,7 +107,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
         myID = id++;
         m_OrientationCube = rootPrefab.GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = rootPrefab.GetComponentInChildren<DirectionIndicator>();
-        bodyPartManager.bodyParts = rootPrefab.GetComponentsInChildren<IsBodyPart>().ToList();
+        bodyPartManager.SetBodies(rootPrefab.GetComponentsInChildren<IsBodyPart>().ToList());
         //Setup each body part
         m_JdController = GetComponent<JointDriveController>();
         foreach(var a in bodyPartManager.bodyParts)
@@ -364,7 +364,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
             
             if(bodyMoveable == true)
             {
-                if (!a.detached)
+                if (!a.detached && alive)
                 {
                     bpDict[a.transform].SetJointTargetRotation(v);
                     bpDict[a.transform].SetJointStrength(continuousActions[i]);
@@ -381,7 +381,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
         //update joint strength settings
        
     }
-
+    public bool alive = true;
     //Update OrientationCube and DirectionIndicator
     void UpdateOrientationObjects()
     {
@@ -664,5 +664,15 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
     public void ReactOnDeathPlane()
     {
         enemy.TakeDamage(100000);
+    }
+
+    public bool Die()
+    {
+        alive = false;
+        foreach(var b in m_JdController.bodyPartsList)
+        {
+            m_JdController.SetJoint(b, Vector3.zero);
+        }
+        return true;
     }
 }

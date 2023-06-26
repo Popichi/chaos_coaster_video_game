@@ -176,30 +176,51 @@ namespace Unity.MLAgentsExamples
             {
                 bp.groundContact.agent = gameObject.GetComponent<Agent>();
             }
-            
 
+            SetJoint(bp);
 
           
+
+            
+            bodyPartsDict.Add(t, bp);
+            bodyPartsList.Add(bp);
+        }
+        public void SetJoint(BodyPart bp, Vector3 v)
+        {
             if (bp.joint)
             {
-               
+
                 var jd = new JointDrive
                 {
-                    positionSpring = maxJointSpring,
-                    positionDamper = jointDampen,
-                    maximumForce = maxJointForceLimit,
-                    
+                    positionSpring = v.x,
+                    positionDamper = v.y,
+                    maximumForce = v.z,
+
                 };
                 bp.joint.slerpDrive = jd;
                 bp.joint.rotationDriveMode = RotationDriveMode.Slerp;
                 bp.joint.projectionMode = JointProjectionMode.PositionAndRotation;
                 bp.thisJdController = this;
             }
-            
-            bodyPartsDict.Add(t, bp);
-            bodyPartsList.Add(bp);
         }
+        public void SetJoint(BodyPart bp)
+        {
+            if (bp.joint)
+            {
 
+                var jd = new JointDrive
+                {
+                    positionSpring = maxJointSpring,
+                    positionDamper = jointDampen,
+                    maximumForce = maxJointForceLimit,
+
+                };
+                bp.joint.slerpDrive = jd;
+                bp.joint.rotationDriveMode = RotationDriveMode.Slerp;
+                bp.joint.projectionMode = JointProjectionMode.PositionAndRotation;
+                bp.thisJdController = this;
+            }
+        }
         public void GetCurrentJointForces()
         {
             foreach (var bodyPart in bodyPartsDict.Values)
