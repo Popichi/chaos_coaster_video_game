@@ -13,6 +13,7 @@ public class BodyPartController : MonoBehaviour
         foreach(var a in bodyParts)
         {
             a.ResetLimb();
+            a.groundContact.reset();
         }
     }
 
@@ -24,6 +25,14 @@ public class BodyPartController : MonoBehaviour
         }
 
     }
+    public void CanTouchFloor()
+    {
+        foreach (var a in bodyParts)
+        {
+            a.groundContact.agentDoneOnGroundContact = true;
+        }
+    }
+    
     // Start is called before the first frame update
 
 

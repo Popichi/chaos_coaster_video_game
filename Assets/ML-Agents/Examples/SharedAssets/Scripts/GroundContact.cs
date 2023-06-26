@@ -9,6 +9,8 @@ namespace Unity.MLAgentsExamples
     /// an observation for that agent, and/or a means of punishing the agent for making undesirable contact.
     /// </summary>
     /// 
+
+
     public interface IReward
     {
         public void reward();
@@ -70,5 +72,19 @@ namespace Unity.MLAgentsExamples
                 touchingGround = false;
             }
         }
+        [HideInInspector]
+        public bool stdAgentDoneOnGroundContact;
+        public void Awake()
+        {
+            stdAgentDoneOnGroundContact = agentDoneOnGroundContact;
+        }
+        public void reset()
+        {
+            agentDoneOnGroundContact = stdAgentDoneOnGroundContact;
+            touchingGround = false;
+            detached = false;
+        }
     }
+
+
 }

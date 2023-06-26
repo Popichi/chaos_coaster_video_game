@@ -41,11 +41,7 @@ public class PulseShotProjectile : MonoBehaviour
             this.transform.parent = other.transform;
             rb.isKinematic = true;
             Invoke(nameof(Detonate), timeDetonation);
-            IsBodyPart takeDamage = collision.gameObject.GetComponent<IsBodyPart>();
-            if (takeDamage)
-            {
-                takeDamage.TakeDamage(damage);
-            }
+
         }
 
 
@@ -62,6 +58,11 @@ public class PulseShotProjectile : MonoBehaviour
                 current = current.transform.parent.gameObject;
             }
             current.GetComponent<Enemy>().TakeDamage((int)damage);
+            IsBodyPart takeDamage = current.GetComponent<IsBodyPart>();
+            if (takeDamage)
+            {
+                takeDamage.TakeDamage(damage);
+            }
             Debug.Log("Enemy Took damage finally");
             
         }
@@ -69,6 +70,7 @@ public class PulseShotProjectile : MonoBehaviour
         if (targetRB != null)
             targetRB.AddForce(collisionDirection.normalized * 3f, ForceMode.Impulse);
         GameObject particleHit = Instantiate(ps, transform.position, Quaternion.identity, transform.parent);
+
         Destroy(particleHit, 0.5f);
         Destroy(gameObject);
     }

@@ -17,6 +17,16 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
     ConfigurableJoint joint;
     public List<IsBodyPart> children;
     public GroundContact groundContact;
+    public GameObject visual;
+    public SkinnedMeshRenderer skinned;
+
+    void addVisuals()
+    {
+        if (skinned)
+        {
+
+        }
+    }
     private void Start()
     {
         
@@ -27,8 +37,10 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
         }
         groundContact = GetComponent<GroundContact>();
         ResetLimb();
-        children = GetComponentsInChildren<IsBodyPart>().ToList();
-        
+        children =transform.GetComponentsInChildren<IsBodyPart>().ToList();
+        children.RemoveAt(0);
+
+
     }
     public bool isMain()
     {
@@ -64,7 +76,7 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
     {
         if (!isMain())
         {
-            groundContact.detached = false;
+            groundContact.reset();
             limbHealth = limbMaxHealth;
             slicedOff = false;
             detached = false;
