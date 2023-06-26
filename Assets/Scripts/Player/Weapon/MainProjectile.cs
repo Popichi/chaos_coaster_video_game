@@ -4,35 +4,40 @@ using UnityEngine;
 
 public class MainProjectile : MonoBehaviour
 {
-    public int damage;
-    private int damageCounter;
+    public int damage = 20;
+    private int damageCounter = 2;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        damageCounter = 2;
+        //dont write in start bc it overwrites what is set in the inspector
     }
 
     // Update is called once per frame
-    void Update()
-    {
 
-    }
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
 
         if (damageCounter > 0 && collision.gameObject.CompareTag("agent"))
         {
-            GameObject current = collision.gameObject.transform.parent.gameObject;
-            while(current.GetComponent<Enemy>() == null)
+            Enemy e;
+            e = collision.gameObject.GetComponent<Enemy>();
+            if(!e)
+            e = collision.gameObject.GetComponentInParent<Enemy>();
+            //if e != null
+            if (e)
             {
-                current = current.transform.parent.gameObject;
+                e.TakeDamage(damage);
+                Debug.Log("Enemy Took damage finally");
+                damageCounter--;
             }
-            current.GetComponent<Enemy>().TakeDamage(damage);
-            Debug.Log("Enemy Took damage finally");
-            damageCounter--;
+            else
+            {
+                Debug.Log("No script attached");
+            }
+            
         }
     }
 }

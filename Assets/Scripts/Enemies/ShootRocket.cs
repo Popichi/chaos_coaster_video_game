@@ -37,32 +37,39 @@ public class ShootRocket : MonoBehaviour
 
     private IEnumerator ShootProjectile()
     {
-        while (true)
+        while (agent.state == EnemyState.playing)
         {
             for (int i = 0; i < numberOfShots; i++)
             {
-                GameObject projectile = Instantiate(projectilePrefab, root.position, Quaternion.identity * Quaternion.Euler(-90,0,0));
-                projectile.GetComponentInChildren<RocketController>().manager = this;
-                projectile.transform.parent = movement.transform;
-                if(movement != null)
+                float distance = Vector3.Distance(target.position, root.position);
+                if (distance < 10)
                 {
-                    projectile.GetComponentInChildren<Rigidbody>().velocity = root.TransformDirection(shootDirection) * power; //+ movement.GetSpeed();
+                    GameObject projectile = Instantiate(projectilePrefab, root.position, Quaternion.identity * Quaternion.Euler(-90, 0, 0));
+                    projectile.GetComponentInChildren<RocketController>().manager = this;
+                    projectile.transform.parent = movement.transform;
+                    if (movement != null)
+                    {
+                        projectile.GetComponentInChildren<Rigidbody>().velocity = root.TransformDirection(shootDirection) * power + movement.GetSpeed();
+                    }
+                    else
+                    {
+                        projectile.GetComponentInChildren<Rigidbody>().velocity = root.TransformDirection(shootDirection) * power;
+                    }
+
+                    Destroy(projectile, 10);
+                    yield return new WaitForSeconds(shootInterval);
                 }
-                else
-                {
-                    projectile.GetComponentInChildren<Rigidbody>().velocity = root.TransformDirection(shootDirection) * power;
-                }
-                
-                Destroy(projectile,15);
-                yield return new WaitForSeconds(shootInterval);
+
             }
 
             yield return new WaitForSeconds(pauseInterval);
         }
     }
+    SpiderAgent agent;
     private void Awake()
     {
         movement = FindObjectOfType<GetMovement>();
+        agent = gameObject.GetComponentInParent<SpiderAgent>();
     }
 
 }

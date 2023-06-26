@@ -5,7 +5,19 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Cinemachine;
 
-public class PlayerController : MonoBehaviour, IReactOnDeathPlane
+public interface ITakeDamage
+{
+    //dead or not
+    bool TakeDamage(float d);
+   
+
+}
+public interface ICanDie
+{
+    bool Die();
+    
+}
+public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, ICanDie
 {
     
     private PlayerInput playerInput;
@@ -105,6 +117,11 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane
 
     private float pulseSwapDelay;
     private float currentPulseSwapDelay;
+    public FootstepSoundController damageSound;
+    private void Awake()
+    {
+        damageSound = gameObject.GetComponent<FootstepSoundController>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -277,8 +294,9 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane
         }
     }
 
-    public void TakeDamage(int damage, bool lastChance=true)
+    public bool TakeDamage(int damage, bool lastChance=true)
     {
+        damageSound.PlayFootstepSound(damage);
         if (health >= 20 && (health - damage) <= 0)
         {
             if(lastChance)
@@ -292,9 +310,10 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane
         playerUI.UpdatePlayerHealth(((float)health) / 100f);
         if (health <= 0)
         {
-            Debug.Log("I died lol");
-            SceneManager.LoadScene("Menu");
+           
+            return true;
         }
+        return false;
     }
 
     private void FixedUpdate()
@@ -515,5 +534,21 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane
     public void ReactOnDeathPlane()
     {
         TakeDamage(100000, false);
+    }
+
+    public bool TakeDamage(float d)
+    {
+        if(TakeDamage((int)d, true)){
+            Die();
+            return true;
+        }
+        return false;
+    }
+
+    public bool Die()
+    {
+        Debug.Log("I died lol");
+        SceneManager.LoadScene("Menu");
+        return true;
     }
 }

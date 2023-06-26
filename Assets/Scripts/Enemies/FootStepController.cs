@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class FootstepSoundController : MonoBehaviour
 {
+     
     public AudioSource footstepAudioSource;
     public float minImpulse = 0;
     public float maxImpulse = 10;

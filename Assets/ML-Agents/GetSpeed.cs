@@ -27,7 +27,7 @@ public class GetMovement : MonoBehaviour
        maRot.AddSample( new Vector3(calcAngle(Vector3.right, deltaRotation), calcAngle(Vector3.up, deltaRotation), calcAngle(Vector3.forward, deltaRotation)));
         lastRotation = transform.rotation;
 
-       maSpeed.AddSample((lastPos - transform.position)/ Time.deltaTime);
+       maSpeed.AddSample((transform.position- lastPos) / Time.deltaTime);
         lastPos = transform.position;
 
         mag = math.length(maSpeed.GetAverage());

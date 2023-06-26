@@ -5034,7 +5034,7 @@ PrefabInstance:
     - target: {fileID: 4193387465435842282, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 7d1303a2b4aac8547ac70936a7648ff7, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: dae4dcba57de9134ba1478c8b6175d92, type: 3}
     - target: {fileID: 4193387465435842282, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: m_BehaviorName
       value: Grunt

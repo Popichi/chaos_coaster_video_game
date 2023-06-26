@@ -327,29 +327,30 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
         foreach (var a in bodyparts)
         {
             Vector3 v = new Vector3();
-            bool b = false;
+            bool bodyMoveable = false;
             if (a.x)
             {
                 v.x = continuousActions[++i];
-                b = true;
+                bodyMoveable = true;
 
             }
                 
             if (a.y)
             {
                 v.y = continuousActions[++i];
-                b = true;
+                bodyMoveable = true;
             }
                
             if (a.z)
             {
                 v.z = continuousActions[++i];
-                b = true;
+                bodyMoveable = true;
             }
                 
             
-            if(b == true)
+            if(bodyMoveable == true)
             {
+                if(bp)
                 bpDict[a.transform].SetJointTargetRotation(v);
                 bpDict[a.transform].SetJointStrength(continuousActions[i]);
                 //Debug.Log(continuousActions[i - 1]);
@@ -459,7 +460,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
         //AddReward(-0.001f);
         if (movingPlattform.transform.InverseTransformPoint(mainBody.transform.position).y < -30)
         {
-            DebugReward(-100, "fell from plattform");
+            DebugReward(-1, "fell from plattform");
             if(state == EnemyState.training)
             {
                 EndEpisode();
@@ -507,7 +508,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane
         if(RewardFunction == RewardMode.MaxVelGaze)
         {
             Vector3 vel = mainBody.GetComponent<Rigidbody>().velocity;
-            var rew1 = (Vector3.Dot(vel, cubeForward) + 1) *.5F * velocityBonus;
+            var rew1 = Vector3.Dot(vel, cubeForward) * velocityBonus;
             var rew2 = (Vector3.Dot(cubeForward, mainHead.transform.forward) + 1) * .5F;
             AddReward(rew1 * rew2);
         }

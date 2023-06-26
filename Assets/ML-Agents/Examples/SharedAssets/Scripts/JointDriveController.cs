@@ -11,6 +11,11 @@ namespace Unity.MLAgentsExamples
     [System.Serializable]
     public class BodyPart
     {
+        public bool slicedOff = false;
+        public bool detached;
+        public float limbHealth;
+        public float limbMaxHealth;
+
         [Header("Body Part Info")] [Space(10)] public ConfigurableJoint joint;
         public Rigidbody rb;
         [HideInInspector] public Vector3 startingPos;
@@ -47,8 +52,36 @@ namespace Unity.MLAgentsExamples
         /// <summary>
         /// Reset body part to initial configuration.
         /// </summary>
+        /// 
+        public void ResetLimb(BodyPart bp)
+        {
+            limbHealth = limbMaxHealth;
+            slicedOff = false;
+            detached = false;
+            AttachJoint();
+            
+        }
+        public void SliceLimb()
+        {
+            slicedOff = true;
+            detached = true;
+            DetechJoint();
+            BodyPart[] parts = GameObject.Get
+        }
+        public void DetechJoint() {
+            joint.xMotion = ConfigurableJointMotion.Free;
+            joint.yMotion = ConfigurableJointMotion.Free;
+            joint.zMotion = ConfigurableJointMotion.Free;
+        }
+        public void AttachJoint()
+        {
+            joint.xMotion = ConfigurableJointMotion.Locked;
+            joint.yMotion = ConfigurableJointMotion.Locked;
+            joint.zMotion = ConfigurableJointMotion.Locked;
+        }
         public void Reset(BodyPart bp)
         {
+           
             bp.rb.transform.localPosition = bp.startingPos;
             bp.rb.transform.localRotation = bp.startingRot;
             bp.rb.velocity = Vector3.zero;
@@ -62,6 +95,7 @@ namespace Unity.MLAgentsExamples
             {
                 bp.targetContact.touchingTarget = false;
             }
+            ResetLimb(bp);
         }
 
         /// <summary>
@@ -169,12 +203,7 @@ namespace Unity.MLAgentsExamples
                 bp.groundContact.agent = gameObject.GetComponent<Agent>();
             }
             
-            if (t.gameObject.CompareTag("wall"))
-            {
-                bp.groundContact.agentDoneOnGroundContact = false;
-                bp.groundContact.penalizeGroundContact = false;
-                bp.groundContact.groundContactPenalty = 0;
-            }
+
 
           
             if (bp.joint)

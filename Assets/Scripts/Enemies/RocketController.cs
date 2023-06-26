@@ -21,11 +21,11 @@ public class RocketController : MonoBehaviour
         rb.AddForce(transform.forward * power);
         if(manager != null)
         {
-            rb.velocity += manager.speed * Time.deltaTime;
+            //rb.velocity += manager.speed * Time.fixedDeltaTime;
             var a = (manager.target.position - transform.position).normalized;
             controlledObject.DesiredOrientation = Quaternion.LookRotation(a);
         }
-       
+        Debug.DrawRay(transform.position, manager.speed);
         
     }
 }
