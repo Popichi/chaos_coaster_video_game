@@ -16,11 +16,11 @@ public class MainProjectile : MonoBehaviour
 
     // Update is called once per frame
 
-
+    public string target = "agent"; 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
 
-        if (damageCounter > 0 && collision.gameObject.CompareTag("agent"))
+        if (damageCounter > 0 && collision.gameObject.CompareTag(target))
         {
             Enemy e;
             e = collision.gameObject.GetComponent<Enemy>();

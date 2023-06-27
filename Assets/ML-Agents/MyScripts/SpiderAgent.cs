@@ -11,6 +11,7 @@ using System.Linq;
 using UnityEngine.Animations;
 using Unity.Barracuda;
 using Unity.MLAgents.Policies;
+using System.Collections;
 
 public enum EnemyState
 {
@@ -72,6 +73,8 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     public BodyPartController bodyPartController;
     public override void Initialize()
     {
+        dissolveSphere = GetComponent<DissolveSphere>();
+        delayBeforeDestroy = dissolveSphere.timeToDissolve;
         bodyPartController = gameObject.GetComponent<BodyPartController>();
        
         alive = true;
@@ -119,9 +122,11 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
             m_JdController.SetupBodyPart(a,a.transform);
         }
        
-
+            
         m_ResetParams = Academy.Instance.EnvironmentParameters;
         bodyPartController.SwitchModelToNormal();
+        dissolveSphere.resetMaterials();
+
         //   SetResetParameters();
     }
 
@@ -723,16 +728,34 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
             {
                 m_JdController.SetJoint(b, Vector3.zero);
             }
+            StartCoroutine(TimerCoroutine());
             return true;
         }
         return true;
     }
 
+    public float delayBeforeAnimation = 5f;
+    public float delayBeforeDestroy = 2f;
 
-    void Start()
+    DissolveSphere dissolveSphere;
+
+
+
+    IEnumerator TimerCoroutine()
     {
-     
+        // Wait for the specified delay
+        yield return new WaitForSeconds(delayBeforeAnimation);
+
+        // Start the animation
+        dissolveSphere.startDissolving();
+
+        // Wait for another delay
+        yield return new WaitForSeconds(delayBeforeDestroy+0.1f);
+
+        // Destroy the object
+        Destroy(enemy.gameObject);
     }
 
 
 }
+

@@ -41,8 +41,8 @@ public class ShootRocket : MonoBehaviour
         {
             for (int i = 0; i < numberOfShots; i++)
             {
-                float distance = Vector3.Distance(target.position, root.position);
-                if (distance < 10)
+                float distance = Vector3.Distance(target.position, transform.position);
+                if (distance < 15)
                 {
                     GameObject projectile = Instantiate(projectilePrefab, root.position, Quaternion.identity * Quaternion.Euler(-90, 0, 0));
                     projectile.GetComponentInChildren<RocketController>().manager = this;
