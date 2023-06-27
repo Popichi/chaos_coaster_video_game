@@ -21,7 +21,8 @@ namespace PathCreation.Examples
             if (pathCreator != null)
             {
                 float distanceTravelled = pathFollower.getDistanceTravelled() + distanceAheadOfFollower;
-                transform.localRotation = Quaternion.Euler(0, 270, 0) * pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);               
+                transform.localRotation = Quaternion.Euler(0, 180, 0) * new Quaternion(pathRotation.x, 0, pathRotation.z, pathRotation.w);
             }
         }
 
