@@ -12,7 +12,8 @@ public class FootstepSoundController : MonoBehaviour
 
     void Start()
     {
-        footstepAudioSource = GetComponent<AudioSource>();
+        if(!footstepAudioSource)
+        footstepAudioSource = GetComponentInChildren<AudioSource>();
     }
 
     public void PlayFootstepSound(float impulse)
