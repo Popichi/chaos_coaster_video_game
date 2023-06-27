@@ -5773,10 +5773,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HighIntensityTrack Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5441381992772879740, guid: 171692ca6c81e1d47aefa13e8b4dcd8d, type: 3}
+      propertyPath: newVelocity
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7958248415096348014, guid: 171692ca6c81e1d47aefa13e8b4dcd8d, type: 3}
       propertyPath: roadSign
       value: 
-      objectReference: {fileID: 21300000, guid: 096dd71021393dc41be7604f94141cd6, type: 3}
+      objectReference: {fileID: 21300000, guid: d1118c4f641a62c4482e6890cf699f17, type: 3}
     - target: {fileID: 7958248415096348014, guid: 171692ca6c81e1d47aefa13e8b4dcd8d, type: 3}
       propertyPath: spritePlaceholder
       value: 
