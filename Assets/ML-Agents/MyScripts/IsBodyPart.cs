@@ -28,7 +28,7 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
 
         }
     }
-    private void Start()
+    private void Awake()
     {
         partController = GetComponentInParent<BodyPartController>();
            joint = GetComponent<ConfigurableJoint>();
@@ -37,11 +37,12 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
             Debug.LogError("No Joint attached at gameobject of IsBodyPart");
         }
         groundContact = GetComponent<GroundContact>();
-        ResetLimb();
+       
         children =transform.GetComponentsInChildren<IsBodyPart>().ToList();
         children.RemoveAt(0);
-
-
+        if(joint)
+        connected = joint.connectedBody;
+       
     }
     public bool isMain()
     {
@@ -72,12 +73,17 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
         return false;
 
     }
-
+    public void SetParent(Transform t)
+    {
+        transform.parent = t;
+    }
     public void ResetLimb()
     {
+        
+        groundContact.reset();
         if (sliceable)
         {
-            groundContact.reset();
+           
             limbHealth = limbMaxHealth;
             slicedOff = false;
             detached = false;
@@ -104,21 +110,27 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
         }
         
     }
+    public Rigidbody connected;
     public void SliceLimb()
     {
-
+        partController.SetLimbOff();
         if (sliceable)
-        {
+        { 
             partController.CanTouchFloor(true);
-            SwitchVisuals(true);
+            partController.SwitchModelToLimb();
             var g = GetComponentsInParent<IsBodyPart>();
-            if (g[1])
+            if (g.Length > 1 && g[1])
                 g[1].SwitchVisuals(true);
              slicedOff = true;
             joint.xMotion = ConfigurableJointMotion.Free;
             joint.yMotion = ConfigurableJointMotion.Free;
             joint.zMotion = ConfigurableJointMotion.Free;
+            
+            joint.connectedBody = partController.setToRB;
             DetachJointRecursive();
+            SwitchVisuals(true);
+            //SetParent(partController.root.parent);
+            SetParent(null);
         }
     }
     void DetachJointRecursive()
@@ -142,9 +154,12 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
     }
     void AttachJoint()
     {
+        joint.connectedBody = connected;
+        
         joint.xMotion = ConfigurableJointMotion.Locked;
         joint.yMotion = ConfigurableJointMotion.Locked;
         joint.zMotion = ConfigurableJointMotion.Locked;
+        
     }
 
     public bool Die()

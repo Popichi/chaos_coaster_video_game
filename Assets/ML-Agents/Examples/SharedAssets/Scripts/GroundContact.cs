@@ -72,7 +72,7 @@ namespace Unity.MLAgentsExamples
                 touchingGround = false;
             }
         }
-        [HideInInspector]
+        
         public bool stdAgentDoneOnGroundContact;
         public void Awake()
         {

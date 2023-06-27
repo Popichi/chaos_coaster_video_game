@@ -12,6 +12,7 @@ TagManager:
   - follower
   - spawnpoint
   - Enemy
+  - Map
   layers:
   - Default
   - TransparentFX

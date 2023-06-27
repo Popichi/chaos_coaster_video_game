@@ -11,7 +11,7 @@ namespace Unity.MLAgentsExamples
     [System.Serializable]
     public class BodyPart
     {
-
+        public Transform parent;
         public IsBodyPart isBodyPart;
         [Header("Body Part Info")] [Space(10)] public ConfigurableJoint joint;
         public Rigidbody rb;
@@ -53,7 +53,7 @@ namespace Unity.MLAgentsExamples
         
         public void Reset(BodyPart bp)
         {
-           
+            isBodyPart.SetParent(parent);
             bp.rb.transform.localPosition = bp.startingPos;
             bp.rb.transform.localRotation = bp.startingRot;
             bp.rb.velocity = Vector3.zero;
@@ -67,7 +67,7 @@ namespace Unity.MLAgentsExamples
             {
                 bp.targetContact.touchingTarget = false;
             }
-            isBodyPart.ResetLimb();
+            bp.isBodyPart.ResetLimb();
         }
 
         /// <summary>
@@ -150,10 +150,11 @@ namespace Unity.MLAgentsExamples
         public float standardPenalty = -1;
         public void SetupBodyPart(IsBodyPart b, Transform t)
         {
-
+           
             var bp = new BodyPart
             {
                 isBodyPart = b,
+                parent = b.transform.parent,
                 rb = t.GetComponent<Rigidbody>(),
                 joint = t.GetComponent<ConfigurableJoint>(),
                 startingPos = t.localPosition,
@@ -187,10 +188,11 @@ namespace Unity.MLAgentsExamples
         }
         public void SetJoint(BodyPart bp, Vector3 v)
         {
+           
             if (bp.joint)
             {
-
-                var jd = new JointDrive
+                
+               var jd = new JointDrive
                 {
                     positionSpring = v.x,
                     positionDamper = v.y,

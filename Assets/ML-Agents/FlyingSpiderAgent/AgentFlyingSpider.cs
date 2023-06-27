@@ -289,8 +289,11 @@ public class AgentFlyingSpider : Agent,IReward,Iid
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var a = actionsOut.ContinuousActions;
-        a[16] = 1;
-        a[17] = 1;
+        int i = 0;
+        foreach(var u in a)
+        {
+            a[i++] = (Random.value-1)*2;
+        }
         
     }
     public override void OnActionReceived(ActionBuffers actionBuffers)

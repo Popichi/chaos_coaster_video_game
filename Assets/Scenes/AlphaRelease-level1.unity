@@ -594,6 +594,17 @@ MonoBehaviour:
   y: 0
   z: 0
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!114 &165420375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,6 +623,8 @@ MonoBehaviour:
   groundContactPenalty: 0
   touchingGround: 0
   quadraticFallOf: 0
+  detached: 0
+  stdAgentDoneOnGroundContact: 0
 --- !u!1 &169137092
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,6 +1124,17 @@ MonoBehaviour:
   y: 1
   z: 1
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!4 &275741775 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 27329548205068880, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
@@ -1138,6 +1162,17 @@ MonoBehaviour:
   y: 1
   z: 1
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!43 &326755555
 Mesh:
   m_ObjectHideFlags: 0
@@ -2112,6 +2147,17 @@ MonoBehaviour:
   y: 0
   z: 0
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!43 &486616686
 Mesh:
   m_ObjectHideFlags: 0
@@ -2464,6 +2510,17 @@ MonoBehaviour:
   y: 1
   z: 1
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!114 &595344124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2482,6 +2539,8 @@ MonoBehaviour:
   groundContactPenalty: 0
   touchingGround: 0
   quadraticFallOf: 0
+  detached: 0
+  stdAgentDoneOnGroundContact: 0
 --- !u!1 &607228289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2633,6 +2692,17 @@ MonoBehaviour:
   y: 1
   z: 1
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!43 &682524447
 Mesh:
   m_ObjectHideFlags: 0
@@ -2985,6 +3055,17 @@ MonoBehaviour:
   y: 1
   z: 1
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!1 &858797163 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2540903965911409284, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
@@ -3309,6 +3390,17 @@ MonoBehaviour:
   y: 1
   z: 1
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!1 &1036771121 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8870851778573083080, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
@@ -3331,6 +3423,17 @@ MonoBehaviour:
   y: 0
   z: 0
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!1 &1088460675 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5535964330308916557, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
@@ -3353,6 +3456,17 @@ MonoBehaviour:
   y: 0
   z: 0
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!1 &1119175280
 GameObject:
   m_ObjectHideFlags: 0
@@ -4397,6 +4511,17 @@ MonoBehaviour:
   y: 1
   z: 1
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!114 &1451513366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4415,6 +4540,8 @@ MonoBehaviour:
   groundContactPenalty: 0
   touchingGround: 0
   quadraticFallOf: 0
+  detached: 0
+  stdAgentDoneOnGroundContact: 0
 --- !u!1 &1479136395
 GameObject:
   m_ObjectHideFlags: 0
@@ -4515,6 +4642,17 @@ MonoBehaviour:
   y: 1
   z: 1
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!43 &1510445653
 Mesh:
   m_ObjectHideFlags: 0
@@ -4702,6 +4840,17 @@ MonoBehaviour:
   y: 1
   z: 1
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!1 &1573814228
 GameObject:
   m_ObjectHideFlags: 0
@@ -5033,6 +5182,17 @@ MonoBehaviour:
   y: 1
   z: 1
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!114 &1581777399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5050,6 +5210,17 @@ MonoBehaviour:
   y: 0
   z: 0
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!4 &1581777400 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6964257768293327174, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
@@ -6217,6 +6388,17 @@ MonoBehaviour:
   y: 0
   z: 0
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!1 &2072822801
 GameObject:
   m_ObjectHideFlags: 0
@@ -6307,6 +6489,17 @@ MonoBehaviour:
   y: 0
   z: 0
   id: 0
+  slicedOff: 0
+  detached: 0
+  limbHealth: 0
+  limbMaxHealth: 30
+  children: []
+  groundContact: {fileID: 0}
+  visual: {fileID: 0}
+  skinned: {fileID: 0}
+  partController: {fileID: 0}
+  sliceable: 1
+  connected: {fileID: 0}
 --- !u!114 &2078412594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6325,6 +6518,8 @@ MonoBehaviour:
   groundContactPenalty: 0
   touchingGround: 0
   quadraticFallOf: 0
+  detached: 0
+  stdAgentDoneOnGroundContact: 0
 --- !u!1 &2094027643
 GameObject:
   m_ObjectHideFlags: 0
@@ -6780,6 +6975,162 @@ PrefabInstance:
       propertyPath: getMovement
       value: 
       objectReference: {fileID: 4329452155262200348}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].TimeToNextWave
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].TimeToNextWave
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].TimeToNextEnemy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].TimeToNextEnemy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[0].enemies.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].enemies.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].enemies.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[0].enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[0].enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[0].enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[0].enemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[1].enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[1].enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[1].enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[1].enemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[2].enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[2].enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[2].enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[2].enemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].enemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].enemies.Array.data[4]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].enemies.Array.data[5]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].enemies.Array.data[6]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].enemies.Array.data[7]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].enemies.Array.data[8]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[3].enemies.Array.data[9]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].enemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].enemies.Array.data[4]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].enemies.Array.data[5]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].enemies.Array.data[6]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].enemies.Array.data[7]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+    - target: {fileID: 3021054521520775356, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+      propertyPath: waves.Array.data[4].enemies.Array.data[8]
+      value: 
+      objectReference: {fileID: 4911549273317085165, guid: db5816d68588b2244a4698e3ab939622, type: 3}
     - target: {fileID: 3424509311011957834, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 

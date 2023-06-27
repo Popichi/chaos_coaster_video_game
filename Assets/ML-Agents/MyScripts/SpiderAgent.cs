@@ -9,6 +9,8 @@ using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Animations;
+using Unity.Barracuda;
+using Unity.MLAgents.Policies;
 
 public enum EnemyState
 {
@@ -67,10 +69,11 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     public int myID;
     public Transform Player;
     public WaveSpawner waveSpawner;
-    public BodyPartController bodyPartManager;
+    public BodyPartController bodyPartController;
     public override void Initialize()
     {
-        bodyPartManager = gameObject.GetComponent<BodyPartController>();
+        bodyPartController = gameObject.GetComponent<BodyPartController>();
+       
         alive = true;
            waveSpawner = FindAnyObjectByType<WaveSpawner>();
         if (waveSpawner)
@@ -85,8 +88,8 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
 
 
          mainBodyRigidBody = mainBody.GetComponent<Rigidbody>();
-       
-        if(state == EnemyState.playing)
+        
+        if (state == EnemyState.playing)
         {
             gameObject.GetComponentInChildren<ShootRocket>().enabled = true;
             MaxStep = 0;
@@ -107,10 +110,10 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         myID = id++;
         m_OrientationCube = rootPrefab.GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = rootPrefab.GetComponentInChildren<DirectionIndicator>();
-        bodyPartManager.SetBodies(rootPrefab.GetComponentsInChildren<IsBodyPart>().ToList());
+        bodyPartController.SetBodies(rootPrefab.GetComponentsInChildren<IsBodyPart>().ToList());
         //Setup each body part
         m_JdController = GetComponent<JointDriveController>();
-        foreach(var a in bodyPartManager.bodyParts)
+        foreach(var a in bodyPartController.bodyParts)
         {
             a.id = myID;
             m_JdController.SetupBodyPart(a,a.transform);
@@ -118,7 +121,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
        
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
-
+        bodyPartController.SwitchModelToNormal();
         //   SetResetParameters();
     }
 
@@ -158,6 +161,9 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     }
     public override void OnEpisodeBegin()
     {
+        bodyPartController.SwitchModelToNormal();
+        
+        alive = true;
         //test
         TargetController targetController = target.GetComponent<TargetController>();
         if (state == EnemyState.training)
@@ -195,6 +201,33 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         nearestDistance = Vector3.Distance(mainBody.transform.position, target.transform.position);
         startDistance = nearestDistance;
         startY = Mathf.Abs(target.transform.position.y - mainBody.transform.position.y);
+        //resetjoint strengths 
+        foreach (var b in m_JdController.bodyPartsList)
+        {
+            m_JdController.SetJoint(b);
+        }
+        if(state == EnemyState.training)
+        {
+            if (!TrainWithAllLimbs)
+            {
+                 float r = Random.value;
+            if (r > 0.5f)
+            {
+                foreach (var a in bodyPartController.bodyParts)
+                {
+                    float f = Random.value;
+                    if (f > 0.8f)
+                    {
+                        a.TakeDamage(1000);
+                    }
+                }
+            }
+            
+            }
+           
+            
+        }
+        
     }
 
     /// <summary>
@@ -273,6 +306,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     /// Loop over body parts to add them to observation.
     /// </summary>
     /// 
+    public bool TrainWithAllLimbs = true;
     public Vector3 forward = new Vector3(0, 0,1);
     public Vector3 up = new Vector3(0, 1, 0);
     public Vector3 Forward(Transform t)
@@ -327,10 +361,24 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(Vector3.down));
         sensor.AddObservation((Quaternion.FromToRotation(movingPlattform.transform.forward, cubeForward)));
         sensor.AddObservation(Quaternion.FromToRotation(movingPlattform.transform.up, m_OrientationCube.transform.up));
-        bodyPartManager.GetObs(sensor);
+       // if (!bodyPartController.normal)
+        {
+            bodyPartController.GetObs(sensor);
+        }
+
     }
     public GetMovement getSpeed;
     public bool showOutput = false;
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var a = actionsOut.ContinuousActions;
+        int i = 0;
+        foreach (var u in a)
+        {
+            a[i++] = (Random.value - 1) * 2;
+        }
+
+    }
     public override void OnActionReceived(ActionBuffers actionBuffers)
 
     {
@@ -338,7 +386,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         var i = -1;
 
         var continuousActions = actionBuffers.ContinuousActions;
-        foreach (var a in bodyParts)
+        foreach (var a in bodyPartController.bodyParts)
         {
             Vector3 v = new Vector3();
             bool bodyMoveable = false;
@@ -364,7 +412,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
             
             if(bodyMoveable == true)
             {
-                if (!a.detached && alive)
+                if (a.detached == false && alive)
                 {
                     bpDict[a.transform].SetJointTargetRotation(v);
                     bpDict[a.transform].SetJointStrength(continuousActions[i]);
@@ -668,11 +716,23 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
 
     public bool Die()
     {
-        alive = false;
-        foreach(var b in m_JdController.bodyPartsList)
+        if(state == EnemyState.playing)
         {
-            m_JdController.SetJoint(b, Vector3.zero);
+            alive = false;
+            foreach (var b in m_JdController.bodyPartsList)
+            {
+                m_JdController.SetJoint(b, Vector3.zero);
+            }
+            return true;
         }
         return true;
     }
+
+
+    void Start()
+    {
+     
+    }
+
+
 }

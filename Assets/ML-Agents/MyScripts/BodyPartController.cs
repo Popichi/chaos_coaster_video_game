@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Policies;
+using Unity.Barracuda;
 
 public class BodyPartController : MonoBehaviour
 {
     public List<IsBodyPart> bodyParts;
     public Transform root;
-
+    public NNModel runNormal;
+    public NNModel runLimbsOff;
+    private BehaviorParameters behaviorParameters;
     private void ResetAllBodyParts()
     {
         foreach(var a in bodyParts)
@@ -15,6 +19,20 @@ public class BodyPartController : MonoBehaviour
             a.ResetLimb();
             a.groundContact.reset();
         }
+    }
+    public bool normal = true;
+    public void SwitchModelToNormal()
+    {
+        normal = true;
+       
+        if(behaviorParameters.Model != runNormal)
+        behaviorParameters.Model = runNormal;
+    }
+    public void SwitchModelToLimb()
+    {
+        normal = false;
+        if(behaviorParameters.Model != runLimbsOff)
+        behaviorParameters.Model = runLimbsOff;
     }
     public void SetBodies(List<IsBodyPart> a)
     {
@@ -37,6 +55,7 @@ public class BodyPartController : MonoBehaviour
         }
 
     }
+    public Rigidbody setToRB;
     public void CanTouchFloor(bool b)
     {
         b = !b;
@@ -44,6 +63,11 @@ public class BodyPartController : MonoBehaviour
         {
             a.groundContact.agentDoneOnGroundContact = b;
         }
+    }
+    Material material;
+    public void SetLimbOff()
+    {
+
     }
     public void setVisuals()
     {
@@ -55,10 +79,12 @@ public class BodyPartController : MonoBehaviour
                 a.visual = new GameObject();
                 MeshFilter m = a.visual.AddComponent<MeshFilter>();
                 var r = a.visual.AddComponent<MeshRenderer>();
-                r.material = a.skinned.GetComponent<Material>();
+                
                 if (a.skinned)
                 {
+                    material = a.skinned.material;
                     m.mesh = a.skinned.sharedMesh;
+                    r.material = material;
                 }
                 else
                 {
@@ -70,6 +96,7 @@ public class BodyPartController : MonoBehaviour
                 a.visual.transform.localRotation = Quaternion.identity;
                 a.visual.transform.localScale = Vector3.one;
                 a.visual.transform.parent = a.transform;
+                a.visual.active = false;
             }
                
             
@@ -79,7 +106,8 @@ public class BodyPartController : MonoBehaviour
     }
     public void Awake()
     {
-       
+        //setToRB = GameObject.FindWithTag("Map").GetComponent<Rigidbody>();
+        behaviorParameters = GetComponent<BehaviorParameters>();
     }
     // Start is called before the first frame update
 
