@@ -21,11 +21,46 @@ public class RocketController : MonoBehaviour
         rb.AddForce(transform.forward * power);
         if(manager != null)
         {
-            //rb.velocity += manager.speed * Time.fixedDeltaTime;
+            rb.velocity += manager.speed * Time.fixedDeltaTime;
             var a = (manager.target.position - transform.position).normalized;
             controlledObject.DesiredOrientation = Quaternion.LookRotation(a);
         }
         Debug.DrawRay(transform.position, manager.speed);
         
     }
+
+
+
+    public int damage = 20;
+    private int damageCounter = 2;
+
+
+    // Start is called before the first frame update
+
+
+    // Update is called once per frame
+
+    public string target = "Player";
+    private void OnCollisionEnter(UnityEngine.Collision collision)
+    {
+
+        if (damageCounter > 0 && collision.gameObject.CompareTag(target))
+        {
+            ITakeDamage e = collision.gameObject.GetComponent<ITakeDamage>(); 
+            //if e != null
+            if (e != null)
+            {
+                e.TakeDamage(damage);
+                Debug.Log("Player Took damage finally");
+                damageCounter--;
+            }
+            else
+            {
+                Debug.Log("No Enemy script attached");
+            }
+            
+        }
+    }
 }
+
+
