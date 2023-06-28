@@ -294,7 +294,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         }
     }
 
-    public bool TakeDamage(int damage, bool lastChance=true)
+    public bool MyTakeDamage(int damage, bool lastChance=true)
     {
         damageSound.PlayFootstepSound(damage);
         if (health >= 20 && (health - damage) <= 0)
@@ -310,7 +310,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         playerUI.UpdatePlayerHealth(((float)health) / 100f);
         if (health <= 0)
         {
-           
+            Die();
             return true;
         }
         return false;
@@ -533,13 +533,13 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     public void ReactOnDeathPlane()
     {
-        TakeDamage(100000, false);
+        MyTakeDamage(100000, false);
     }
 
     public bool TakeDamage(float d)
     {
-        if(TakeDamage((int)d, true)){
-            Die();
+        if(MyTakeDamage((int)d, true)){
+            
             return true;
         }
         return false;

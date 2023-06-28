@@ -305,6 +305,72 @@ MonoBehaviour:
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
+--- !u!1001 &2064150413817942827
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5202429566531062880}
+    m_Modifications:
+    - target: {fileID: 3019209955087496971, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_Name
+      value: VoiceHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.165888
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -19.548294
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -33.525963
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+--- !u!4 &2541666024843652449 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+  m_PrefabInstance: {fileID: 2064150413817942827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4146067216574586564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -626,6 +692,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8195271533778752164, guid: f38605940042fb342a446537faa08f9c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4933873638189306416}
+    - targetCorrespondingSourceObject: {fileID: 8195271533778752164, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2541666024843652449}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5450107666897048440, guid: f38605940042fb342a446537faa08f9c, type: 3}
       insertIndex: -1
@@ -703,7 +772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyParts: []
   root: {fileID: 5202429566531062880}
-  runNormal: {fileID: 5022602860645237092, guid: cd98657eef10bf543bf2d56375c4270c, type: 3}
+  runNormal: {fileID: 5022602860645237092, guid: b46320efdcf04cb40ade166d54b0bb9c, type: 3}
   runLimbsOff: {fileID: 5022602860645237092, guid: cd98657eef10bf543bf2d56375c4270c, type: 3}
   normal: 1
   setToRB: {fileID: 0}

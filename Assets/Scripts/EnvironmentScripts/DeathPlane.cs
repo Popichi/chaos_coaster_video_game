@@ -20,8 +20,21 @@ public class DeathPlane : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Deathplane touched");
         IReactOnDeathPlane r = collision.gameObject.GetComponent<IReactOnDeathPlane>();
-        if(r!=null)
-        r.ReactOnDeathPlane();
+        if (r == null)
+            r = collision.gameObject.GetComponentInChildren<IReactOnDeathPlane>();
+        if (r == null)
+            r = collision.gameObject.GetComponentInParent<IReactOnDeathPlane>();
+        if(r!= null)
+        {
+            r.ReactOnDeathPlane();
+
+        }
+        else
+        {
+            Debug.Log("Ireact not found");
+        }
+        
     }
 }

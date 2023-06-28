@@ -7318,6 +7318,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 230998507}
     m_Modifications:
+    - target: {fileID: 446621462699320836, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: TrainWithAllLimbs
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3609111304897431685, guid: db5816d68588b2244a4698e3ab939622, type: 3}
       propertyPath: m_Name
       value: SSpider2Simple

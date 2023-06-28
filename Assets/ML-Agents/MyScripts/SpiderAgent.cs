@@ -73,6 +73,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     public BodyPartController bodyPartController;
     public override void Initialize()
     {
+        dialogue = GetComponentInChildren<LMNT.DialogueTriggerScript>();
         dissolveSphere = GetComponent<DissolveSphere>();
         delayBeforeDestroy = dissolveSphere.timeToDissolve;
         bodyPartController = gameObject.GetComponent<BodyPartController>();
@@ -216,7 +217,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
             if (!TrainWithAllLimbs)
             {
                  float r = Random.value;
-            if (r > 0.5f)
+            //if (r > 0.5f)
             {
                 foreach (var a in bodyPartController.bodyParts)
                 {
@@ -733,7 +734,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         }
         return true;
     }
-
+    public LMNT.DialogueTriggerScript dialogue;
     public float delayBeforeAnimation = 5f;
     public float delayBeforeDestroy = 2f;
 
@@ -748,10 +749,10 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
 
         // Start the animation
         dissolveSphere.startDissolving();
-
+        dialogue.speak("I don't want to die");
         // Wait for another delay
         yield return new WaitForSeconds(delayBeforeDestroy+0.1f);
-
+        
         // Destroy the object
         Destroy(enemy.gameObject);
     }

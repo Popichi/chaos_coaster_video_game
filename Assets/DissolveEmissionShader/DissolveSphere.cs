@@ -5,17 +5,22 @@ using System.Linq;
 public class DissolveSphere : MonoBehaviour {
 
     List<Material> oldMat;
-    List<MeshRenderer> renderer;
+    List<Renderer> renderer;
+    List<Material> disMats;
     public Material disMat; 
     private void Awake() {
         oldMat = new List<Material>();
-        renderer = new List<MeshRenderer>();
+        disMats = new List<Material>();
+        renderer = new List<Renderer>();
 
-        renderer = GetComponentsInChildren<MeshRenderer>().ToList();
-        renderer.Add(GetComponent<MeshRenderer>());
+        renderer.AddRange(transform.parent.GetComponentsInChildren<MeshRenderer>().ToList());
+        //renderer.Add(GetComponent<MeshRenderer>());
         foreach(var a in renderer)
         {
+            //oldMat.Add(a.gameObject.GetComponent<Material>());
             oldMat.Add(a.material);
+
+            disMats.Add(disMat);
         }
         
          
@@ -28,10 +33,11 @@ public class DissolveSphere : MonoBehaviour {
     {
         dissolve = true;
         timer = 0;
+        int i = 0;
         foreach (var a in renderer)
         {
-           Material m = disMat;
-           a.material = m;
+           
+           a.material = disMats[i++];
         }
 
 
@@ -51,7 +57,11 @@ public class DissolveSphere : MonoBehaviour {
         timer += Time.deltaTime;
         if (dissolve)
         {
-            disMat.SetFloat("_DissolveAmount", timer/timeToDissolve);
+            foreach(var a in disMats)
+            {
+                a.SetFloat("_DissolveAmount",Mathf.Clamp01(timer / timeToDissolve));
+            }
+           
         }
            
     }
