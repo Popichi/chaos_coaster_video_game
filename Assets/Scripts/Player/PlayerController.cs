@@ -381,13 +381,13 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
             primaryCharging = true;
             weaponVisuals.ChangeCharge(1);
             playerUI.IncreaseMainCharge();
-            currentMainProjectile = Instantiate(primaryProjectile, visualMainSpawnPoint.position, Quaternion.identity);
+            currentMainProjectile = Instantiate(primaryProjectile, visualMainSpawnPoint.position, Quaternion.identity, transform.parent);
             currentMainProjectile.GetComponent<MainProjectile>().damage = lvl0Damage;
             currentMainRb = currentMainProjectile.GetComponent<Rigidbody>();
             currentMainRb.isKinematic = true;
             currentMainProjectile.GetComponent<SphereCollider>().enabled = false;
             currentMainProjectile.layer = 11; //Weapon layer, for rendering properly
-            currentMainProjectile.transform.parent = transform.parent;
+            //currentMainProjectile.transform.parent = transform.parent;
         }
         else
         //if (currentCooldown <= 0)
@@ -408,18 +408,15 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
             rbProjectile.mass *= (lvlCharge + 1);
             PlayWeaponSound(mainWeaponReleaseSound);
             Debug.Log("Shot with charge = " + lvlCharge);
-            //GameObject projectile = Instantiate(primaryProjectile, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
-            //Scale the projectile based on charge, might need no make this differently
-            //projectile.transform.localScale *= (1 + lvlCharge);
             currentMainProjectile.layer = 13;
             //currentMainProjectile.transform.position = rangedSpawnPoint.position;
             currentMainRb.isKinematic = false;
             currentMainProjectile.GetComponent<SphereCollider>().enabled = true;
-            currentMainProjectile.transform.parent = transform.parent;
+            //currentMainProjectile.transform.parent = transform.parent;
             currentMainProjectile.transform.localScale *= 2;
             
             currentMainRb.velocity = cameraPos.forward * baseProjectileSpeed;
-            rb.AddForce((-1f * baseProjectileSpeed * cameraPos.forward).normalized * weaponPush * (1 + lvlCharge), ForceMode.Impulse);
+            rb.AddForce((1 + lvlCharge) * weaponPush * (-1f * baseProjectileSpeed * cameraPos.forward).normalized, ForceMode.Impulse);
             currentCooldown = weaponCooldown;
 
             currentMainProjectile = null;

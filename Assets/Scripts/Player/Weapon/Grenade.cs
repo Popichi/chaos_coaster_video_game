@@ -46,7 +46,7 @@ public class Grenade : MonoBehaviour
             Rigidbody nearbyRb = nearbyObject.GetComponent<Rigidbody>();
             if (nearbyRb != null)
             {
-                nearbyRb.AddExplosionForce(force, transform.position, radius);
+                nearbyRb.AddExplosionForce(force, transform.position, radius, 7f, ForceMode.Impulse);
             }
 
             if (nearbyObject.gameObject.CompareTag("agent"))
