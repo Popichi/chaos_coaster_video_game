@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    [SerializeField] private float countdown;
+    [SerializeField] private float countdown = 0;
 
     [SerializeField] private GameObject[] SpawnPoints;
     public Transform TrainingGround;
@@ -24,11 +24,12 @@ public class WaveSpawner : MonoBehaviour
     private bool ReadyToCountDown;
 
     private void Start() {
-
+        
         ReadyToCountDown = true;
-
+        
         if (spawn) {
         for (int i = 0; i < waves.Length; ++i) {
+            
             waves[i].EnemiesLeft = waves[i].enemies.Length;
         }
         }
@@ -37,8 +38,10 @@ public class WaveSpawner : MonoBehaviour
     private void Update() {
         if (spawn)
         {
+            Debug.Log("CurrentWaveIndex: " + CurrentWaveIndex);
             if (CurrentWaveIndex >= waves.Length)
             {
+                
                 Debug.Log("You survived every wave!");
                 return;
             }
@@ -52,23 +55,29 @@ public class WaveSpawner : MonoBehaviour
             {
                 ReadyToCountDown = false;
                 countdown = waves[CurrentWaveIndex].TimeToNextWave;
-                StartCoroutine(SpawnWave());
+                if (CurrentWaveIndex < waves.Length)
+                {
+                    StartCoroutine(SpawnWave());
+                }
             }
 
-            if (waves[CurrentWaveIndex].EnemiesLeft == 0)
+            if (waves[CurrentWaveIndex].EnemiesLeft <= 0)
             {
-                ReadyToCountDown = true;
-                ++CurrentWaveIndex;
+               
+                    ReadyToCountDown = true;
+               
+                    ++CurrentWaveIndex;
+                
             }
         }
        
     }
 
     private IEnumerator SpawnWave() {
-        if (CurrentWaveIndex < waves.Length) {
+       
             for (int i = 0; i < waves[CurrentWaveIndex].enemies.Length; ++i) {
                 // Choose a random spawn point
-                GameObject SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+                GameObject SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length-1)];
                 
                 // Instantiate the enemy at the chosen spawn point
                 Enemy enemy = Instantiate(waves[CurrentWaveIndex].enemies[i], SpawnPoint.transform);
@@ -76,7 +85,7 @@ public class WaveSpawner : MonoBehaviour
                 enemy.transform.SetParent(TrainingGround);
                 yield return new WaitForSeconds(waves[CurrentWaveIndex].TimeToNextEnemy);
             }
-        }
+        
     }
 }
 

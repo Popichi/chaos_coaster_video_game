@@ -294,12 +294,13 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         }
     }
 
+    
     public bool MyTakeDamage(int damage, bool lastChance=true)
     {
         damageSound.PlayFootstepSound(damage);
-        if (health >= 20 && (health - damage) <= 0)
+        if (health >= 20 && (health - damage) <= 0 && lastChance)
         {
-            if(lastChance)
+            
             health = 1; //Last chance 
         } 
         else
@@ -531,9 +532,16 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         return weapons[weapon].bulletsLeft >= weapons[weapon].magazineSize;
     }
 
+    bool reacted;
     public void ReactOnDeathPlane()
     {
-        MyTakeDamage(100000, false);
+        if (!reacted)
+        {
+            reacted = true;
+            Debug.Log("Damage taken");
+            MyTakeDamage(100000, false);
+        }
+
     }
 
     public bool TakeDamage(float d)

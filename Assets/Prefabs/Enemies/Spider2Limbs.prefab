@@ -389,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 915992554059371299, guid: f38605940042fb342a446537faa08f9c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1064451111396286638, guid: f38605940042fb342a446537faa08f9c, type: 3}
       propertyPath: skinned

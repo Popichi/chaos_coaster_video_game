@@ -23,16 +23,16 @@ public class Enemy : MonoBehaviour, ITakeDamage
         die = GetComponentInChildren<ICanDie>();
   }
 
-  // Update is called once per frame
+    // Update is called once per frame
 
 
 
-
+    public bool isDead;
     public bool TakeDamage(float d)
     {
        int  amount = (int)d;
         currentHealth -= amount;
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
             //Instantiate(ammoBox, transform.position, Quaternion.identity, transform.parent);
             die.Die();
@@ -44,8 +44,12 @@ public class Enemy : MonoBehaviour, ITakeDamage
                 box.GetComponent<AmmoBox>().InitBox(boxType);
             }
 
+            if (!isDead)
+            {
+                isDead = true;
+                --WaveSpawner.waves[WaveSpawner.CurrentWaveIndex].EnemiesLeft;
 
-            --WaveSpawner.waves[WaveSpawner.CurrentWaveIndex].EnemiesLeft;
+            }
             return true;
         }
         return false;
