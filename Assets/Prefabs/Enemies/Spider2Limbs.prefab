@@ -317,6 +317,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VoiceHandler
       objectReference: {fileID: 0}
+    - target: {fileID: 3019209955087496971, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4602848238299790922, guid: fd62c7318d4cd2b4990374759c4459fb, type: 3}
       propertyPath: m_RootOrder
       value: -1
