@@ -749,6 +749,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
 
         // Start the animation
         dissolveSphere.startDissolving();
+        if(dialogue)
         dialogue.speak("I don't want to die");
         // Wait for another delay
         yield return new WaitForSeconds(delayBeforeDestroy+0.1f);

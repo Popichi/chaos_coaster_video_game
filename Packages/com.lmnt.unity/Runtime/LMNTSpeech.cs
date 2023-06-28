@@ -24,7 +24,7 @@ public class LMNTSpeech : MonoBehaviour {
     _voiceList = LMNTLoader.LoadVoices();
   }
 
-  public IEnumerator Prefetch() {
+  public IEnumerator Prefetch2() {
     if (_handler != null) {
       yield break;
     }
@@ -43,8 +43,40 @@ public class LMNTSpeech : MonoBehaviour {
       _audioSource.clip = _handler.audioClip;
     }
   }
+        public IEnumerator Prefetch()
+        {
+            if (_handler != null)
+            {
+                yield break;
+            }
 
-  public IEnumerator Talk() {
+            WWWForm form = new WWWForm();
+            form.AddField("voice", LookupByName(voice));
+            form.AddField("text", dialogue);
+            using (UnityWebRequest request = UnityWebRequest.Post(Constants.LMNT_SYNTHESIZE_URL, form))
+            {
+                _handler = new DownloadHandlerAudioClip(Constants.LMNT_SYNTHESIZE_URL, AudioType.WAV);
+                request.SetRequestHeader("X-API-Key", _apiKey);
+                // TODO: do not hard-code; find a clean way to get package version at runtime
+                request.SetRequestHeader("X-Client", "unity/0.1.0");
+                request.downloadHandler = _handler;
+                yield return request.SendWebRequest();
+
+                AudioClip audioClip = null;
+                if (request.isNetworkError || request.isHttpError)
+                {
+                    Debug.LogError(request.error);
+                }
+                else if (_handler.isDone)
+                {
+                    audioClip = _handler.audioClip;
+                }
+                _handler = null; // clear the handler after its use
+                _audioSource.clip = audioClip;
+            }
+        }
+
+        public IEnumerator Talk() {
     if (_handler == null) {
       StartCoroutine(Prefetch());
     }
