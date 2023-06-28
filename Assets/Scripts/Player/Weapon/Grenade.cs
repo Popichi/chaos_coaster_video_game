@@ -51,13 +51,24 @@ public class Grenade : MonoBehaviour
 
             if (nearbyObject.gameObject.CompareTag("agent"))
             {
-                GameObject current = nearbyObject.gameObject.transform.parent.gameObject;
-                while (current.GetComponent<Enemy>() == null)
+                
+                
+                Enemy e = nearbyObject.GetComponentInParent<Enemy>();
+                if (e)
                 {
-                    current = current.transform.parent.gameObject;
+                    e.TakeDamage(damage);
+                    Debug.Log("Enemy Took damage finally");
+                    
                 }
-                current.GetComponent<Enemy>().TakeDamage((int)damage);
-                Debug.Log("Enemy Took damage finally");
+                else
+                {
+                    Debug.Log("No Enemy script attached");
+                }
+                IsBodyPart takeDamage = nearbyObject.gameObject.GetComponent<IsBodyPart>();
+                if (takeDamage)
+                {
+                    takeDamage.TakeDamage(damage);
+                }
             }
         }
         GameObject ps = Instantiate(explosionVFX, transform.position, Quaternion.identity);

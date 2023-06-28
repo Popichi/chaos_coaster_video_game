@@ -13,7 +13,7 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
     public bool slicedOff = false;
     public bool detached;
     public float limbHealth;
-    public float limbMaxHealth = 30;
+    public float limbMaxHealth = 15;
     ConfigurableJoint joint;
     public List<IsBodyPart> children;
     public GroundContact groundContact;
