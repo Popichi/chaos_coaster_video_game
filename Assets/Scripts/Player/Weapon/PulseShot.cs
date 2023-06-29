@@ -5,6 +5,7 @@ using UnityEngine;
 public class PulseShot : SecondaryGun
 {
     public int damage;
+    public float force;
     public override void ShootHeld()
     {
         if(bulletsLeft > 0)
@@ -49,7 +50,7 @@ public class PulseShot : SecondaryGun
     void ShootPulseRifle()
     {        
         GameObject projectile = Instantiate(bullet, rangedSpawnPoint.position, Quaternion.identity, transform.parent);
-        bullet.GetComponent<PulseShotProjectile>().SetDamage(damage);
+        bullet.GetComponent<PulseShotProjectile>().SetDamage(damage, force);
         projectile.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         Rigidbody rbProjectile = projectile.GetComponent<Rigidbody>();
         float spreadX = Random.Range(-spreadRange, spreadRange);

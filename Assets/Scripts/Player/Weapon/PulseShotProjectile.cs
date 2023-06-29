@@ -9,6 +9,7 @@ public class PulseShotProjectile : MonoBehaviour
     GameObject other;
     public GameObject ps;
     public int damage;
+    public float force;
 
     bool collided;
     Vector3 collisionDirection;
@@ -19,9 +20,10 @@ public class PulseShotProjectile : MonoBehaviour
         collided = false;
     }
 
-    public void SetDamage(int _damage)
+    public void SetDamage(int _damage, float _force)
     {
         damage = _damage;
+        force = _force;
     }
 
 
@@ -68,9 +70,9 @@ public class PulseShotProjectile : MonoBehaviour
         }
         Rigidbody targetRB = other.GetComponent<Rigidbody>();
         if (targetRB != null)
-            targetRB.AddForce(collisionDirection.normalized * 3f, ForceMode.Impulse);
+            targetRB.AddForce(collisionDirection.normalized * force, ForceMode.Impulse);
         GameObject particleHit = Instantiate(ps, transform.position, Quaternion.identity, transform.parent);
-
+        //particleHit.transform.localScale *= 4;
         Destroy(particleHit, 0.5f);
         Destroy(gameObject);
     }
