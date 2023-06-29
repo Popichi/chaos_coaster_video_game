@@ -67,8 +67,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
     public float pushbackHorizontal;
     public float pushbackVertical;
 
-    private float currentInvincibilityDuration;
-    private bool isInvincible;
+    public float currentInvincibilityDuration;
+    public bool isInvincible;
 
 
     [Header("Shooting")]
@@ -296,9 +296,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("agent") && !isInvincible)
+        if (collision.gameObject.CompareTag("agent"))
         {
-            isInvincible = true;
             TakeDamage(25);
             Vector3 forceDir = collision.transform.forward;
             rb.AddForce(-transform.forward * pushbackHorizontal, ForceMode.Impulse);
@@ -309,6 +308,11 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
     
     public bool MyTakeDamage(int damage, bool lastChance=true)
     {
+        if (isInvincible)
+        {
+            return false;
+        }
+        isInvincible = true;
         damageSound.PlayFootstepSound(damage);
         if (health >= 20 && (health - damage) <= 0 && lastChance)
         {

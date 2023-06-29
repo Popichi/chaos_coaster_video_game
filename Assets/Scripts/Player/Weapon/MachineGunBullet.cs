@@ -30,6 +30,11 @@ public class MachineGunBullet : MonoBehaviour
     {
         if (!collision.collider.CompareTag("Player"))
         {
+            Rigidbody collisionRB = collision.gameObject.GetComponent<Rigidbody>();
+            if (collisionRB != null)
+            {
+                collisionRB.AddForce(transform.forward * force, ForceMode.Impulse);
+            }
             GameObject impact = Instantiate(ps, transform.position, Quaternion.identity, transform.parent);
             Destroy(impact, 0.4f);
             if (collision.gameObject.CompareTag("agent"))

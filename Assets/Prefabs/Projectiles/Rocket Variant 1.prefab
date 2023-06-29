@@ -235,6 +235,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
   power: 10
+  damage: 10
+  target: Player
 --- !u!114 &8527461002600292433
 MonoBehaviour:
   m_ObjectHideFlags: 0
