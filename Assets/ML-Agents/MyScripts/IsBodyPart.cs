@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Unity.MLAgentsExamples;
-public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
+public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie, Iid
 {
     // Start is called before the first frame update
     public float strength = 40;
@@ -21,6 +21,7 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
     public SkinnedMeshRenderer skinned;
     public BodyPartController partController;
     public bool sliceable=true;
+    public bool isTraining;
     void addVisuals()
     {
         if (skinned)
@@ -28,9 +29,13 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
 
         }
     }
+    Collider c;
+    IState state;
     private void Awake()
     {
+        c = GetComponentInChildren<Collider>();
         partController = GetComponentInParent<BodyPartController>();
+        state = GetComponentInParent<IState>();
            joint = GetComponent<ConfigurableJoint>();
         if (!joint && !isMain())
         {
@@ -43,6 +48,11 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
         if(joint)
         connected = joint.connectedBody;
        
+    }
+    private void Start()
+    {
+        if (state.GetState() == EnemyState.training)
+            isTraining = true;
     }
     public bool isMain()
     {
@@ -166,5 +176,48 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
     {
        SliceLimb();
         return true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isTraining)
+        {
+            var s = collision.transform.GetComponentInParent<SpiderAgent>();
+            Iid i = null;
+            if (s)
+            {
+                i= (Iid)s;
+            }
+
+              
+            if (i != null)
+            {
+                if (GetID() != i.GetID())
+                {
+                    Collider col = collision.gameObject.GetComponentInChildren<Collider>();
+                    if (col)
+                        Physics.IgnoreCollision(c, col, true);
+                    return;
+                }
+            }
+            var t = collision.transform.GetComponent<TargetController>();
+            if (t)
+                i = (Iid)t;
+            if (i != null)
+            {
+                if (i.GetID() != GetID())
+                {
+                    Collider col = collision.gameObject.GetComponent<Collider>();
+                    if (col)
+                        Physics.IgnoreCollision(c, col, true);
+                }
+            }
+        }
+
+    }
+
+    public int GetID()
+    {
+        return id;
     }
 }

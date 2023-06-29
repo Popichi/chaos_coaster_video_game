@@ -22,7 +22,7 @@ using UnityEngine.Events;
 
     }
 
-    public class TargetController : MonoBehaviour
+    public class TargetController : MonoBehaviour, Iid
     {
     public GetRandomPositionOnSurface getRandom;
     //Target has to be under the map to work properly and on the same level as the Mlagents Agent
@@ -66,10 +66,12 @@ using UnityEngine.Events;
 
         
         public Mesh mesh;
+    int id;
         public void Awake()
         {
         rootMap = FindAnyObjectByType<WaveSpawner>().mapMoving;
-        a = rootMap.gameObject.GetComponentInChildren<Iid>();
+        a = (Iid)rootMap.gameObject.GetComponentInChildren<SpiderAgent>();
+        id = a.GetID();
         getRandom = FindAnyObjectByType<GetRandomPositionOnSurface>();
             //meshFilter = GetComponent<MeshFilter>();
             //mesh = meshFilter.mesh;
@@ -202,4 +204,9 @@ using UnityEngine.Events;
         private void OnTriggerExit(Collider col)
         {
         }
+
+    public int GetID()
+    {
+       return id;
     }
+}
