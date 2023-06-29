@@ -79,7 +79,7 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie
     }
     public void ResetLimb()
     {
-        
+        if(groundContact)
         groundContact.reset();
         if (sliceable)
         {

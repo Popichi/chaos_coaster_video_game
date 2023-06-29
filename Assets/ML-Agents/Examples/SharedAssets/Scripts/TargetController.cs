@@ -134,7 +134,13 @@ using UnityEngine.Events;
             {
                 if(col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
 
+            {
+                ITouchTarget t = col.gameObject.GetComponentInParent<ITouchTarget>();
+                if (t != null)
                 {
+                    t.TouchedTarget(col.impulse.magnitude);
+                }
+                Debug.Log("impulse Target " + col.impulse.magnitude); 
                     onCollisionEnterEvent.Invoke(col);
                     if (respawnIfTouched)
                     {
@@ -170,34 +176,30 @@ using UnityEngine.Events;
 
         private void OnTriggerEnter(Collider col)
         {
-            if (col.CompareTag(tagToDetect))
+        if (col.transform.CompareTag(tagToDetect))
+        {
+            if (col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
+
             {
-                if (col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
+   
+                //Debug.Log("impulse Target " + col.impulse.magnitude);
+                onTriggerEnterEvent.Invoke(col);
+                if (respawnIfTouched)
                 {
-                    onTriggerEnterEvent.Invoke(col);
+                    if (((IState)a).GetState() == EnemyState.training)
+                        MoveTargetToRandomPosition();
                 }
             }
+
         }
+    }
 
         private void OnTriggerStay(Collider col)
         {
-            if (col.CompareTag(tagToDetect))
-            {
-                if (col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
-                {
-                    onTriggerStayEvent.Invoke(col);
-                }
-            }
+           
         }
 
         private void OnTriggerExit(Collider col)
         {
-            if (col.CompareTag(tagToDetect))
-            {
-                if (col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
-                {
-                    onTriggerExitEvent.Invoke(col);
-                }
-            }
         }
     }

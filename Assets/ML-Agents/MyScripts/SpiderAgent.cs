@@ -23,6 +23,11 @@ public interface IState
 {
     public EnemyState GetState();
 }
+public interface ITouchTarget
+{
+   public void TouchedTarget(float f);
+}
+
 public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICanDie
 {
     public Enemy enemy;
@@ -71,9 +76,14 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     public Transform Player;
     public WaveSpawner waveSpawner;
     public BodyPartController bodyPartController;
+    public bool ifDialoge;
     public override void Initialize()
     {
-        dialogue = GetComponentInChildren<LMNT.DialogueTriggerScript>();
+        if (ifDialoge)
+        {
+            dialogue = GetComponentInChildren<LMNT.DialogueTriggerScript>();
+        }
+        
         dissolveSphere = GetComponent<DissolveSphere>();
         delayBeforeDestroy = dissolveSphere.timeToDissolve;
         bodyPartController = gameObject.GetComponent<BodyPartController>();
@@ -672,10 +682,15 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     /// 
     public float reachTargetreward = 0;
     public float timeRewardMult = 1;
-    public void TouchedTarget()
+    public bool impulse;
+    public void TouchedTarget(float f)
     {
         if(state == EnemyState.training)
         {
+            if (impulse)
+            {
+                AddReward(f);
+            }
             float d = 0;
             if (MaxStep != 0)
             {
@@ -749,7 +764,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
 
         // Start the animation
         dissolveSphere.startDissolving();
-        if(dialogue)
+        if(ifDialoge)
         dialogue.speak("I don't want to die");
         // Wait for another delay
         yield return new WaitForSeconds(delayBeforeDestroy+0.1f);
