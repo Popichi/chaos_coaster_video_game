@@ -154,10 +154,6 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         wheelThreshold = 1f;
         mainFailed = false;
         secondaryFailed = false;
-        playerUI.Init();
-        playerUI.UpdatePlayerHealth(1f);
-        playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
-        playerUI.ResetMainCharge();
         isInvincible = false;
         currentInvincibilityDuration = 0f;
         introSequencePlaying = introSequenceEnabled;
@@ -167,6 +163,12 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
             virtualCamera.LookAt = cameraLookAtIntro;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             Invoke(nameof(StartGame), introDuration);
+        } else
+        {
+            playerUI.Init();
+            playerUI.UpdatePlayerHealth(1f);
+            playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
+            playerUI.ResetMainCharge();
         }
     }
 
@@ -196,6 +198,10 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         virtualCamera.Follow = cameraFollowGame;
         virtualCamera.LookAt = cameraLookAtGame;
         rb.constraints = RigidbodyConstraints.None;
+        playerUI.Init();
+        playerUI.UpdatePlayerHealth(1f);
+        playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
+        playerUI.ResetMainCharge();
         introSequencePlaying = false;
     }
 
@@ -331,6 +337,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     void OnCamera(InputValue value)
     {
+        if (introSequencePlaying)
+            return;
         Vector2 mouseInput = value.Get<Vector2>();
         float mouseY = mouseInput.x * sensitivityX * Time.deltaTime; //delta time?
         float mouseX = mouseInput.y * sensitivityY * Time.deltaTime;
