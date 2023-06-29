@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     [Header("Movement")]
     public float moveSpeed;
+    public float moveSpeedHard;
     public float maxSpeedY;
     public float speedDecay;
     public float jumpForce;
@@ -57,6 +58,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
     public Transform parent;
     public Transform playerTempSpawnPoint;
     public bool introSequenceEnabled;
+    private bool introSequencePlaying;
+    Vector3 flatVel;
 
     [Header("Health")]
     public int health;
@@ -157,6 +160,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         playerUI.ResetMainCharge();
         isInvincible = false;
         currentInvincibilityDuration = 0f;
+        introSequencePlaying = introSequenceEnabled;
         if (introSequenceEnabled)
         {
             virtualCamera.Follow = cameraPointStart;
@@ -192,6 +196,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         virtualCamera.Follow = cameraFollowGame;
         virtualCamera.LookAt = cameraLookAtGame;
         rb.constraints = RigidbodyConstraints.None;
+        introSequencePlaying = false;
     }
 
     // Update is called once per frame
@@ -219,6 +224,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         {
             rb.drag = 0.3f;
         }
+        flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         if (!isInvincible)
             SpeedControl();
 
@@ -345,14 +351,17 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
     void MovePlayer()
     {
         Vector3 direction = (transform.forward * verticalMov + transform.right * horizontalMov).normalized;
-        if (grounded)
+        if (flatVel.magnitude <= moveSpeed)
         {
-            rb.AddForce(direction * moveSpeed * 10f, ForceMode.Force);
-            
-        }
-        else
-        {
-            rb.AddForce(direction * moveSpeed * airMultiplier * 10f, ForceMode.Force);
+            if (grounded)
+            {
+                rb.AddForce(10f * moveSpeed * direction, ForceMode.Force);
+
+            }
+            else
+            {
+                rb.AddForce(10f * airMultiplier * moveSpeed * direction, ForceMode.Force);
+            }
         }
 
     }
@@ -370,6 +379,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     void OnShootPrimary(InputValue context)
     {
+        if (introSequencePlaying)
+            return;
         if (currentCooldown > 0 || mainFailed)
         {
             mainFailed = !mainFailed;
@@ -437,6 +448,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     void PlayWeaponSound(AudioClip clip)
     {
+        if (introSequencePlaying)
+            return;
         weaponAudioSource.clip = clip;
         weaponAudioSource.Play();
     }
@@ -448,6 +461,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     void OnShootSecondary()
     {
+        if (introSequencePlaying)
+            return;
         if (primaryCharging || secondaryFailed)
         {
             secondaryFailed = !secondaryFailed;
@@ -478,8 +493,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
     //May need to remove this if the player is getting launched, try without this first or set a different max speed
     void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        if (flatVel.magnitude > moveSpeed)
+        
+        if (flatVel.magnitude > moveSpeedHard)
         {
 
             Vector3 newVel = flatVel.normalized * speedDecay;

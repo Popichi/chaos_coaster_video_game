@@ -604,6 +604,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!114 &165420375
 MonoBehaviour:
@@ -1134,6 +1135,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!4 &275741775 stripped
 Transform:
@@ -1172,6 +1174,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!1 &302802291 stripped
 GameObject:
@@ -2197,6 +2200,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!43 &486616686
 Mesh:
@@ -2560,6 +2564,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!114 &595344124
 MonoBehaviour:
@@ -2745,6 +2750,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!43 &682524447
 Mesh:
@@ -3108,6 +3114,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!1 &858797163 stripped
 GameObject:
@@ -3443,6 +3450,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!1 &1028772603
 GameObject:
@@ -3604,6 +3612,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!1 &1088460675 stripped
 GameObject:
@@ -3637,6 +3646,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!1 &1119175280
 GameObject:
@@ -3697,7 +3707,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-176922
+  m_Name: pb_Mesh-38076
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -4568,6 +4578,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!114 &1451513366
 MonoBehaviour:
@@ -4897,6 +4908,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!43 &1510445653
 Mesh:
@@ -5095,6 +5107,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!1 &1573814228
 GameObject:
@@ -5437,6 +5450,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!114 &1581777399
 MonoBehaviour:
@@ -5465,6 +5479,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!4 &1581777400 stripped
 Transform:
@@ -6652,6 +6667,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!1 &2072822801
 GameObject:
@@ -6753,6 +6769,7 @@ MonoBehaviour:
   skinned: {fileID: 0}
   partController: {fileID: 0}
   sliceable: 1
+  isTraining: 0
   connected: {fileID: 0}
 --- !u!114 &2078412594
 MonoBehaviour:
@@ -7623,7 +7640,7 @@ PrefabInstance:
       objectReference: {fileID: 1248148790}
     - target: {fileID: 5466844596615767811, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
       propertyPath: m_VersionIndex
-      value: 2793
+      value: 2799
       objectReference: {fileID: 0}
     - target: {fileID: 5759989262809571708, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
       propertyPath: m_IsActive
