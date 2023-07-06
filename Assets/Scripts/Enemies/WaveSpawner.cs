@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class WaveSpawner : MonoBehaviour
     public Transform up;
     public Transform forward;
     public Transform position;
+    public PlayerUI visuals;
 
 
     public Wave[] waves;
@@ -85,6 +87,7 @@ public class WaveSpawner : MonoBehaviour
                 enemy.transform.SetParent(TrainingGround);
                 yield return new WaitForSeconds(waves[CurrentWaveIndex].TimeToNextEnemy);
             }
+        visuals.UpdateWaveCounter(CurrentWaveIndex + 1, waves.Length);
         
     }
 }

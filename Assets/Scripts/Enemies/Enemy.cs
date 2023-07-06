@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
             {
                 hasSpawnedBox = true;
                 GameObject box = Instantiate(ammoBox, model.position, Quaternion.identity, transform.parent);
-                int boxType = Random.Range(0, 3);
+                int boxType = Random.Range(0, 4);
                 box.GetComponent<AmmoBox>().InitBox(boxType);
             }
 

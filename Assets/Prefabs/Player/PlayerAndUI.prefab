@@ -638,7 +638,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -19, y: -48}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 105, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &165755572773608986
 CanvasRenderer:
@@ -1857,6 +1857,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: moveSpeedHard
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: pulseWeaponSound
       value: 
       objectReference: {fileID: 8300000, guid: b63670fe77e65f645bc88a73bfaed3c2, type: 3}
@@ -1878,7 +1882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: invicibilityDuration
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1490419189840106004, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: visualMainSpawnPoint
@@ -1895,6 +1899,10 @@ PrefabInstance:
     - target: {fileID: 2840984232906874618, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalPosition.z
       value: -25.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3707825336351526986, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: force
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3707825336351526986, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: damage
@@ -2122,31 +2130,31 @@ PrefabInstance:
       objectReference: {fileID: 5654329387214688141}
     - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 58.97808
+      value: -0.20197296
       objectReference: {fileID: 0}
     - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.6298523
+      value: -1.4259033
       objectReference: {fileID: 0}
     - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.769993
+      value: -7.616333
       objectReference: {fileID: 0}
     - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1e-45
-      objectReference: {fileID: 0}
-    - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
-      propertyPath: m_LocalRotation.y
       value: 0.9999879
       objectReference: {fileID: 0}
     - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0049255705
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169956158929667511, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0049255583
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8866938920496419903, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_LocalScale.x
@@ -2593,7 +2601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5519718292709298076, guid: f70a17b9a27a8ac489e9428db12b4d79, type: 3}
       propertyPath: m_VersionIndex
-      value: 2418
+      value: 2421
       objectReference: {fileID: 0}
     - target: {fileID: 7486525472991457143, guid: f70a17b9a27a8ac489e9428db12b4d79, type: 3}
       propertyPath: m_Name
