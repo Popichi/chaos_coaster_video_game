@@ -76,6 +76,7 @@ namespace Unity.MLAgentsExamples
         public bool stdAgentDoneOnGroundContact;
         public void Awake()
         {
+            agent = GetComponentInParent<Agent>();
             stdAgentDoneOnGroundContact = agentDoneOnGroundContact;
         }
         public void reset()

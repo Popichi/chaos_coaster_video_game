@@ -10,7 +10,7 @@ public class SparseVoxelOctree : MonoBehaviour
     public bool[] occupancyMap;
 
     public Transform root;
-    public GameObject cube;
+    public GameObject cubePrefab;
 
     // Start is called befor the first frame update
     public List<GameObject> voxels;
@@ -18,15 +18,15 @@ public class SparseVoxelOctree : MonoBehaviour
 
     void placeVoxels()
     {
-        
+
         voxels = new List<GameObject>();
         voxelsV = new List<Voxel>();
         Vector3 offset = root.transform.position;
-        offset.x -= voxelSizeMeters/ 2;
+        offset.x -= voxelSizeMeters / 2;
         offset.y -= voxelSizeMeters / 2;
         offset.z -= voxelSizeMeters / 2;
 
-        cube.transform.localScale = new Vector3(voxelSizeMeters / 2, voxelSizeMeters / 2, voxelSizeMeters / 2);
+        cubePrefab.transform.localScale = new Vector3(voxelSizeMeters / 2, voxelSizeMeters / 2, voxelSizeMeters / 2);
         for (int x = 0; x < Mathf.RoundToInt(rootVoxelSizeMeters / voxelSizeMeters); ++x)
         {
             for (int y = 0; y < Mathf.RoundToInt(rootVoxelSizeMeters / voxelSizeMeters); ++y)
@@ -34,11 +34,11 @@ public class SparseVoxelOctree : MonoBehaviour
                 for (int z = 0; z < Mathf.RoundToInt(rootVoxelSizeMeters / voxelSizeMeters); ++z)
                 {
                     Vector3 pos = new Vector3(x, y, z) * voxelSizeMeters;
-                    GameObject g = Instantiate(cube, pos, Quaternion.identity);
+                    GameObject g = Instantiate(cubePrefab, pos, Quaternion.identity);
                     g.transform.position += offset;
                     voxels.Add(g);
                     var v = g.GetComponent<Voxel>();
-                    v.id = (int)(x + (y * voxelSizeMeters/2) + (z * voxelSizeMeters/2 * voxelSizeMeters/2));
+                    v.id = (int)(x + (y * voxelSizeMeters / 2) + (z * voxelSizeMeters / 2 * voxelSizeMeters / 2));
                     voxelsV.Add(v);
                     g.transform.parent = root;
                 }
@@ -49,7 +49,7 @@ public class SparseVoxelOctree : MonoBehaviour
     public void initialize(float leafHalfSize, float halfSize)
     {
         int oneRow = Mathf.RoundToInt(halfSize / leafHalfSize);
-        int numberOfLeafVoxels = oneRow* oneRow* oneRow;
+        int numberOfLeafVoxels = oneRow * oneRow * oneRow;
         int total_parents = 0; // Initialize total parents to zero
 
         int n = numberOfLeafVoxels;
@@ -74,20 +74,20 @@ public class SparseVoxelOctree : MonoBehaviour
         placeVoxels();
     }
     public string[] layers;
-    int layerMask; 
+    int layerMask;
     public void Overlap(Vector3 pos, float3 halfsize, int arrayID)
     {
         //parent
         Collider[] colliders = Physics.OverlapBox(root.position, halfsize, root.rotation, layerMask);
         if (colliders.Length != 0)
         {
-            
+
         }
 
     }
     public void UpdateTree()
     {
-        
+
         Vector3 boxSize = new Vector3(rootVoxelSizeMeters, rootVoxelSizeMeters, rootVoxelSizeMeters);
         layerMask = LayerMask.GetMask(layers);
         Overlap(root.position, rootVoxelSizeMeters / 2, 0);
@@ -96,6 +96,6 @@ public class SparseVoxelOctree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

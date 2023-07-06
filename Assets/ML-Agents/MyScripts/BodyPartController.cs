@@ -21,6 +21,35 @@ public class BodyPartController : MonoBehaviour
         }
     }
     public bool normal = true;
+    public static void MakeIgnore()
+    {
+        IsBodyPart[] bodyParts = FindObjectsByType<IsBodyPart>(FindObjectsSortMode.None);
+
+
+
+            foreach (var b in bodyParts)
+            {
+            Collider c = b.GetComponent<Collider>();
+            if (!c)
+                c = b.GetComponentInChildren<Collider>();
+                foreach (var bb in bodyParts)
+                {
+                   
+                        if (b != bb)
+                        {
+                            Collider col = bb.gameObject.GetComponentInChildren<Collider>();
+                            if (col)
+                                Physics.IgnoreCollision(c, col, true);
+                            return;
+                        }
+                    }
+                   
+                    
+                
+            }
+              
+        
+    }
     public void SwitchModelToNormal()
     {
         normal = true;

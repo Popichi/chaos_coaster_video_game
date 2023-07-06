@@ -137,10 +137,10 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         m_ResetParams = Academy.Instance.EnvironmentParameters;
         bodyPartController.SwitchModelToNormal();
         dissolveSphere.resetMaterials();
-
+       
         //   SetResetParameters();
     }
-
+    static bool initGlobal = true;
     /// <summary>
     /// Loop over body parts and reset them to initial conditions.
     /// </summary>
@@ -159,12 +159,13 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         rootRoot.rotation = Quaternion.identity;
         rootPrefab.parent = rootRoot;
     }
+    public float SquareSpawn = 25;
     void rotate()
     {
         Quaternion rot = Quaternion.Euler(movingPlattform.transform.up * 360);//Random.rotation;
 
         mainBody.transform.rotation *= rot;
-        float off = 14;
+        float off = SquareSpawn;
         mainBody.transform.position += new Vector3(Random.value * off - off / 2, 0, Random.value * off - off / 2);
 
     }
@@ -590,7 +591,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         if(RewardFunction == RewardMode.MaxVelGaze)
         {
             Vector3 vel = mainBody.GetComponent<Rigidbody>().velocity;
-            var rew1 = Vector3.Dot(vel, cubeForward) * velocityBonus;
+            var rew1 = (Vector3.Dot(vel, cubeForward) * velocityBonus + 1) *.5F;
             var rew2 = (Vector3.Dot(cubeForward, mainHead.transform.forward) + 1) * .5F;
             AddReward(rew1 * rew2);
         }

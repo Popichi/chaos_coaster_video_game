@@ -177,10 +177,10 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie, Iid
        SliceLimb();
         return true;
     }
-
-    private void OnCollisionEnter(Collision collision)
+  
+    private void OnCollisionStay(Collision collision)
     {
-        if (isTraining)
+        if (false)
         {
             var s = collision.transform.GetComponentInParent<SpiderAgent>();
             Iid i = null;
@@ -192,7 +192,9 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie, Iid
               
             if (i != null)
             {
-                if (GetID() != i.GetID())
+                int o = GetID();
+                int oo = i.GetID();
+                if (o != oo)
                 {
                     Collider col = collision.gameObject.GetComponentInChildren<Collider>();
                     if (col)
@@ -200,6 +202,7 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie, Iid
                     return;
                 }
             }
+            i = null;
             var t = collision.transform.GetComponent<TargetController>();
             if (t)
                 i = (Iid)t;

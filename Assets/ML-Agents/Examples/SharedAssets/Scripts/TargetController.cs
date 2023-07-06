@@ -70,7 +70,7 @@ using UnityEngine.Events;
         public void Awake()
         {
         rootMap = FindAnyObjectByType<WaveSpawner>().mapMoving;
-        a = (Iid)rootMap.gameObject.GetComponentInChildren<SpiderAgent>();
+        a = (Iid) transform.parent.gameObject.GetComponentInChildren<SpiderAgent>();
         id = a.GetID();
         getRandom = FindAnyObjectByType<GetRandomPositionOnSurface>();
             //meshFilter = GetComponent<MeshFilter>();
@@ -134,7 +134,8 @@ using UnityEngine.Events;
         {
             if (col.transform.CompareTag(tagToDetect))
             {
-                if(col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
+            var bb = col.gameObject.GetComponent<IsBodyPart>();
+                if (bb && bb.id == a.GetID())
 
             {
                 ITouchTarget t = col.gameObject.GetComponentInParent<ITouchTarget>();
@@ -178,14 +179,20 @@ using UnityEngine.Events;
 
         private void OnTriggerEnter(Collider col)
         {
+        Debug.Log("Triggered");
         if (col.transform.CompareTag(tagToDetect))
         {
-            if (col.gameObject.GetComponent<IsBodyPart>().id == a.GetID())
+            var bb = col.gameObject.GetComponentInParent<IsBodyPart>();
+            if (bb && bb.id == a.GetID())
 
             {
-   
+                ITouchTarget t = col.gameObject.GetComponentInParent<ITouchTarget>();
+                if (t != null)
+                {
+                    t.TouchedTarget(0);
+                }
                 //Debug.Log("impulse Target " + col.impulse.magnitude);
-                onTriggerEnterEvent.Invoke(col);
+                //onCollisionEnterEvent.Invoke(col);
                 if (respawnIfTouched)
                 {
                     if (((IState)a).GetState() == EnemyState.training)
