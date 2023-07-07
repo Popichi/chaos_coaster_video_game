@@ -40,11 +40,11 @@ public class WaveSpawner : MonoBehaviour
     private void Update() {
         if (spawn)
         {
-            Debug.Log("CurrentWaveIndex: " + CurrentWaveIndex);
+            //Debug.Log("CurrentWaveIndex: " + CurrentWaveIndex);
             if (CurrentWaveIndex >= waves.Length)
             {
                 
-                Debug.Log("You survived every wave!");
+                //Debug.Log("You survived every wave!");
                 return;
             }
 
