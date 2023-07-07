@@ -383,6 +383,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 618100811869420838, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 618100811869420838, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: footstepAudioSource
+      value: 
+      objectReference: {fileID: 6439618481948142503}
     - target: {fileID: 837645025915442753, guid: f38605940042fb342a446537faa08f9c, type: 3}
       propertyPath: m_Name
       value: Spider2Limbs
@@ -395,6 +403,10 @@ PrefabInstance:
       propertyPath: skinned
       value: 
       objectReference: {fileID: 3050400066940251660}
+    - target: {fileID: 1102619759342620787, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1222399295412071744, guid: f38605940042fb342a446537faa08f9c, type: 3}
       propertyPath: skinned
       value: 
@@ -439,6 +451,18 @@ PrefabInstance:
       propertyPath: m_DetectableTags.Array.data[1]
       value: ground
       objectReference: {fileID: 0}
+    - target: {fileID: 1697889034854305752, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697889034854305752, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: footstepAudioSource
+      value: 
+      objectReference: {fileID: 1728069189559358438}
+    - target: {fileID: 1867387462391858562, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1915707456792761296, guid: f38605940042fb342a446537faa08f9c, type: 3}
       propertyPath: sliceable
       value: 0
@@ -451,8 +475,20 @@ PrefabInstance:
       propertyPath: pauseInterval
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2614980930241903791, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614980930241903791, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: footstepAudioSource
+      value: 
+      objectReference: {fileID: 3946421005905530551}
     - target: {fileID: 2618296967785862996, guid: f38605940042fb342a446537faa08f9c, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3346913322005531938, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3417790648848080889, guid: f38605940042fb342a446537faa08f9c, type: 3}
@@ -494,6 +530,10 @@ PrefabInstance:
     - target: {fileID: 4620720337185257791, guid: f38605940042fb342a446537faa08f9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5311049442616741621, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5584808363813659256, guid: f38605940042fb342a446537faa08f9c, type: 3}
       propertyPath: skinned
@@ -537,6 +577,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6936820999515037343, guid: f38605940042fb342a446537faa08f9c, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6978280131603019107, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7207663473587170148, guid: f38605940042fb342a446537faa08f9c, type: 3}
@@ -717,9 +761,19 @@ SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3445761663125351286, guid: f38605940042fb342a446537faa08f9c, type: 3}
   m_PrefabInstance: {fileID: 4146067216574586564}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1728069189559358438 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3346913322005531938, guid: f38605940042fb342a446537faa08f9c, type: 3}
+  m_PrefabInstance: {fileID: 4146067216574586564}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &3050400066940251660 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1431292114760577224, guid: f38605940042fb342a446537faa08f9c, type: 3}
+  m_PrefabInstance: {fileID: 4146067216574586564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &3946421005905530551 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1102619759342620787, guid: f38605940042fb342a446537faa08f9c, type: 3}
   m_PrefabInstance: {fileID: 4146067216574586564}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &4114871474613724594 stripped
@@ -745,6 +799,11 @@ SkinnedMeshRenderer:
 --- !u!4 &5359401443489458892 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8352384129948824584, guid: f38605940042fb342a446537faa08f9c, type: 3}
+  m_PrefabInstance: {fileID: 4146067216574586564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6439618481948142503 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6978280131603019107, guid: f38605940042fb342a446537faa08f9c, type: 3}
   m_PrefabInstance: {fileID: 4146067216574586564}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &7793722551719750274 stripped

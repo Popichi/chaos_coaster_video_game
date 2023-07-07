@@ -120,10 +120,10 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     private float pulseSwapDelay;
     private float currentPulseSwapDelay;
-    public FootstepSoundController damageSound;
+    public AudioSource damageSound;
+    public CinemachineImpulseSource cameraShakeImpulseSource;
     private void Awake()
     {
-        damageSound = gameObject.GetComponent<FootstepSoundController>();
     }
 
     // Start is called before the first frame update
@@ -313,7 +313,11 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
             return false;
         }
         isInvincible = true;
-        damageSound.PlayFootstepSound(damage);
+        if(damageSound != null)
+        {
+            damageSound.Play();
+        }
+        cameraShakeImpulseSource.GenerateImpulseWithForce(2f);
         if (health >= 20 && (health - damage) <= 0 && lastChance)
         {
             
