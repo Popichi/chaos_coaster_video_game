@@ -51,21 +51,57 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Spawn",
+                    "name": "WeaponSwap",
                     "type": "Button",
-                    "id": "f3bc591d-23dc-4521-a1b5-cdc5dd8e1fd6",
+                    "id": "35718256-482a-45c9-929b-c64bab63ede2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "WeaponSwap",
+                    "name": "WeaponSwapBackwards",
                     "type": "Button",
-                    "id": "35718256-482a-45c9-929b-c64bab63ede2",
+                    "id": "5e1c75df-b7db-4366-a0af-59b8a9382aef",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WeaponSwap0",
+                    "type": "Button",
+                    "id": "1e98fe82-3d7f-4273-ab27-4c700afc54c7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "WeaponSwap1",
+                    "type": "Button",
+                    "id": "fb37fe67-e777-46d4-981a-7ecb5d03e15c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WeaponSwap2",
+                    "type": "Button",
+                    "id": "32e8f0ee-6010-4c2b-bb4b-f1cf11f122c2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WeaponSwap3",
+                    "type": "Button",
+                    "id": "7d234013-c9a3-4162-94bd-3864a84f2420",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -171,23 +207,67 @@
                 },
                 {
                     "name": "",
-                    "id": "35b65864-d109-44cb-998b-68c5d0a4d0b6",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Spawn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "9e3fc67a-c4eb-49e5-9830-647cb010eaac",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "WeaponSwap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cfbb6c90-8943-49f1-9449-5ec351817fdf",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeaponSwapBackwards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "96f6f6ff-2de7-4e72-9d49-bcc6ef8cee05",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeaponSwap0",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b678ea90-96b4-47af-a7f9-301f95ba35ee",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeaponSwap1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d970065-84a1-41db-b8c1-3ea77a97c789",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeaponSwap2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "116baa37-980c-41e1-9d99-1e6e2519c04c",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeaponSwap3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
