@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     ICanDie die;
   // Start is called before the first frame update
   void Start() {
+        crossHairManager = FindAnyObjectByType<CrossHairManager>();
     currentHealth = maxHealth;
     WaveSpawner = FindAnyObjectByType<WaveSpawner>();
         die = GetComponentInChildren<ICanDie>();
@@ -28,10 +29,17 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
 
     public bool isDead;
+    CrossHairManager crossHairManager;
     public bool TakeDamage(float d)
     {
        int  amount = (int)d;
         currentHealth -= amount;
+        if (!isDead)
+        {
+            crossHairManager.GetCrossHairByName("hit").startAnimation();
+            crossHairManager.PlaySound("hit");
+        }
+    
         if (currentHealth <= 0 && !isDead)
         {
             //Instantiate(ammoBox, transform.position, Quaternion.identity, transform.parent);

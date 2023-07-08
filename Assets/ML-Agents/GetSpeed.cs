@@ -7,7 +7,7 @@ public class GetMovement : MonoBehaviour
 
     public float  mag;
     Vector3 lastPos = Vector3.zero;
-    public Vector3 speed=Vector3.zero;
+    Vector3 speed=Vector3.zero;
 
     private Quaternion lastRotation = Quaternion.identity;
     public Vector3 rotationSpeed = Vector3.zero;

@@ -773,7 +773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2660832757214148316, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: RewardFunction
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2660832757214148316, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: timeRewardMult
@@ -1653,7 +1653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   agentDoneOnGroundContact: 0
-  penalizeGroundContact: 1
+  penalizeGroundContact: 0
   groundContactPenalty: -1
   touchingGround: 0
   quadraticFallOf: 0
@@ -1754,8 +1754,8 @@ MonoBehaviour:
   jointDampen: 5000
   maxJointForceLimit: 40000
   bodyPartsList: []
-  standardDoneOnCollision: 1
-  standardDoPenalty: 1
+  standardDoneOnCollision: 0
+  standardDoPenalty: 0
   standardPenalty: -1
 --- !u!114 &3746770032904083938
 MonoBehaviour:
@@ -1799,7 +1799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyParts: []
   root: {fileID: 2052939848836058243}
-  runNormal: {fileID: 5022602860645237092, guid: 178906eec814fd84686b6f5bf8c5f7d8, type: 3}
+  runNormal: {fileID: 5022602860645237092, guid: d1f2a21144b878e4aa64e416a404d48c, type: 3}
   runLimbsOff: {fileID: 0}
   normal: 1
   setToRB: {fileID: 0}
@@ -1905,7 +1905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   agentDoneOnGroundContact: 0
-  penalizeGroundContact: 1
+  penalizeGroundContact: 0
   groundContactPenalty: -1
   touchingGround: 0
   quadraticFallOf: 0

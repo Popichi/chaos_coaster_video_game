@@ -45,12 +45,18 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie, Iid
        
         children =transform.GetComponentsInChildren<IsBodyPart>().ToList();
         children.RemoveAt(0);
-        if(joint)
-        connected = joint.connectedBody;
+        if (joint)
+        {
+            connected = joint.connectedBody;
+            jj = new JJ(joint.angularXMotion, joint.angularYMotion, joint.angularZMotion);
+        }
        
     }
+    CrossHairManager crossHairManager;
     private void Start()
     {
+        if (state.GetState() == EnemyState.playing)
+            crossHairManager = FindAnyObjectByType<CrossHairManager>();
         if (state.GetState() == EnemyState.training)
             isTraining = true;
     }
@@ -135,12 +141,22 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie, Iid
             joint.xMotion = ConfigurableJointMotion.Free;
             joint.yMotion = ConfigurableJointMotion.Free;
             joint.zMotion = ConfigurableJointMotion.Free;
-            
+
+            joint.angularXMotion = ConfigurableJointMotion.Free;
+            joint.angularYMotion = ConfigurableJointMotion.Free;
+            joint.angularZMotion = ConfigurableJointMotion.Free;
+
             joint.connectedBody = partController.setToRB;
             DetachJointRecursive();
             SwitchVisuals(true);
             //SetParent(partController.root.parent);
             SetParent(null);
+            if (state.GetState() == EnemyState.playing)
+            {
+                crossHairManager.GetCrossHairByName("bone").startAnimation();
+                crossHairManager.PlaySound("bone");
+            }
+                
         }
     }
     void DetachJointRecursive()
@@ -156,11 +172,25 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie, Iid
         }
 
     }
+    struct JJ
+    {
+        public ConfigurableJointMotion x;
+        public ConfigurableJointMotion y;
+        public ConfigurableJointMotion z;
+        public JJ(ConfigurableJointMotion a, ConfigurableJointMotion b, ConfigurableJointMotion c)
+        {
+            x = a;
+            y = b;
+            z = c;
+        }
+    }
+    JJ jj;
     void DetechJoint()
     {
         groundContact.agentDoneOnGroundContact = false;
         detached = true;
         groundContact.detached = true;
+        
     }
     void AttachJoint()
     {
@@ -169,7 +199,10 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie, Iid
         joint.xMotion = ConfigurableJointMotion.Locked;
         joint.yMotion = ConfigurableJointMotion.Locked;
         joint.zMotion = ConfigurableJointMotion.Locked;
-        
+
+        joint.angularXMotion = jj.x;
+        joint.angularYMotion = jj.y;
+        joint.angularZMotion = jj.z;
     }
 
     public bool Die()

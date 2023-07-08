@@ -79,6 +79,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     public bool ifDialoge;
     public override void Initialize()
     {
+        crossHairManager = FindAnyObjectByType<CrossHairManager>();
         if (ifDialoge)
         {
             dialogue = GetComponentInChildren<LMNT.DialogueTriggerScript>();
@@ -735,17 +736,20 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     {
         enemy.TakeDamage(100000);
     }
-
+    CrossHairManager crossHairManager;
     public bool Die()
     {
-        if(state == EnemyState.playing)
+        if(state == EnemyState.playing && alive)
         {
             alive = false;
             foreach (var b in m_JdController.bodyPartsList)
             {
                 m_JdController.SetJoint(b, Vector3.zero);
             }
+            crossHairManager.GetCrossHairByName("death").startAnimation();
+            crossHairManager.PlaySound("death");
             StartCoroutine(TimerCoroutine());
+     
             return true;
         }
         return true;
