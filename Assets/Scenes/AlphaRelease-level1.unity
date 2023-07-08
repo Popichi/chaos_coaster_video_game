@@ -6182,6 +6182,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5190054838649487184, guid: bd6ad67f8e6daff499c5e5840f96a372, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1850422295}
     - target: {fileID: 7504830338575938231, guid: bd6ad67f8e6daff499c5e5840f96a372, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -20693,6 +20697,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4745074893814020913, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
   m_PrefabInstance: {fileID: 4134209413188895744}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1850422295 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8222403285904439263, guid: 256ca3307b3fcf44f8234d50cb020408, type: 3}
+  m_PrefabInstance: {fileID: 4134209413188895744}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0073cf0ee551eda4c892ad515c2601f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1956442771
 GameObject:
   m_ObjectHideFlags: 0
@@ -21075,6 +21090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenuUI: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &2094125439
 MonoBehaviour:
   m_ObjectHideFlags: 0

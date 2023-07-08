@@ -63,7 +63,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
     public Transform parent;
     public Transform playerTempSpawnPoint;
     public bool introSequenceEnabled;
-    private bool introSequencePlaying;
+    private bool playerFrozen;
+    private bool introFinished;
     Vector3 flatVel;
 
     [Header("Health")]
@@ -162,7 +163,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         secondaryFailed = false;
         isInvincible = false;
         currentInvincibilityDuration = 0f;
-        introSequencePlaying = introSequenceEnabled;
+        playerFrozen = introSequenceEnabled;
         SensX.onValueChanged.AddListener((v) =>
         {
             ChangeSensitivityX(v);
@@ -175,12 +176,14 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         SensY.value = StatManager.sensitivityY;
         if (introSequenceEnabled)
         {
+            introFinished = false;
             virtualCamera.Follow = cameraPointStart;
             virtualCamera.LookAt = cameraLookAtIntro;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             Invoke(nameof(StartGame), introDuration);
         } else
         {
+            introFinished = true;
             playerUI.Init();
             playerUI.UpdatePlayerHealth(1f);
             playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
@@ -197,6 +200,13 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         
     }
 
+    public void Freeze(bool status)
+    {
+        if (introFinished)
+            playerFrozen = status;
+
+        
+    }
 
 
     private IEnumerator IntroFadeIn()
@@ -223,7 +233,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         playerUI.UpdatePlayerHealth(1f);
         playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
         playerUI.ResetMainCharge();
-        introSequencePlaying = false;
+        playerFrozen = false;
+        introFinished = true;
     }
 
     public void ChangeSensitivityX(float x)
@@ -388,11 +399,11 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     void OnCamera(InputValue value)
     {
-        if (introSequencePlaying)
+        if (playerFrozen)
             return;
         Vector2 mouseInput = value.Get<Vector2>();
-        float mouseY = mouseInput.x * sensitivityX * Time.deltaTime; //delta time?
-        float mouseX = mouseInput.y * sensitivityY * Time.deltaTime;
+        float mouseY = mouseInput.x * sensitivityX * Time.fixedDeltaTime * 0.5f; //delta time?
+        float mouseX = mouseInput.y * sensitivityY * Time.fixedDeltaTime * 0.5f;
 
         yRotation += mouseY;
         xRotation -= mouseX;
@@ -438,7 +449,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     void OnShootPrimary(InputValue context)
     {
-        if (introSequencePlaying)
+        if (playerFrozen)
             return;
         if (currentCooldown > 0 || mainFailed)
         {
@@ -507,7 +518,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     void PlayWeaponSound(AudioClip clip)
     {
-        if (introSequencePlaying)
+        if (playerFrozen)
             return;
         weaponAudioSource.clip = clip;
         weaponAudioSource.Play();
@@ -520,7 +531,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     void OnShootSecondary()
     {
-        if (introSequencePlaying)
+        if (playerFrozen)
             return;
         if (primaryCharging || secondaryFailed)
         {
