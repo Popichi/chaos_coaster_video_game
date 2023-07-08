@@ -788,6 +788,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2660832757214148316, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
+      propertyPath: m_TargetWalkingSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660832757214148316, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: randomizeWalkSpeedEachEpisode
       value: 0
       objectReference: {fileID: 0}
@@ -1799,7 +1803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyParts: []
   root: {fileID: 2052939848836058243}
-  runNormal: {fileID: 5022602860645237092, guid: d1f2a21144b878e4aa64e416a404d48c, type: 3}
+  runNormal: {fileID: 5022602860645237092, guid: e11960eaa8f181143887dbedb73ba401, type: 3}
   runLimbsOff: {fileID: 0}
   normal: 1
   setToRB: {fileID: 0}

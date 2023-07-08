@@ -18,6 +18,8 @@ public interface ICanDie
     bool Die();
     
 }
+
+
 public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, ICanDie
 {
     
@@ -325,7 +327,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         }
 
     }
-
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("agent"))

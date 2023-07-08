@@ -27,6 +27,7 @@ namespace Unity.MLAgentsExamples
         public const string k_Ground = "ground"; // Tag of ground object.
         public bool quadraticFallOf;
         public bool detached;
+        public bool triggersExorcist;
         /// <summary>
         /// Check for collision with ground, and optionally penalize agent.
         /// </summary>
@@ -35,6 +36,11 @@ namespace Unity.MLAgentsExamples
             if (col.transform.CompareTag(k_Ground) && !detached)
             {
                 touchingGround = true;
+                if (triggersExorcist)
+                {
+                    agent
+                }
+
                 if (penalizeGroundContact)
                 {
                     if (quadraticFallOf)

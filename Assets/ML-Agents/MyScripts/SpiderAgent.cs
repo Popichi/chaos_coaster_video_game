@@ -19,6 +19,13 @@ public enum EnemyState
     playing,
     dead
 }
+
+public enum EnemyType
+{
+    SmallSpider,
+    Grunt,
+    Spider
+}
 public interface IState
 {
     public EnemyState GetState();
@@ -31,17 +38,18 @@ public interface ITouchTarget
 public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICanDie
 {
     public Enemy enemy;
+    public EnemyType enemyType = EnemyType.SmallSpider;
     public EnemyState state;
     public bool isTraining = true;
     public GameObject mainBody;
     public GameObject mainHead;
-    const float minWSpeed = 0.1f;
-    const float maxWSpeed = 20;
-    [Header("Walk Speed")]
-    [Range(minWSpeed, maxWSpeed)]
+    public float minWSpeed = 0.1f;
+    public float maxWSpeed = 20;
+    //[Header("Walk Speed")]
+    //[Range(minWSpeed, maxWSpeed)]
     [SerializeField]
     //The walking speed to try and achieve
-    private float m_TargetWalkingSpeed = maxWSpeed;
+    private float m_TargetWalkingSpeed;
 
     public float MTargetWalkingSpeed // property
     {
@@ -49,7 +57,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         set { m_TargetWalkingSpeed = Mathf.Clamp(value, minWSpeed, maxWSpeed); }
     }
 
-    const float m_maxWalkingSpeed = maxWSpeed; //The max walking speed
+     //The max walking speed
 
     //Should the agent sample a new goal velocity each episode?
     //If true, walkSpeed will be randomly set between zero and m_maxWalkingSpeed in OnEpisodeBegin()
@@ -77,8 +85,10 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     public WaveSpawner waveSpawner;
     public BodyPartController bodyPartController;
     public bool ifDialoge;
+    float m_maxWalkingSpeed;
     public override void Initialize()
     {
+        m_maxWalkingSpeed = maxWSpeed;
         crossHairManager = FindAnyObjectByType<CrossHairManager>();
         if (ifDialoge)
         {
