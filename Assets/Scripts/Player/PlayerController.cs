@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Cinemachine;
 
 public interface ITakeDamage
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
     public Transform cameraPos;
     public float sensitivityX;
     public float sensitivityY;
+    
     public Transform cameraPointStart;
     public Transform cameraLookAtIntro;
     public Transform cameraLookAtGame;
@@ -41,7 +43,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
     public CinemachineVirtualCamera virtualCamera;
     public float introDuration;
     public float introSpeed;
-
+    public Slider SensX;
+    public Slider SensY;
     private float xRotation;
     private float yRotation;
 
@@ -95,6 +98,7 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
     private bool secondaryFailed;
     private GameObject currentMainProjectile;
     private Rigidbody currentMainRb;
+
 
     [Header("Sound")]
     public AudioClip mainWeaponChargeSound;
@@ -157,6 +161,16 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         isInvincible = false;
         currentInvincibilityDuration = 0f;
         introSequencePlaying = introSequenceEnabled;
+        SensX.onValueChanged.AddListener((v) =>
+        {
+            ChangeSensitivityX(v);
+        });
+        SensX.value = StatManager.sensitivityX;
+        SensY.onValueChanged.AddListener((v) =>
+        {
+            ChangeSensitivityY(v);
+        });
+        SensY.value = StatManager.sensitivityY;
         if (introSequenceEnabled)
         {
             virtualCamera.Follow = cameraPointStart;
@@ -170,6 +184,9 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
             playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
             playerUI.ResetMainCharge();
         }
+
+        sensitivityX = StatManager.sensitivityX;
+        sensitivityY = StatManager.sensitivityY;
     }
 
     private void StartGame()
@@ -177,6 +194,8 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         StartCoroutine(nameof(IntroFadeIn));
         
     }
+
+
 
     private IEnumerator IntroFadeIn()
     {
@@ -205,13 +224,26 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
         introSequencePlaying = false;
     }
 
+    public void ChangeSensitivityX(float x)
+    {
+        sensitivityX = x;
+        StatManager.sensitivityX = x;
+    }
+
+    public void ChangeSensitivityY(float y)
+    {
+        sensitivityY = y;
+        StatManager.sensitivityY = y;
+    }
+
     // Update is called once per frame
     void Update()
     {
         //Camera Movement and Rotation
         //ignore rotation of the follower
         //if (this.gameObject.transform.parent != null)
-            //this.gameObject.transform.parent.parent.rotation = Quaternion.Euler(0, 0, -90);
+        //this.gameObject.transform.parent.parent.rotation = Quaternion.Euler(0, 0, -90);
+        
         if (currentPulseSwapDelay > 0)
         {
             currentPulseSwapDelay -= Time.deltaTime;
