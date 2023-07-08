@@ -330,10 +330,15 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
     {
         if (collision.gameObject.CompareTag("agent"))
         {
-            TakeDamage(25);
-            Vector3 forceDir = collision.transform.forward;
-            rb.AddForce(-transform.forward * pushbackHorizontal, ForceMode.Impulse);
-            rb.AddForce(transform.up * pushbackVertical, ForceMode.Impulse);
+            var a = GetComponentInParent<SpiderAgent>();
+            if (a && a.alive)
+            {
+                TakeDamage(25);
+                Vector3 forceDir = collision.transform.forward;
+                rb.AddForce(-transform.forward * pushbackHorizontal, ForceMode.Impulse);
+                rb.AddForce(transform.up * pushbackVertical, ForceMode.Impulse);
+            }
+           
         }
     }
 

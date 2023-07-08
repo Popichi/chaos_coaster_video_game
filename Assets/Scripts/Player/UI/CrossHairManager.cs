@@ -21,6 +21,7 @@ public class CrossHairManager : MonoBehaviour
         if(!audioSource)
         audioSource = GetComponentInChildren<AudioSource>();
     }
+
     public CrossHair GetCrossHairByName(string s)
     {
         if (crossHairs.ContainsKey(s))

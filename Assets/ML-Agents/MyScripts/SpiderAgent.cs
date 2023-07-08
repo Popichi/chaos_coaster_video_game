@@ -511,7 +511,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
             }
             
         }
-        if (backCounterActivated)
+        if (alive && backCounterActivated)
         {
             if (onBackCounter > maxFramesOnBack)
             {
@@ -739,7 +739,8 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     CrossHairManager crossHairManager;
     public bool Die()
     {
-        if(state == EnemyState.playing && alive)
+        gameObject.GetComponentInChildren<ShootRocket>().enabled = false;
+        if (state == EnemyState.playing && alive)
         {
             alive = false;
             foreach (var b in m_JdController.bodyPartsList)
