@@ -66,7 +66,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Glossiness: 0.5
-    - _InvFade: 0.4
+    - _InvFade: 1.56
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -77,5 +77,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 0.6415094, g: 0.19062723, b: 0.16703455, a: 0.03529412}
+    - _TintColor: {r: 0.4528302, g: 0.17088012, b: 0, a: 0.3764706}
   m_BuildTextureStacks: []

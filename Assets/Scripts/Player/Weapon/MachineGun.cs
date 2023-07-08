@@ -17,7 +17,10 @@ public class MachineGun : SecondaryGun
 
     public override void ShootHeld()
     {
-        PlayGunshotSound();
+        if(bulletsLeft > 0)
+        {
+            PlayGunshotSound();
+        }        
         attackPressed = true;
         visuals.ChangeShooting();
     }
@@ -51,6 +54,7 @@ public class MachineGun : SecondaryGun
             ShootMachineGun();
         } else if (!attackPressed && bulletsLeft > 0 && shooting)
         {
+            StopGunshotSound();
             shooting = false;
         }
         
@@ -87,6 +91,7 @@ public class MachineGun : SecondaryGun
         UpdateAmmoUI();
         if (bulletsLeft <= 0)
         {
+            StopGunshotSound();
             shooting = false;
         }
     }

@@ -120,10 +120,10 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     private float pulseSwapDelay;
     private float currentPulseSwapDelay;
-    public FootstepSoundController damageSound;
+    public AudioSource damageSound;
+    public CinemachineImpulseSource cameraShakeImpulseSource;
     private void Awake()
     {
-        damageSound = gameObject.GetComponent<FootstepSoundController>();
     }
 
     // Start is called before the first frame update
@@ -313,7 +313,11 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
             return false;
         }
         isInvincible = true;
-        damageSound.PlayFootstepSound(damage);
+        if(damageSound != null)
+        {
+            damageSound.Play();
+        }
+        cameraShakeImpulseSource.GenerateImpulseWithForce(2f);
         if (health >= 20 && (health - damage) <= 0 && lastChance)
         {
             
@@ -525,20 +529,51 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     void OnWeaponSwap()
     {
-        //Messy interaction,
+        WeaponSwap((currentWeapon + 1) % weapons.Length);
+    }
+
+    void OnWeaponSwapBackwards()
+    {
+        int newWeapon = (currentWeapon - 1) % weapons.Length;
+        if (newWeapon < 0)
+        {
+            newWeapon += weapons.Length;
+        }
+        WeaponSwap(newWeapon);
+    }
+
+    void OnWeaponSwap0()
+    {
+        WeaponSwap(0);
+    }
+
+    void OnWeaponSwap1()
+    {
+        WeaponSwap(1);
+    }
+
+    void OnWeaponSwap2()
+    {
+        WeaponSwap(2);
+    }
+
+    void OnWeaponSwap3()
+    {
+        WeaponSwap(3);
+    }
+
+    void WeaponSwap(int newWeapon)
+    {
         if (!secondaryPressed && currentPulseSwapDelay <= 0f)
         {
-            swapPressed = !swapPressed;
-            //When it has been released and it was not pressed long enough to take out wheapon wheel
-            if (!swapPressed && currentSwapTime < wheelThreshold)
-            {
-                weapons[currentWeapon].enabled = false;
-                currentWeapon = (currentWeapon + 1) % weapons.Length;
-                weapons[currentWeapon].enabled = true;
-                weaponVisuals.ChangeWeapon(currentWeapon);
-                playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
-                currentSwapTime = 0;
-            }
+
+            weapons[currentWeapon].enabled = false;
+            currentWeapon = newWeapon;
+            weapons[currentWeapon].enabled = true;
+            weaponVisuals.ChangeWeapon(currentWeapon);
+            playerUI.ChangeWeapon(currentWeapon, weapons[currentWeapon].magazineSize, weapons[currentWeapon].bulletsLeft);
+            currentSwapTime = 0;
+
         }
     }
 

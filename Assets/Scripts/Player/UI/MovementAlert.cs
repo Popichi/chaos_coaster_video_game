@@ -37,7 +37,10 @@ public class MovementAlert : MonoBehaviour
         {
             spritePlaceholderImage.sprite = roadSign;
             spritePlaceholderImage.enabled = true;
-            movementIndicatorFrame.SetActive(false);
+            if(movementIndicatorFrame != null)
+            {
+                movementIndicatorFrame.SetActive(false);
+            }
             StartCoroutine(WaitAndDisableAlert());
             spritePlaceholderSound.Play();
         }
@@ -47,6 +50,9 @@ public class MovementAlert : MonoBehaviour
     {
         yield return new WaitForSeconds(alertTime);
         spritePlaceholderImage.enabled = false;
-        movementIndicatorFrame.SetActive(true);
+        if (movementIndicatorFrame != null)
+        {
+            movementIndicatorFrame.SetActive(true);
+        }
     }
 }
