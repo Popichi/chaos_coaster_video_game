@@ -183,6 +183,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         
         alive = true;
         //test
+        //test
         TargetController targetController = target.GetComponent<TargetController>();
         if (state == EnemyState.training)
         {

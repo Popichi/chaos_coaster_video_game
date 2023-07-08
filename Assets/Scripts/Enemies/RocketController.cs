@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
+    int health = 50;
     VacuumBreather.ControlledObject controlledObject;
     public ShootRocket manager;
     Rigidbody rb;
@@ -29,10 +30,20 @@ public class RocketController : MonoBehaviour
         
     }
 
-
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            --health;
+            if(health<= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 
     public int damage = 20;
-    private int damageCounter = 2;
+    private int damageCounter = 1;
 
 
     // Start is called before the first frame update

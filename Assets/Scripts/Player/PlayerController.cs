@@ -330,13 +330,17 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
     {
         if (collision.gameObject.CompareTag("agent"))
         {
-            var a = GetComponentInParent<SpiderAgent>();
+            var a = collision.gameObject.GetComponentInParent<SpiderAgent>();
             if (a && a.alive)
             {
                 TakeDamage(25);
                 Vector3 forceDir = collision.transform.forward;
                 rb.AddForce(-transform.forward * pushbackHorizontal, ForceMode.Impulse);
                 rb.AddForce(transform.up * pushbackVertical, ForceMode.Impulse);
+            }
+            else
+            {
+                Debug.LogError("spider dead or no spider script for taking damage");
             }
            
         }
