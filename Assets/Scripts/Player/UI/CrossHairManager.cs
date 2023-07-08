@@ -13,7 +13,7 @@ public class CrossHairManager : MonoBehaviour
     void Awake()
     {
         crossHairs = new Dictionary<string, CrossHair>();
-        var d = GameObject.FindObjectsOfType<CrossHair>();
+        var d = GameObject.FindObjectsOfType<CrossHair>(true);
         foreach(var c in d)
         {
             crossHairs.Add(c.cName, c);

@@ -23,7 +23,10 @@ public class CrossHair : MonoBehaviour
        
         startAlpha = crossHairImage.color.a;
     }
-
+    public void OnEnable()
+    {
+        transform.localScale = Vector3.one;
+    }
     // Update is called once per frame
     void Update()
     {
