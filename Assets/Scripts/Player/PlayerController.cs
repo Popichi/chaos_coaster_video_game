@@ -339,6 +339,14 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
 
     }
     
+    void reactToHit(Transform t, int damage, float forceH, float forceV)
+    {
+        TakeDamage(damage);
+        Vector3 forceDir = t.forward;
+        rb.AddForce(-transform.forward * forceH, ForceMode.Impulse);
+        rb.AddForce(transform.up * forceV, ForceMode.Impulse);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("agent"))
@@ -346,10 +354,15 @@ public class PlayerController : MonoBehaviour, IReactOnDeathPlane, ITakeDamage, 
             var a = collision.gameObject.GetComponentInParent<SpiderAgent>();
             if (a && a.alive)
             {
-                TakeDamage(25);
-                Vector3 forceDir = collision.transform.forward;
-                rb.AddForce(-transform.forward * pushbackHorizontal, ForceMode.Impulse);
-                rb.AddForce(transform.up * pushbackVertical, ForceMode.Impulse);
+                if(a.enemyType == EnemyType.SmallSpider)
+                {
+                    reactToHit(collision.transform, 25, pushbackHorizontal, pushbackVertical);
+                }
+                if (a.enemyType == EnemyType.Grunt)
+                {
+                    reactToHit(collision.transform, 1000, pushbackHorizontal*3, pushbackVertical*3);
+                }
+
             }
             else
             {

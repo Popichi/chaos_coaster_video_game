@@ -11,6 +11,7 @@ public class BodyPartController : MonoBehaviour
     public Transform root;
     public NNModel runNormal;
     public NNModel runLimbsOff;
+    public NNModel exorcist;
     private BehaviorParameters behaviorParameters;
     private void ResetAllBodyParts()
     {
@@ -57,7 +58,14 @@ public class BodyPartController : MonoBehaviour
         if(behaviorParameters.Model != runNormal)
         behaviorParameters.Model = runNormal;
     }
-    public void SwitchModelToLimb()
+    public void SwitchModelToExo()
+    {
+        normal = false;
+        if (behaviorParameters.Model != exorcist)
+            behaviorParameters.Model = exorcist;
+    }
+
+        public void SwitchModelToLimb()
     {
         normal = false;
         if(behaviorParameters.Model != runLimbsOff)

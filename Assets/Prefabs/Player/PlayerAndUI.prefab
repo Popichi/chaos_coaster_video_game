@@ -223,7 +223,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 5, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2960,7 +2960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5114123030814960346, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 15729719
+      value: 116393015
       objectReference: {fileID: 0}
     - target: {fileID: 5783206959525072782, guid: 357596b2931c5b445b044c995d999697, type: 3}
       propertyPath: m_RootOrder

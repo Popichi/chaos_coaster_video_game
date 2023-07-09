@@ -16,8 +16,10 @@ public class Enemy : MonoBehaviour, ITakeDamage
   private WaveSpawner WaveSpawner;
 
     ICanDie die;
-  // Start is called before the first frame update
+    // Start is called before the first frame update
+    SpiderAgent spiderAgent;
   void Start() {
+        spiderAgent = GetComponentInChildren<SpiderAgent>();
         crossHairManager = FindAnyObjectByType<CrossHairManager>();
     currentHealth = maxHealth;
     WaveSpawner = FindAnyObjectByType<WaveSpawner>();
@@ -39,7 +41,10 @@ public class Enemy : MonoBehaviour, ITakeDamage
             crossHairManager.GetCrossHairByName("hit").startAnimation();
             crossHairManager.PlaySound("hit");
         }
-    
+        if(currentHealth < maxHealth * 0.3f && spiderAgent.enemyType == EnemyType.Grunt && spiderAgent.alive)
+        {
+            spiderAgent.bodyPartController.SwitchModelToExo();
+        }
         if (currentHealth <= 0 && !isDead)
         {
             //Instantiate(ammoBox, transform.position, Quaternion.identity, transform.parent);

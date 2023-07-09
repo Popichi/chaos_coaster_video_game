@@ -73,7 +73,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     public Transform rootPrefab;
     //This will be used as a stabilized model space reference point for observations
     //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning
-    OrientationCubeController m_OrientationCube;
+    public OrientationCubeController m_OrientationCube;
 
     //The indicator graphic gameobject that points towards the target
     DirectionIndicator m_DirectionIndicator;
@@ -116,6 +116,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         
         if (state == EnemyState.playing)
         {
+            if(enemyType == EnemyType.SmallSpider)
             gameObject.GetComponentInChildren<ShootRocket>().enabled = true;
             MaxStep = 0;
             Player = FindFirstObjectByType<PlayerController>().transform;
@@ -477,10 +478,11 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         JustGetit,
         MaxVelocity,
         AvgVelocity,
-        MaxVelGaze
+        MaxVelGaze,
+        StandUP
 
     }
-    public RewardMode RewardFunction;
+    public RewardMode rewardMode;
     public float nearestDistance = 0;
     float nearestY = 0;
     float startDistance;
@@ -488,7 +490,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     public float velocityBonus = 0.1f;
     public void reward()
     {
-        if (RewardMode.Ndistance == RewardFunction)
+        if (RewardMode.Ndistance == rewardMode)
         {
             if(startDistance - nearestDistance != 0)
             {
@@ -521,6 +523,14 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
 
             }
             
+        }
+
+        if( rewardMode == RewardMode.StandUP)
+        {
+            var a = Mathf.Abs(mainBody.transform.localPosition.y - 7);
+            a = 1-Mathf.Clamp01(a / 10);
+            var b = (Vector3.Dot(Vector3.up, mainBody.transform.up)+1)/2;
+            AddReward(a*b);
         }
         if (alive && backCounterActivated)
         {
@@ -567,9 +577,9 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
          
         }
         
-        if (RewardFunction == RewardMode.Nearest || RewardFunction == RewardMode.JustGetit)
+        if (rewardMode == RewardMode.Nearest || rewardMode == RewardMode.JustGetit)
             DebugReward(-1, "living penalty");
-            if (RewardFunction == RewardMode.Ndistance)
+            if (rewardMode == RewardMode.Ndistance)
         {
             float f = Vector3.Distance(mainBody.transform.position, target.transform.position);
             if (f < nearestDistance)
@@ -590,7 +600,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         //AddReward(r*0.1f);
         var cubeForward = m_OrientationCube.transform.forward;
 
-        if (RewardFunction == RewardMode.MaxVelocity)
+        if (rewardMode == RewardMode.MaxVelocity)
         { Vector3 vel = mainBody.GetComponent<Rigidbody>().velocity;
             DebugReward((Vector3.Dot((vel), cubeForward)* velocityBonus), "Velocity: " + vel);
         }
@@ -600,14 +610,14 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
         var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
 
-        if(RewardFunction == RewardMode.MaxVelGaze)
+        if(rewardMode == RewardMode.MaxVelGaze)
         {
             Vector3 vel = mainBody.GetComponent<Rigidbody>().velocity;
             var rew1 = (Vector3.Dot(vel, cubeForward) * velocityBonus + 1) *.5F;
             var rew2 = (Vector3.Dot(cubeForward, mainHead.transform.forward) + 1) * .5F;
             AddReward(rew1 * rew2);
         }
-        if (RewardFunction == RewardMode.AvgVelocity)
+        if (rewardMode == RewardMode.AvgVelocity)
         {
             var g = GetAvgVelocity();
             var o = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, g);
@@ -643,13 +653,13 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
                 $" head.forward: {Forward(mainHead.transform)}"
             );
         }
-        if (RewardFunction == RewardMode.Nearest)
+        if (rewardMode == RewardMode.Nearest)
         {
             DebugReward(1 - Mathf.Clamp01(Vector3.Distance(mainBody.transform.position, target.transform.position) / 200), "Distance Bonus" );
         }
         else {
 
-            if(RewardFunction == RewardMode.Gaze)
+            if(rewardMode == RewardMode.Gaze)
         {
                 DebugReward(matchSpeedReward * lookAtTargetReward,"Gaze");
             }
@@ -710,8 +720,8 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
                 d = reachTargetreward + ((MaxStep - StepCount) / (MaxStep * 1.0f)) * timeRewardMult;
             }
            
-            if (RewardFunction == RewardMode.Nearest || RewardFunction == RewardMode.Ndistance || RewardFunction == RewardMode.JustGetit
-                || RewardFunction == RewardMode.MaxVelocity || RewardFunction == RewardMode.MaxVelGaze)
+            if (rewardMode == RewardMode.Nearest || rewardMode == RewardMode.Ndistance || rewardMode == RewardMode.JustGetit
+                || rewardMode == RewardMode.MaxVelocity || rewardMode == RewardMode.MaxVelGaze)
             {
                 DebugReward(d, "Touched: " + (MaxStep - StepCount));
             }
@@ -750,6 +760,7 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
     CrossHairManager crossHairManager;
     public bool Die()
     {
+        if(enemyType == EnemyType.SmallSpider)
         gameObject.GetComponentInChildren<ShootRocket>().enabled = false;
         if (state == EnemyState.playing && alive)
         {
