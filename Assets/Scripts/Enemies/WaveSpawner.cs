@@ -37,6 +37,12 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
+    public void ReduceEnemy()
+    {
+        --waves[CurrentWaveIndex].EnemiesLeft;
+        visuals.UpdateEnemiesLeft(waves[CurrentWaveIndex].EnemiesLeft);
+    }
+
     private void Update() {
         if (spawn)
         {
@@ -88,7 +94,7 @@ public class WaveSpawner : MonoBehaviour
                 yield return new WaitForSeconds(waves[CurrentWaveIndex].TimeToNextEnemy);
             }
         visuals.UpdateWaveCounter(CurrentWaveIndex + 1, waves.Length);
-        
+        visuals.UpdateEnemiesLeft(waves[CurrentWaveIndex].EnemiesLeft);
     }
 }
 

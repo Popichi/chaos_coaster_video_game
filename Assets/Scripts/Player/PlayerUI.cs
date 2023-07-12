@@ -17,6 +17,7 @@ public class PlayerUI : MonoBehaviour
     public TextMeshProUGUI ammo;
     public TextMeshProUGUI danger;
     public TextMeshProUGUI waves;
+    public TextMeshProUGUI enemiesLeft;
     private string currentAmmoText = "25";
     private string maxAmmoText = "25";
     private int currentCharge = 0;
@@ -53,6 +54,11 @@ public class PlayerUI : MonoBehaviour
         main[currentCharge].sprite = chargeFull[currentCharge];
         currentCharge++;
 
+    }
+
+    public void UpdateEnemiesLeft(int _enemiesLeft)
+    {
+        enemiesLeft.text = "Enemies: " + _enemiesLeft;
     }
 
     public void ResetMainCharge()

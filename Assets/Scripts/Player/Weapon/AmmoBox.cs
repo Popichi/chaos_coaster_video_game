@@ -9,12 +9,14 @@ public class AmmoBox : MonoBehaviour
     private MeshRenderer meshR;
     public int[] ammo;
     public Material[] ammoMaterials;
+    public AmmoRespawn respawner;
+    public int respawnerIndex;
     
     // 
     // Start is called before the first frame update
     void Start()
     {
-
+        InitBox(ammoType);
     }
 
     public void InitBox(int type)
@@ -30,11 +32,6 @@ public class AmmoBox : MonoBehaviour
         boxHighlight.color = ammoMaterials[type].color;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -46,6 +43,10 @@ public class AmmoBox : MonoBehaviour
                 player.WeaponReload(ammoType, ammo[ammoType]);
                 //Play a sound or something
                 Destroy(this.gameObject);
+                if (respawner != null)
+                {
+                    respawner.NotifyDestroyed(respawnerIndex);
+                }
             }
         }
     }
