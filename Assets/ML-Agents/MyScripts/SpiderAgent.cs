@@ -527,10 +527,27 @@ public class SpiderAgent : Agent, IReward, Iid, IState, IReactOnDeathPlane, ICan
 
         if( rewardMode == RewardMode.StandUP)
         {
-            var a = Mathf.Abs(mainBody.transform.localPosition.y - 7);
+            int layerMask = 1 << 10;
+
+            layerMask = ~layerMask; // invert the layerMask so it collides with everything EXCEPT layer 8
+
+            RaycastHit hit; // Stores information about what the raycast hit
+
+            float dis = 10;
+            // Cast a ray from this object's position in the direction specified
+            if (Physics.Raycast(mainBody.transform.position, -trainingGround.transform.up, out hit, 1000, layerMask))
+            {
+                // If the Raycast hit something, check if it has the "Ground" tag
+                if (hit.collider.CompareTag("ground"))
+                {
+                   dis = hit.distance;
+                    // Do something if hit the ground
+                }
+            }
+            var a = Mathf.Abs(dis - 2);
             a = 1-Mathf.Clamp01(a / 10);
-            var b = (Vector3.Dot(Vector3.up, mainBody.transform.up)+1)/2;
-            AddReward(a*b);
+            var b = (Vector3.Dot(Vector3.up, mainBody.transform.up));
+            AddReward(b);
         }
         if (alive && backCounterActivated)
         {

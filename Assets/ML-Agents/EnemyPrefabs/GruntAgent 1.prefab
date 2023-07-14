@@ -605,6 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8bdc17eef270940a55445c06b62994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doExo: 1
 --- !u!1 &5836290808371893174
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,6 +885,10 @@ PrefabInstance:
     - target: {fileID: 2660832757214148316, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: maxWSpeed
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660832757214148316, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
+      propertyPath: rewardMode
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2660832757214148316, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: rootPrefab
@@ -1958,7 +1963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyParts: []
   root: {fileID: 2052939848836058243}
-  runNormal: {fileID: 5022602860645237092, guid: 4b65aa908ee7866489b32404a5be4635, type: 3}
+  runNormal: {fileID: 5022602860645237092, guid: 3d8f84029dc484d49948aa434b85a37e, type: 3}
   runLimbsOff: {fileID: 0}
   exorcist: {fileID: 5022602860645237092, guid: e11960eaa8f181143887dbedb73ba401, type: 3}
   normal: 1

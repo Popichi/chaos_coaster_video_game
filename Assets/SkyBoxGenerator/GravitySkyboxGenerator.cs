@@ -139,6 +139,8 @@ public class GravitySkyboxGenerator : MonoBehaviour
                 GameObject g = Instantiate(pref);
                 
                 g.transform.parent = transform;
+                float f = UnityEngine.Random.RandomRange(minMaxMass.x, minMaxMass.y);
+                g.transform.localScale = new Vector3(f,f,f);
                 prefs.Add(g);
             }
         }

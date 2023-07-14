@@ -916,11 +916,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2660832757214148316, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: m_TargetWalkingSpeed
-      value: 0.1
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2660832757214148316, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: randomizeWalkSpeedEachEpisode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2741592708513275512, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: m_Layer
@@ -1961,7 +1961,7 @@ MonoBehaviour:
   root: {fileID: 2052939848836058243}
   runNormal: {fileID: 5022602860645237092, guid: 4b65aa908ee7866489b32404a5be4635, type: 3}
   runLimbsOff: {fileID: 0}
-  exorcist: {fileID: 5022602860645237092, guid: e11960eaa8f181143887dbedb73ba401, type: 3}
+  exorcist: {fileID: 5022602860645237092, guid: 29e1cd3f7f3c935478d640f12d13513e, type: 3}
   normal: 1
   setToRB: {fileID: 0}
 --- !u!1 &7307645647777216028 stripped
