@@ -60,8 +60,8 @@ public class Enemy : MonoBehaviour, ITakeDamage
             if (!isDead)
             {
                 isDead = true;
-                --WaveSpawner.waves[WaveSpawner.CurrentWaveIndex].EnemiesLeft;
-
+                //--WaveSpawner.waves[WaveSpawner.CurrentWaveIndex].EnemiesLeft;
+                WaveSpawner.ReduceEnemy();
             }
             return true;
         }
