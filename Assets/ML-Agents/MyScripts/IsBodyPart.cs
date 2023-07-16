@@ -132,7 +132,9 @@ public class IsBodyPart : MonoBehaviour, ITakeDamage, ICanDie, Iid
         partController.SetLimbOff();
         if (sliceable)
         { 
-            partController.CanTouchFloor(true);
+            //activate to allow for tocuh floor 
+            //partController.CanTouchFloor(true);
+            
             partController.SwitchModelToLimb();
             var g = GetComponentsInParent<IsBodyPart>();
             if (g.Length > 1 && g[1])

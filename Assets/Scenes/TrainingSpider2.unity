@@ -380,6 +380,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAndUI (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6781594399581831885, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7368339303253829834, guid: eb27d676b3aaa6d418d261dcefbc4152, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4850,7 +4858,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-674942
+  m_Name: pb_Mesh385838
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -6422,6 +6430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenuUI: {fileID: 169137092}
+  player: {fileID: 0}
 --- !u!114 &2094125439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7266,6 +7275,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8396927063333701020, guid: d4436e912d7cae54e9d59befade6a1ff, type: 3}
+      propertyPath: isMoving
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8396927063333701020, guid: d4436e912d7cae54e9d59befade6a1ff, type: 3}
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 1970060160}
@@ -7333,7 +7346,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mag: 0
-  speed: {x: 0, y: 0, z: 0}
   rotationSpeed: {x: 0, y: 0, z: 0}
 --- !u!114 &4329452155262200349 stripped
 MonoBehaviour:
@@ -7354,17 +7366,69 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 230998507}
     m_Modifications:
+    - target: {fileID: 23047033925619231, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: penalizeGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23047033925619231, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 446621462699320836, guid: db5816d68588b2244a4698e3ab939622, type: 3}
       propertyPath: state
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 446621462699320836, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: rewardMode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 446621462699320836, guid: db5816d68588b2244a4698e3ab939622, type: 3}
       propertyPath: TrainWithAllLimbs
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 446621462699320836, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: randomizeWalkSpeedEachEpisode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 937176404050961742, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: runLimbsOff
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 604ce1b2bb2a1ad458e70645c7e5da29, type: 3}
+    - target: {fileID: 1104081986714227381, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: penalizeGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1104081986714227381, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872484213316782493, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: penalizeGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872484213316782493, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3609111304897431685, guid: db5816d68588b2244a4698e3ab939622, type: 3}
       propertyPath: m_Name
       value: SSpider2Simple
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174316988579443863, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: penalizeGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174316988579443863, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168609891664392778, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: penalizeGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168609891664392778, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5359401443489458892, guid: db5816d68588b2244a4698e3ab939622, type: 3}
       propertyPath: m_RootOrder
@@ -7410,6 +7474,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5758841935376978705, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: penalizeGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758841935376978705, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084102749550570754, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: penalizeGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084102749550570754, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7178963854600773315, guid: db5816d68588b2244a4698e3ab939622, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -7418,6 +7498,22 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 450586139}
+    - target: {fileID: 8071337996447054259, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: penalizeGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8071337996447054259, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391614094923998887, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: penalizeGroundContact
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391614094923998887, guid: db5816d68588b2244a4698e3ab939622, type: 3}
+      propertyPath: agentDoneOnGroundContact
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
