@@ -26,12 +26,14 @@ public class PauseMenu : MonoBehaviour
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        player.GetComponentInChildren<PlayerController>().Freeze(false);
+        var playerController = player.GetComponentInChildren<PlayerController>();
+        if (playerController != null) { playerController.Freeze(false); }
     }
 
     void Pause () {
         DisablePlayerUI();
-        player.GetComponentInChildren<PlayerController>().Freeze(true);
+        var playerController = player.GetComponentInChildren<PlayerController>();
+        if(playerController != null ) { playerController.Freeze(true); }
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;

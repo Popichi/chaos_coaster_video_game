@@ -47,5 +47,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TrainingSpider2.unity
     guid: 1de36f5ea8f066b43b8f6e25b51a9d81
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 0f437af152a1b2e4997a456d6d077a7c
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 3832e4bc32ad63b468c0914b2c01c565, type: 2}

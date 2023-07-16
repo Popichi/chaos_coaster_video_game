@@ -14,6 +14,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("TutorialAlpha");
     }
 
+    public void OnClickCreditsButton()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
 
     public void OnClickQuitButton()
     {
