@@ -155,7 +155,7 @@ MonoBehaviour:
     value: 0
   vignette:
     overrideState: 1
-    value: 0.17
+    value: 0.089
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,9 +216,6 @@ MonoBehaviour:
   thicknessModifier:
     overrideState: 1
     value: 1.56
-  zBias:
-    overrideState: 0
-    value: 0.0001
   directLightingStrength:
     overrideState: 0
     value: 0
