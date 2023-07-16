@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
 
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
-    public PlayerController player;
+    public GameObject player;
 
     // Update is called once per frame
     void Update() {
@@ -22,14 +22,16 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Resume () {
+        EnablePlayerUI();
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        player.Freeze(false);
+        player.GetComponentInChildren<PlayerController>().Freeze(false);
     }
 
     void Pause () {
-        player.Freeze(true);
+        DisablePlayerUI();
+        player.GetComponentInChildren<PlayerController>().Freeze(true);
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -43,5 +45,32 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame () {
         Debug.Log("Quitting game...");
         Application.Quit();
+    }
+
+    private void DisablePlayerUI()
+    {
+        //disable other canvases
+        Canvas[] canvases;
+
+        canvases = player.GetComponentsInChildren<Canvas>();
+
+        foreach (Canvas canvas in canvases)
+        {
+            canvas.enabled = false;
+        }
+    }
+
+
+    private void EnablePlayerUI()
+    {
+        //disable other canvases
+        Canvas[] canvases;
+
+        canvases = player.GetComponentsInChildren<Canvas>();
+
+        foreach (Canvas canvas in canvases)
+        {
+            canvas.enabled = true;
+        }
     }
 }

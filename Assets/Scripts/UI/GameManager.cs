@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     // Reference to the Victory UI
     public GameObject VictoryScreen;
 
+    // Refrenece to Player Script
+    public GameObject player;
+
     private void Start() {
         // Ensure the victory screen is not visible at the start
         VictoryScreen.SetActive(false);
@@ -36,11 +39,26 @@ public class GameManager : MonoBehaviour
     }
 
     private void WinGame() {
+        DisablePlayerUI();
         // Pause the game
         Time.timeScale = 0f;
-
+        // Freeze Player
+        player.GetComponentInChildren<PlayerController>().Freeze(true);
         // Show the victory screen
         VictoryScreen.SetActive(true);
+    }
+
+    private void DisablePlayerUI()
+    {
+        //disable other canvases
+        Canvas[] canvases;
+
+        canvases = player.GetComponentsInChildren<Canvas>();
+
+        foreach (Canvas canvas in canvases)
+        {
+            canvas.enabled = false;
+        }       
     }
 
     public void OnClickContinueButton() {
