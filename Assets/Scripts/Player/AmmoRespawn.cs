@@ -41,6 +41,7 @@ public class AmmoRespawn : MonoBehaviour
         newBox.gameObject.transform.localRotation = Quaternion.Euler(-90, 0, 0);
         newBox.InitBox(index);
         newBox.respawnerIndex = index;
+        newBox.respawner = this;
         boxes[index] = newBox.gameObject;
         isDead[index] = false;
     }

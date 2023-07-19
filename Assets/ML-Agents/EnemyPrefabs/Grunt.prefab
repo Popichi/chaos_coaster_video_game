@@ -235,7 +235,6 @@ MonoBehaviour:
   m_ShowGizmos: 1
   m_CompressionType: 1
   m_ObservationStacks: 2
-  _center: {fileID: 0}
 --- !u!114 &938679254144237271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,7 +729,6 @@ MonoBehaviour:
   m_ShowGizmos: 1
   m_CompressionType: 1
   m_ObservationStacks: 2
-  _center: {fileID: 0}
 --- !u!114 &5513030177131380698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1233,6 +1231,10 @@ PrefabInstance:
     - target: {fileID: 6834803460902665124, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: m_Layer
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875615293058419930, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
+      propertyPath: m_Mass
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 6980855423932763778, guid: d1a00168e54f0024ca220de173d37c4a, type: 3}
       propertyPath: m_Layer
@@ -1777,8 +1779,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a06884e8d8dd4d63846285836a5cf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
-  currentHealth: 300
+  maxHealth: 200
+  currentHealth: 200
   ammoBox: {fileID: 4583053118789656287, guid: 1ad8a4cd52eba1940a3cd9679249ad52, type: 3}
   model: {fileID: 2052939848836058243}
   spawnBoxChance: 2

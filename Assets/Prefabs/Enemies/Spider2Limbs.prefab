@@ -715,6 +715,10 @@ PrefabInstance:
       propertyPath: m_DetectableTags.Array.data[1]
       value: ground
       objectReference: {fileID: 0}
+    - target: {fileID: 9052409111529296169, guid: f38605940042fb342a446537faa08f9c, type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 9052864199814550853, guid: f38605940042fb342a446537faa08f9c, type: 3}
       propertyPath: m_Layer
       value: 0
